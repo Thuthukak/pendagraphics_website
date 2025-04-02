@@ -1,5 +1,5 @@
-import 'bootstrap/dist/css/bootstrap.min.css';
 import './bootstrap';
+import 'bootstrap/dist/css/bootstrap.min.css';
 import { createApp } from 'vue';
 import App from './components/App.vue';
 import Home from './components/Home/Home.vue';

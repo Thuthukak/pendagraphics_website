@@ -1,83 +1,206 @@
 <template>
   <Layout>
-    <!-- Hero Section -->
-    <section class="relative min-h-[80vh] flex items-center bg-[#007ec7] px-4 md:px-8 overflow-hidden">
-      <div class="container mx-auto relative z-10">
-        <div class="flex flex-col md:flex-row items-center gap-12">
-          <!-- Text Content -->
-          <div class="md:w-1/2 text-center md:text-left">
-            <h1 class="text-4xl md:text-6xl font-bold text-white mb-6 leading-tight">
-              Transform Your Digital Presence with
-              <span class="text-[#f6df35]">Premium Web Solutions</span>
-            </h1>
-            
-            <p class="text-xl text-white/90 mb-8 max-w-2xl mx-auto md:mx-0">
-              Full-service web development & design agency specializing in Laravel & Vue.js applications. 
-              From concept to deployment - we craft digital experiences that convert.
-            </p>
-
-            <div class="flex flex-col sm:flex-row gap-4 justify-center md:justify-start">
-              <button class="bg-[#f6df35] hover:bg-[#e21c26] text-black hover:text-white 
-                px-8 py-4 rounded-lg font-bold transition-all duration-300 shadow-lg
-                transform hover:scale-105">
-                Get Free Consultation
-              </button>
+    <!-- hero section -->
+    <section class="about py-5 bg-light">
+      <div class="container">
+        <div class="row align-items-center">
+          <div class="col-md-6">
+            <div class="content">
+              <h2 class="fw-bold">Empowering Your Brand with Stunning Designs & Websites</h2>
+              <p class="mt-4 text-secondary">
+                We are a team of passionate designers and developers dedicated to creating exceptional digital experiences for our clients.
+              </p>
+              <button class="btn btn-primary rounded">Get A Quote</button>   
             </div>
           </div>
+          <div class="col-md-6">
+              <div class="row">
+                <div class="col-md-6">
+                  <div class="card mt-5">
+                    <div class="card-body">
+                      <h5 class="card-title">Card title</h5>
+                      <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <div class="row">
+                    <div class="col-md-12">
+                      <div class="card">
+                        <div class="card-body">
+                          <h5 class="card-title">Card title</h5>
+                          <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-md-12 mt-4">
+                      <div class="card">
+                        <div class="card-body">
+                          <h5 class="card-title">Card title</h5>
+                          <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  
+                </div>
+              </div>
+          </div>
+        </div>
+      </div>
+    </section>
 
-          <!-- Interactive Web Elements Visualization -->
-          <div class="md:w-1/2 mt-12 md:mt-0">
-            <div class="relative bg-white/10 p-8 rounded-2xl backdrop-blur-lg">
-              <div class="absolute inset-0 border-2 border-[#f6df35]/30 rounded-2xl"></div>
-              <div class="relative grid gap-4 grid-cols-2">
-                <div class="h-40 bg-white/5 rounded-lg animate-pulse-slow"></div>
-                <div class="h-48 bg-[#f6df35]/10 rounded-lg animate-pulse-slow delay-100"></div>
-                <div class="h-32 bg-[#e21c26]/10 rounded-lg animate-pulse-slow delay-200"></div>
-                <div class="h-44 bg-white/5 rounded-lg animate-pulse-slow delay-300"></div>
+
+    <!-- <section class="hero text-white py-5 position-relative" style="background-color: #f8f9fa;">
+      <div class="container text-center">
+        <h1 class="fw-bold text-dark">Discover the World's <span class="text-primary">Hidden</span> Wonders</h1>
+        <p class="lead text-muted">Find the unique moments and hidden gems that ignite unforgettable experiences. From raw encounters to remarkable destinations, we help you uncover the spark that turns every trip into a cherished year.</p>
+        <button class="btn btn-dark fw-bold mt-3">Plan Your Trip</button>
+      </div>
+      <div class="position-absolute top-0 start-50 translate-middle-x w-100 h-100" style="background: url('https://via.placeholder.com/800x400') center/cover no-repeat; opacity: 0.1;"></div>
+    </section> -->
+
+
+    <!-- Hero Section -->
+    <!-- <section class="hero text-center text-white py-5" style="background: linear-gradient(to right, #007ec7, #000000);">
+      <div class="container">
+        <h1 class="fw-bold">Discover the World's Hidden Wonders</h1>
+        <p class="lead">Find the unique moments and hidden gems that ignite unforgettable experiences.</p>
+        <button class="btn btn-warning text-black fw-bold mt-3">Plan Your Trip</button>
+      </div>
+    </section> -->
+    
+    <!-- Top Destinations -->
+    <section class="py-5">
+      <div class="container">
+        <h2 class="fw-bold">Top Destinations</h2>
+        <div class="row">
+          <div class="col-md-3 col-6 mb-4" v-for="n in 4" :key="n">
+            <div class="card">
+              <div class="card-img-top"></div>
+              <div class="card-body text-center">
+                <h5 class="card-title">Destination Name</h5>
+                <p class="text-muted">Country</p>
+              </div>
+            </div>
+          </div>
+        </div>
+        <button class="btn btn-outline-dark">Explore all destinations</button>
+      </div>
+    </section>
+
+    <!-- Latest Stories -->
+    <section class="py-5 bg-light">
+      <div class="container">
+        <h2 class="fw-bold">Latest Stories</h2>
+        <div class="row">
+          <div class="col-md-6 mb-4">
+            <div class="card">
+              <div class="card-img-top"></div>
+              <div class="card-body">
+                <h5 class="card-title">Story Title</h5>
+                <p class="text-muted">Category | Date</p>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-6">
+            <div class="row">
+              <div class="col-6 mb-3" v-for="n in 3" :key="n">
+                <div class="card">
+                  <div class="card-img-top"></div>
+                  <div class="card-body">
+                    <h6 class="card-title">Story Title</h6>
+                    <p class="text-muted small">Category | Date</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <button class="btn btn-outline-dark mt-3">Read more articles</button>
+      </div>
+    </section>
+    
+    <!-- Highlights -->
+    <section class="py-5">
+      <div class="container">
+        <h2 class="fw-bold">Trekker’s Highlights</h2>
+        <div class="row">
+          <div class="col-md-4">
+            <div class="card">
+              <div class="card-body">
+                <h5 class="card-title">Person Name</h5>
+                <p class="small text-muted">Review</p>
+                <p>Testimonial text...</p>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-8">
+            <div class="row">
+              <div class="col-md-6 mb-4" v-for="n in 2" :key="n">
+                <div class="card">
+                  <div class="card-img-top"></div>
+                  <div class="card-body">
+                    <h6 class="card-title">Experience Title</h6>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
         </div>
       </div>
-
-      <!-- Decorative Elements -->
-      <div class="absolute inset-0 bg-grid-white/5"></div>
     </section>
+    
+    <!-- Newsletter -->
+    <section class="py-5 text-center bg-dark text-white">
+      <div class="container">
+        <h2>Get Your Travel Inspiration Straight to Your Inbox</h2>
+        <div class="mt-4">
+          <input type="email" class="form-control w-50 mx-auto d-inline" placeholder="Enter your email">
+          <button class="btn btn-primary">Subscribe</button>
+        </div>
+      </div>
+    </section>
+    
+    <!-- Footer -->
+    <footer class="py-4 bg-black text-white">
+      <div class="container text-center">
+        <p>© 2024 Your Company. All rights reserved.</p>
+      </div>
+    </footer>
   </Layout>
 </template>
 
 <script>
 import Layout from "../../Layouts/HomeLayout.vue";
-import { ref } from "vue";
-
 export default {
   components: {
     Layout,
   },
-  setup() {
-    // For future interactive elements
-    const heroVisible = ref(true);
-    
-    return { heroVisible };
-  }
 };
 </script>
 
 <style scoped>
-.bg-grid-white\/5 {
-  background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32' width='32' height='32' fill='none' stroke='%23ffffff10'%3e%3cpath d='M0 .5H31.5V32'/%3e%3c/svg%3e");
+.card-img-top {
+  height: 150px;
+  background: url('https://via.placeholder.com/300') center/cover no-repeat;
 }
 
-@keyframes pulse-slow {
-  0%, 100% { opacity: 1; }
-  50% { opacity: 0.5; }
+.hero-image {
+  background: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3)),
+              url("/public/assets/images/hero.jpg") center/cover no-repeat;
+  height: 100%;
+  width: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  animation: zoomEffect 20s infinite alternate;
 }
 
-.animate-pulse-slow {
-  animation: pulse-slow 3s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+.overlay-content {
+  width: 90%;
+  max-width: 800px;
+  position: relative;
+  z-index: 2;
 }
-
-.delay-100 { animation-delay: 100ms; }
-.delay-200 { animation-delay: 200ms; }
-.delay-300 { animation-delay: 300ms; }
 </style>
