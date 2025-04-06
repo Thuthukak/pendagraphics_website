@@ -16,33 +16,23 @@
           <div class="col-md-6">
               <div class="row">
                 <div class="col-md-6">
-                  <div class="card mt-5">
-                    <div class="card-body">
-                      <h5 class="card-title">Card title</h5>
-                      <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                    </div>
+                  <div class="card border-0 shadow rounded mt-5">                 
+                      <img src="/public/assets/images/branding.jpg" alt="Hero Image" class="w-100 rounded" style="height: 400px; object-fit: cover;">
                   </div>
                 </div>
                 <div class="col-md-6">
                   <div class="row">
                     <div class="col-md-12">
-                      <div class="card">
-                        <div class="card-body">
-                          <h5 class="card-title">Card title</h5>
-                          <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                        </div>
+                      <div class="card border-0 shadow ">
+                        <img src="/public/assets/images/web-design.jpg" alt="Hero Image" class="w-100 rounded" style="height: 200px; object-fit: cover; ">
                       </div>
                     </div>
                     <div class="col-md-12 mt-4">
-                      <div class="card">
-                        <div class="card-body">
-                          <h5 class="card-title">Card title</h5>
-                          <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                        </div>
+                      <div class="card border-0 shadow">
+                        <img src="/public/assets/images/web-design.jpg" alt="Hero Image" class="w-100 rounded" style="height: 200px; object-fit: cover;">
                       </div>
                     </div>
                   </div>
-                  
                 </div>
               </div>
           </div>
@@ -70,27 +60,115 @@
       </div>
     </section> -->
     
-    <!-- Top Destinations -->
+    <!-- Our Featured Services -->
     <section class="py-5">
       <div class="container">
-        <h2 class="fw-bold">Top Destinations</h2>
+        <h2 class="fw-bold mb-4 text-center">Our Featured Services</h2>
         <div class="row">
-          <div class="col-md-3 col-6 mb-4" v-for="n in 4" :key="n">
-            <div class="card">
-              <div class="card-img-top"></div>
-              <div class="card-body text-center">
-                <h5 class="card-title">Destination Name</h5>
-                <p class="text-muted">Country</p>
+          <div class="col-md-4 col-sm-6 mb-4">
+            <div class="card p-3 service-card border-0">
+              <div class="d-flex align-items-center mb-2">
+                <img src="/public/assets/gifs/worldwide.gif" alt="Web" style="height: 50px; width: 50px; object-fit: cover;" class="me-3">
+                <h3 class="card-title mb-0">
+                  <a href="#" class="text-decoration-none">Web Development</a>
+                </h3>
               </div>
+              <p>
+                We incorporate the latest design trends, intuitive navigation, and engaging visuals to ensure that your website stands out.
+              </p>
+              <a href="#" class="btn btn-primary mt-2">Discover More</a>
+            </div>
+          </div>
+          <div class="col-md-4 col-sm-6 mb-4">
+            <div class="card p-3 service-card border-0">
+              <div class="d-flex align-items-center mb-2">
+                <img src="/public/assets/gifs/dairy-products.gif" alt="Web" style="height: 50px; width: 50px; object-fit: cover;" class="me-3">
+                <h3 class="card-title mb-0">
+                  <a href="#" class="text-decoration-none">Product Design</a>
+                </h3>
+              </div>
+              <p>
+                We specialize in turning your innovative ideas into tangible products that resonate with your audience and drive success.
+              </p>
+              <a href="#" class="btn btn-primary mt-2">Discover More</a>
+            </div>
+          </div>
+          <div class="col-md-4 col-sm-6 mb-4">
+            <div class="card p-3 service-card border-0">
+              <div class="d-flex align-items-center mb-2">
+                <img src="/public/assets/gifs/design.gif" alt="Web" style="height: 50px; width: 50px; object-fit: cover;" class="me-3">
+                <h3 class="card-title mb-0">
+                  <a href="#" class="text-decoration-none">Graphic Design</a>
+                </h3>
+              </div>
+              <p>
+                Posters, flyers, and banners, brochures, business cards, infographics, social media graphics, and packaging design.
+              </p>
+              <a href="#" class="btn btn-primary mt-2">Discover More</a>
+            </div>
+          </div>
+          <div class="col-md-4 col-sm-6 mb-4">
+            <div class="card p-3 service-card border-0">
+              <div class="d-flex align-items-center mb-2">
+                <img src="/public/assets/gifs/passport.gif" alt="Web" style="height: 50px; width: 50px; object-fit: cover;" class="me-3">
+                <h3 class="card-title mb-0">
+                  <a href="#" class="text-decoration-none">Identity Design</a>
+                </h3>
+              </div>
+              <p>
+                We help develop a strong brand identity through logo design, brand guidelines, brand strategy, and brand messaging.
+              </p>
+              <a href="#" class="btn btn-primary mt-2">Discover More</a>
+            </div>
+          </div>
+          <div class="col-md-4 col-sm-6 mb-4">
+            <div class="card p-3 service-card border-0">
+              <div class="d-flex align-items-center mb-2">
+                <img src="/public/assets/gifs/online-supermarket.gif" alt="Web" style="height: 50px; width: 50px; object-fit: cover;" class="me-3">
+                <h3 class="card-title mb-0">
+                  <a href="#" class="text-decoration-none">E-Commerce Solutions</a>
+                </h3>
+              </div>
+              <p>
+                We provide e-commerce design and development services, including online store setup, product listing, payment integration, and order management.
+              </p>
+              <a href="#" class="btn btn-primary mt-2">Discover More</a>
+            </div>
+          </div>
+          <div class="col-md-4 col-sm-6 mb-4">
+            <div class="card p-3 service-card border-0">
+              <div class="d-flex align-items-center mb-2">
+                <img src="/public/assets/gifs/responsive-design.gif" alt="Web" style="height: 50px; width: 50px; object-fit: cover;" class="me-3">
+                <h3 class="card-title mb-0">
+                  <a href="#" class="text-decoration-none">Digital Marketing</a>
+                </h3>
+              </div>
+              <p>
+                We provide digital marketing services, including search engine optimization (SEO), social media marketing, content marketing, email marketing, etc. 
+              </p>
+              <a href="#" class="btn btn-primary mt-2">Discover More</a>
             </div>
           </div>
         </div>
-        <button class="btn btn-outline-dark">Explore all destinations</button>
+      </div>
+    </section>
+
+    <!-- portfolio -->
+    <section>
+      <div class="container">
+        <Portfolio />
+      </div>
+    </section>
+
+    <!-- about -->
+    <section>
+      <div class="container mt-4">
+        <About />
       </div>
     </section>
 
     <!-- Latest Stories -->
-    <section class="py-5 bg-light">
+    <!-- <section class="py-5 bg-light">
       <div class="container">
         <h2 class="fw-bold">Latest Stories</h2>
         <div class="row">
@@ -119,10 +197,10 @@
         </div>
         <button class="btn btn-outline-dark mt-3">Read more articles</button>
       </div>
-    </section>
+    </section> -->
     
     <!-- Highlights -->
-    <section class="py-5">
+    <!-- <section class="py-5">
       <div class="container">
         <h2 class="fw-bold">Trekker’s Highlights</h2>
         <div class="row">
@@ -149,58 +227,104 @@
           </div>
         </div>
       </div>
-    </section>
+    </section> -->
     
     <!-- Newsletter -->
     <section class="py-5 text-center bg-dark text-white">
       <div class="container">
-        <h2>Get Your Travel Inspiration Straight to Your Inbox</h2>
-        <div class="mt-4">
-          <input type="email" class="form-control w-50 mx-auto d-inline" placeholder="Enter your email">
-          <button class="btn btn-primary">Subscribe</button>
+        <div class="row">
+          <div class="col-md-6">
+            <h2 class="fw-bold text-left">Let’s work together</h2>
+            <p class="text-left">
+              We're excited to hear about your vision and explore how we can bring it to life. Whether you're looking to build a modern website, create a strong visual identity, or launch a compelling marketing campaign — we’re here to help.  
+            </p>
+            <p class="text-left">
+              Fill out the form with your project details, goals, and any specific requirements you have in mind. One of our team members will review your message and get back to you promptly to discuss the next steps.  
+            </p>
+            <p class="text-left">
+              Let’s turn your ideas into powerful digital experiences — together.
+            </p>
+          </div>
+          <div class="col-md-6">
+            <form  @submit.prevent="submitForm" class="p-4 shadow rounded bg-white">
+              <div class="mb-3">
+                <input
+                  type="text"
+                  class="form-control"
+                  placeholder="Enter your name"
+                  required
+                />
+              </div>
+
+              <div class="mb-3">
+                <input
+                  type="email"
+                  class="form-control"
+                  placeholder="Enter your email"
+                  required
+                />
+              </div>
+
+              <div class="mb-3">
+                <textarea
+                  class="form-control"
+                  rows="4"
+                  placeholder="Enter your message"
+                  required
+                ></textarea>
+              </div>
+
+              <div class="text-end">
+                <button type="submit" class="btn btn-primary">
+                  Send Message
+                </button>
+              </div>
+            </form>
+          </div>
         </div>
       </div>
     </section>
     
-    <!-- Footer -->
-    <footer class="py-4 bg-black text-white">
-      <div class="container text-center">
-        <p>© 2024 Your Company. All rights reserved.</p>
-      </div>
-    </footer>
   </Layout>
 </template>
 
-<script>
+<script setup>
 import Layout from "../../Layouts/HomeLayout.vue";
-export default {
-  components: {
-    Layout,
-  },
-};
+import Portfolio from "@/components/Home/Portfolio.vue";
+import About from "@/components/Home/About.vue";
+import { ref} from "vue";
+import axios from "axios";
+
+const form = ref({
+  name: '',
+  email: '',
+  message: '',
+});
+
+const submitForm = async () => {
+  try {
+    const response = await axios.post('/contact-form', form.value);
+    console.log(response.data);
+
+    // Reset form
+    form.value = {
+      name: '',
+      email: '',
+      message: '',
+    };
+  } catch (error) {
+    console.error('Form submission error:', error);
+  }
+}
 </script>
 
+
 <style scoped>
-.card-img-top {
-  height: 150px;
-  background: url('https://via.placeholder.com/300') center/cover no-repeat;
+
+.service-card:hover{
+  box-shadow: 0 0 10px rgba(48, 48, 48, 0.3);
+  transform: scale(1.05);
+  transition: transform 0.3s ease;
 }
 
-.hero-image {
-  background: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3)),
-              url("/public/assets/images/hero.jpg") center/cover no-repeat;
-  height: 100%;
-  width: 100%;
-  position: absolute;
-  top: 0;
-  left: 0;
-  animation: zoomEffect 20s infinite alternate;
-}
-
-.overlay-content {
-  width: 90%;
-  max-width: 800px;
-  position: relative;
-  z-index: 2;
-}
 </style>

@@ -1,0 +1,184 @@
+<template>
+  <section class=" bg-light section portfolio">
+    <div>
+      <h2 class="fw-bold text-center mb-4">Portfolio</h2>
+    </div>
+    <div class="portfolio container my-5">
+      <!-- Tabs -->
+      <div class="tabs d-flex flex-wrap justify-content-center mb-4">
+        <button
+          v-for="cat in categories"
+          :key="cat"
+          @click="selectedCategory = cat"
+          :class="['btn m-2', selectedCategory === cat ? 'btn-primary' : 'btn-outline-primary']"
+        >
+          {{ cat }}
+        </button>
+      </div>
+  
+      <!-- Gallery Grid -->
+      <div class="row">
+        <div
+          class="col-md-4 mb-4"
+          v-for="item in filteredItems"
+          :key="item.id"
+        >
+          <div class="portfolio-item position-relative overflow-hidden rounded shadow-sm">
+            <img
+              :src="item.image"
+              :alt="item.title"
+              class="w-100 h-100 object-cover"
+            />
+            <div class="overlay d-flex flex-column justify-content-center align-items-center text-white text-center px-3">
+              <h5>{{ item.title }}</h5>
+              <p class="small">{{ item.description }}</p>
+              <div class="d-flex gap-2">
+                <button class="btn btn-sm btn-light" @click="zoomImage(item.image)">Zoom</button>
+                <a :href="item.link" target="_blank" class="btn btn-sm btn-light">Visit</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+  
+      <!-- Modal Zoom -->
+      <div
+        v-if="zoomedImage"
+        class="modal-backdrop"
+        @click="zoomedImage = null"
+      >
+        <img :src="zoomedImage" class="zoomed-img" />
+      </div>
+    </div>
+  </section>
+  </template>
+  
+  <script setup>
+  import { ref, computed } from 'vue'
+  
+  const selectedCategory = ref('All')
+  const zoomedImage = ref(null)
+  
+  const categories = [
+    'All',
+    'Web Design',
+    'Product Design',
+    'Graphic Design',
+    'Digital Marketing',
+    'Identity Design'
+  ]
+  
+  const items = ref([
+    {
+      id: 1,
+      category: 'Web Design',
+      title: 'Landing Page Design',
+      description: 'Modern and responsive layout for a startup.',
+      image: '/assets/images/portfolio/kmcollect.jpg',
+      link: 'https://www.kmcollection.co.za/'
+    },
+    {
+      id: 2,
+      category: 'Product Design',
+      title: 'Mobile App Mockup',
+      description: 'Clean and intuitive mobile UI design.',
+      image: '/assets/images/portfolio/mabura.jpg',
+      link: 'https://example.com/product1'
+    },
+    {
+      id: 3,
+      category: 'Graphic Design',
+      title: 'Event Poster',
+      description: 'Eye-catching poster for music event.',
+      image: '/assets/images/portfolio/mkay-aqua.jpg',
+      link: 'https://example.com/graphic1'
+    },
+    {
+      id: 4,
+      category: 'Digital Marketing',
+      title: 'Social Media Campaign',
+      description: 'Ad creatives and strategy.',
+      image: '/assets/images/portfolio/seo.jpg',
+      link: 'https://example.com/marketing1'
+    },
+    {
+      id: 5,
+      category: 'Identity Design',
+      title: 'Logo & Branding',
+      description: 'Custom branding for tech startup.',
+      image: '/assets/images/portfolio/bakili.jpg',
+      link: 'https://example.com/identity1'
+    },
+    {
+      id: 6,
+      category: 'Web Design',
+      title: 'E-commerce UI',
+      description: 'User-friendly online store interface.',
+      image: '/assets/images/portfolio/ramohlale.jpg',
+      link: 'https://ramohlale.co.za/wp/'
+    }
+  ])
+  
+  const filteredItems = computed(() => {
+    if (selectedCategory.value === 'All') return items.value
+    return items.value.filter(i => i.category === selectedCategory.value)
+  })
+  
+  function zoomImage(src) {
+    zoomedImage.value = src
+  }
+  </script>
+  
+  <style scoped>
+  .portfolio-item {
+    height: 250px;
+    position: relative;
+  }
+  
+  .portfolio-item img {
+    transition: transform 0.3s ease;
+    height: 100%;
+    object-fit: cover;
+  }
+  
+  .portfolio-item:hover img {
+    transform: scale(1.1);
+  }
+  
+  .overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.7);
+    opacity: 0;
+    transition: opacity 0.3s ease;
+  }
+  
+  .portfolio-item:hover .overlay {
+    opacity: 1;
+  }
+  
+  /* Zoom Modal */
+  .modal-backdrop {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.8);
+    z-index: 1050;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .zoomed-img {
+    max-width: 90%;
+    max-height: 90%;
+    border-radius: 10px;
+    box-shadow: 0 0 20px #000;
+  }
+  </style>
+  
