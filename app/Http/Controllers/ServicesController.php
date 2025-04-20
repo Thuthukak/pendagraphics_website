@@ -7,9 +7,34 @@ use App\Models\Service;
 
 class ServicesController extends Controller
 {
-    public function index()
+    public function indexWebDesign()
     {
-        return response()->json(Service::all());
+        return view('services.web-design');
+    }
+
+    public function indexGraphicDesign()
+    {
+        return view('services.graphic-design');
+    }
+
+    public function indexProductDesign()
+    {
+        return view('services.product-design');
+    }
+
+    public function indexIdentityDesign()
+    {
+        return view('services.identity-design');
+    }
+
+    public function indexECommerce()
+    {
+        return view('services.e-commerce');
+    }
+
+    public function indexDigitalMarketing()
+    {
+        return view('services.digital-marketing');
     }
 
 }

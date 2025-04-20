@@ -6,12 +6,12 @@
     <!-- icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css " />
 
-    <title>Penda Graphics - Home</title>
+    <title>Penda Graphics - Graphic Design</title>
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 </head>
 <body>
     <div id="app">
-        <Home></Home>
+        <graphic-design></graphic-design>
     </div>
 </body>
 </html>

@@ -8,6 +8,8 @@ use App\Http\Controllers\BarberController;
 use App\Http\Controllers\BookingController;
 use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\ContactController;
+use App\Http\Controllers\NewsletterController;
 
 // Admin Authentication Routes
 Route::prefix('admin')->group(function () {
@@ -35,11 +37,18 @@ Route::middleware('guest')->group(function () {
         return view('welcome');
     });
 
-    Route::get('/bookings', function () {
-        return view('bookings');
+    Route::prefix('services')->group(function () {
+        Route::get('/web-design', [ServicesController::class, 'indexWebDesign'])->name('web-design.index');
+        Route::get('/graphic-design', [ServicesController::class, 'indexGraphicDesign'])->name('graphic-design.index');
+        Route::get('/product-design', [ServicesController::class, 'indexProductDesign'])->name('product-design.index');
+        Route::get('/identity-design', [ServicesController::class, 'indexIdentityDesign'])->name('identity-design.index');
+        Route::get('/e-commerce', [ServicesController::class, 'indexECommerce'])->name('e-commerce.index');
+        Route::get('/digital-marketing', [ServicesController::class, 'indexDigitalMarketing'])->name('digital-marketing.index');
     });
 
-    Route::post('/book', [BookingController::class, 'create'])->name('book');
+    Route::post('/contact-form', [ContactController::class, 'contactForm'])->name('contact.form');
+    Route::post('/newsletter', [NewsletterController::class, 'store'])->name('newsletter.store');
+   
 });
 
 // API Routes (Public API)

@@ -1,7 +1,7 @@
 <template>
-  <section class=" bg-light section portfolio">
+  <section class=" bg-blue section portfolio ">
     <div>
-      <h2 class="fw-bold text-center mb-4">Portfolio</h2>
+      <h2 class="fw-bold text-center mb-4 mt-4">Portfolio</h2>
     </div>
     <div class="portfolio container my-5">
       <!-- Tabs -->
@@ -130,6 +130,9 @@
   </script>
   
   <style scoped>
+  .bg-blue{
+    background-color: #b0d7ff3f !important;
+  }
   .portfolio-item {
     height: 250px;
     position: relative;

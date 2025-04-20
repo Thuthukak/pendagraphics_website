@@ -1,7 +1,7 @@
 <!-- About -->
  <template>
     <section id="about" class="about">
-        <div class="container my-5 py-5 ">
+        <div class="container my-5 py-5 px-4 ">
             <div class="row">
                 <div class="col-md-6 col-lg-6 ">
                     <div>

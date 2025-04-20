@@ -2,7 +2,7 @@
   <Layout>
     <!-- hero section -->
     <section class="about py-5 bg-light">
-      <div class="container">
+      <div class="container px-4">
         <div class="row align-items-center">
           <div class="col-md-6">
             <div class="content">
@@ -62,16 +62,16 @@
     
     <!-- Our Featured Services -->
     <section class="py-5">
-      <div class="container">
+      <div class="container px-4">
         <h2 class="fw-bold mb-4 text-center">Our Featured Services</h2>
         <div class="row">
           <div class="col-md-4 col-sm-6 mb-4">
             <div class="card p-3 service-card border-0">
               <div class="d-flex align-items-center mb-2">
                 <img src="/public/assets/gifs/worldwide.gif" alt="Web" style="height: 50px; width: 50px; object-fit: cover;" class="me-3">
-                <h3 class="card-title mb-0">
+                <h4 class="card-title mb-0">
                   <a href="#" class="text-decoration-none">Web Development</a>
-                </h3>
+                </h4>
               </div>
               <p>
                 We incorporate the latest design trends, intuitive navigation, and engaging visuals to ensure that your website stands out.
@@ -83,9 +83,9 @@
             <div class="card p-3 service-card border-0">
               <div class="d-flex align-items-center mb-2">
                 <img src="/public/assets/gifs/dairy-products.gif" alt="Web" style="height: 50px; width: 50px; object-fit: cover;" class="me-3">
-                <h3 class="card-title mb-0">
+                <h4 class="card-title mb-0">
                   <a href="#" class="text-decoration-none">Product Design</a>
-                </h3>
+                </h4>
               </div>
               <p>
                 We specialize in turning your innovative ideas into tangible products that resonate with your audience and drive success.
@@ -97,9 +97,9 @@
             <div class="card p-3 service-card border-0">
               <div class="d-flex align-items-center mb-2">
                 <img src="/public/assets/gifs/design.gif" alt="Web" style="height: 50px; width: 50px; object-fit: cover;" class="me-3">
-                <h3 class="card-title mb-0">
+                <h4 class="card-title mb-0">
                   <a href="#" class="text-decoration-none">Graphic Design</a>
-                </h3>
+                </h4>
               </div>
               <p>
                 Posters, flyers, and banners, brochures, business cards, infographics, social media graphics, and packaging design.
@@ -111,9 +111,9 @@
             <div class="card p-3 service-card border-0">
               <div class="d-flex align-items-center mb-2">
                 <img src="/public/assets/gifs/passport.gif" alt="Web" style="height: 50px; width: 50px; object-fit: cover;" class="me-3">
-                <h3 class="card-title mb-0">
+                <h4 class="card-title mb-0">
                   <a href="#" class="text-decoration-none">Identity Design</a>
-                </h3>
+                </h4>
               </div>
               <p>
                 We help develop a strong brand identity through logo design, brand guidelines, brand strategy, and brand messaging.
@@ -125,9 +125,9 @@
             <div class="card p-3 service-card border-0">
               <div class="d-flex align-items-center mb-2">
                 <img src="/public/assets/gifs/online-supermarket.gif" alt="Web" style="height: 50px; width: 50px; object-fit: cover;" class="me-3">
-                <h3 class="card-title mb-0">
+                <h4 class="card-title mb-0">
                   <a href="#" class="text-decoration-none">E-Commerce Solutions</a>
-                </h3>
+                </h4>
               </div>
               <p>
                 We provide e-commerce design and development services, including online store setup, product listing, payment integration, and order management.
@@ -139,9 +139,9 @@
             <div class="card p-3 service-card border-0">
               <div class="d-flex align-items-center mb-2">
                 <img src="/public/assets/gifs/responsive-design.gif" alt="Web" style="height: 50px; width: 50px; object-fit: cover;" class="me-3">
-                <h3 class="card-title mb-0">
+                <h4 class="card-title mb-0">
                   <a href="#" class="text-decoration-none">Digital Marketing</a>
-                </h3>
+                </h4>
               </div>
               <p>
                 We provide digital marketing services, including search engine optimization (SEO), social media marketing, content marketing, email marketing, etc. 
@@ -167,71 +167,10 @@
       </div>
     </section>
 
-    <!-- Latest Stories -->
-    <!-- <section class="py-5 bg-light">
-      <div class="container">
-        <h2 class="fw-bold">Latest Stories</h2>
-        <div class="row">
-          <div class="col-md-6 mb-4">
-            <div class="card">
-              <div class="card-img-top"></div>
-              <div class="card-body">
-                <h5 class="card-title">Story Title</h5>
-                <p class="text-muted">Category | Date</p>
-              </div>
-            </div>
-          </div>
-          <div class="col-md-6">
-            <div class="row">
-              <div class="col-6 mb-3" v-for="n in 3" :key="n">
-                <div class="card">
-                  <div class="card-img-top"></div>
-                  <div class="card-body">
-                    <h6 class="card-title">Story Title</h6>
-                    <p class="text-muted small">Category | Date</p>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-        <button class="btn btn-outline-dark mt-3">Read more articles</button>
-      </div>
-    </section> -->
     
-    <!-- Highlights -->
-    <!-- <section class="py-5">
-      <div class="container">
-        <h2 class="fw-bold">Trekker’s Highlights</h2>
-        <div class="row">
-          <div class="col-md-4">
-            <div class="card">
-              <div class="card-body">
-                <h5 class="card-title">Person Name</h5>
-                <p class="small text-muted">Review</p>
-                <p>Testimonial text...</p>
-              </div>
-            </div>
-          </div>
-          <div class="col-md-8">
-            <div class="row">
-              <div class="col-md-6 mb-4" v-for="n in 2" :key="n">
-                <div class="card">
-                  <div class="card-img-top"></div>
-                  <div class="card-body">
-                    <h6 class="card-title">Experience Title</h6>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section> -->
-    
-    <!-- Newsletter -->
+    <!-- form -->
     <section class="py-5 text-center bg-dark text-white">
-      <div class="container">
+      <div class="container px-4">
         <div class="row">
           <div class="col-md-6">
             <h2 class="fw-bold text-left">Let’s work together</h2>
@@ -250,6 +189,7 @@
               <div class="mb-3">
                 <input
                   type="text"
+                  v-model="form.name"
                   class="form-control"
                   placeholder="Enter your name"
                   required
@@ -259,6 +199,7 @@
               <div class="mb-3">
                 <input
                   type="email"
+                  v-model="form.email"
                   class="form-control"
                   placeholder="Enter your email"
                   required
@@ -268,6 +209,7 @@
               <div class="mb-3">
                 <textarea
                   class="form-control"
+                  v-model="form.message"
                   rows="4"
                   placeholder="Enter your message"
                   required
@@ -284,7 +226,6 @@
         </div>
       </div>
     </section>
-    
   </Layout>
 </template>
 

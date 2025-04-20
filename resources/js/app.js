@@ -1,5 +1,6 @@
 import './bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
+import '../css/custom.css';
 import { createApp } from 'vue';
 import App from './components/App.vue';
 import Home from './components/Home/Home.vue';
@@ -11,6 +12,12 @@ import { library } from "@fortawesome/fontawesome-svg-core";
 import { FontAwesomeIcon } from "@fortawesome/vue-fontawesome"; 
 import router from './router'; 
 
+import WebDesign from './components/Home/Services/WebDesign.vue';
+import ProductDesign from './components/Home/Services/ProductDesign.vue';
+import GraphicDesign from './components/Home/Services/GraphicDesign.vue';
+import ECommerce from './components/Home/Services/ECommerce.vue';
+import DigitalMarketing from './components/Home/Services/DigitalMarketing.vue';
+import IdentityDesign from './components/Home/Services/IdentityDesign.vue';
 
 import { faBars, 
         faMoon, 
@@ -46,5 +53,12 @@ app.component('Dashboard', Dashboard);
 app.component('DashboardLayout', DashboardLayout);
 app.component("font-awesome-icon", FontAwesomeIcon);
 app.use(router);
+
+app.component('web-design', WebDesign);
+app.component('product-design', ProductDesign);
+app.component('graphic-design', GraphicDesign);
+app.component('e-commerce', ECommerce);
+app.component('digital-marketing', DigitalMarketing);
+app.component('identity-design', IdentityDesign);
 
 app.mount('#app');
