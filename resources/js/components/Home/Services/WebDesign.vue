@@ -4,7 +4,7 @@
     <section id="apply" class="cta">
       <div class="container" data-aos="zoom-in">
         <div class="text-center text-white">
-          <h2 class="fw-bold">Website Design</h2>
+          <h1 class="fw-bold">Website Design</h1>
           <p> At Penda Graphics, our web design services combine creativity and functionality to give your brand an unforgettable digital presence</p>
         </div>
       </div>

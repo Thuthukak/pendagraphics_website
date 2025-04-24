@@ -19,6 +19,7 @@ import ECommerce from './components/Home/Services/ECommerce.vue';
 import DigitalMarketing from './components/Home/Services/DigitalMarketing.vue';
 import IdentityDesign from './components/Home/Services/IdentityDesign.vue';
 import WebDesignCarousel from './components/Home/Services/WebDesignCarousel.vue';
+import GraphicDesignCarousel from './components/Home/Services/GraphicDesignCarousel.vue';
 
 import { faBars, 
         faMoon, 
@@ -62,5 +63,6 @@ app.component('e-commerce', ECommerce);
 app.component('digital-marketing', DigitalMarketing);
 app.component('identity-design', IdentityDesign);
 app.component('WebDesignCarousel', WebDesignCarousel);
+app.component('GraphicDesignCarousel', GraphicDesignCarousel);
 
 app.mount('#app');
