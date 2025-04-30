@@ -20,6 +20,7 @@ import DigitalMarketing from './components/Home/Services/DigitalMarketing.vue';
 import IdentityDesign from './components/Home/Services/IdentityDesign.vue';
 import WebDesignCarousel from './components/Home/Services/WebDesignCarousel.vue';
 import GraphicDesignCarousel from './components/Home/Services/GraphicDesignCarousel.vue';
+import ProductDesignCarousel from './components/Home/Services/ProductDesignCarousel.vue';
 
 import { faBars, 
         faMoon, 
@@ -64,5 +65,6 @@ app.component('digital-marketing', DigitalMarketing);
 app.component('identity-design', IdentityDesign);
 app.component('WebDesignCarousel', WebDesignCarousel);
 app.component('GraphicDesignCarousel', GraphicDesignCarousel);
+app.component('ProductDesignCarousel', ProductDesignCarousel);
 
 app.mount('#app');
