@@ -20,7 +20,7 @@
                 style="width:400px; height:400px; object-fit: cover;"  />
           </div>
           <div class="col-md-7 align-self-center">
-            <h2 class="fw-bold ">Product Design That Connects</h2>
+            <h2 class="fw-bold mb-3">Product Design That Connects</h2>
             <p>We craft visually compelling and functional product designs that captivate your audience and communicate your brand’s identity. From packaging to mockups, every detail is designed to make your product stand out on the shelf and in the digital space.</p>
             <p>Whether you're launching a new product or refreshing an existing one, our design process ensures a perfect balance of creativity, usability, and brand alignment.</p>
           </div>
