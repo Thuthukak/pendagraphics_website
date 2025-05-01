@@ -28,6 +28,7 @@
             <a href="/services/digital-marketing" class="block px-4 py-2 text-gray-700 hover:bg-gray-100 hover:text-blue-600">Digital Marketing</a>
           </div>
         </div>
+        <a href="/faq" class="nav-item">FAQ</a>
         <a href="/contact-us" class="nav-item">Contact Us</a>
         <a href="/admin/auth" class="bg-blue-500 px-4 py-2 rounded text-white hover:bg-blue-600 transition">
           Get Quote
@@ -60,6 +61,7 @@
             <a href="/services/e-commerce" class="block px-4 py-2 text-gray-700 hover:bg-gray-100 hover:text-blue-600">E-Commerce</a>
             <a href="/services/digital-marketing" class="block px-4 py-2 text-gray-700 hover:bg-gray-100 hover:text-blue-600">Digital Marketing</a>
           </div>
+      <a href="/faq" class="nav-item">FAQ</a>
       <a href="/contact-us" class="block px-6 py-2 text-black">Contact Us</a>
       <div class="px-6 py-2 flex space-x-2">
       </div>

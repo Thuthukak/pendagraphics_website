@@ -17,10 +17,12 @@
             <img src="/public/assets/images/homepage-seen-computer-screen.jpg" 
                 alt="Web design" 
                 class="rounded-lg shadow-md"
-                style="width:500px; height:300px; object-fit: cover;"  />
+                style="width:500px; height:400px; object-fit: cover;"  />
           </div>
           <div class="col-md-6 align-self-center">
-            <h2 class="fw-bold ">What we offer</h2>
+            <h2 class="fw-bold ">Websites That Work — and Wow</h2>
+            <p>We design custom websites that blend beauty with functionality. Whether you need a sleek portfolio, a lead-generating landing page, or a powerful business site, our designs are fast, responsive, and built to impress — on any device.</p>
+            <h5>Our website design services include:</h5>
             <ul class="list-disc pl-6 space-y-2 mt-3">
               <li>Custom website design tailored to your brand</li>
               <li>Responsive, mobile-friendly layouts</li>
@@ -97,13 +99,11 @@
     <section>
       <div class="container mt-5 my-5 py-5 px-4">
         <div class="row">
-          <div class="col-md-6 ">
-          <div class="mt-5">
+          <div class="col-md-6 align-self-center">
             <h1 class="fw-bold ">Case Studies</h1>
             <p>Dive into our collection of captivating web design case studies, showcasing our expertise in crafting exceptional online experiences for a diverse range of clients. From startups to established brands, our portfolio highlights our ability to blend creativity with functionality, resulting in websites that not only engage users but also drive tangible results.
             </p>
-          </div>
-          </div>
+        </div>
           <div class="col-md-6">
             <WebDesignCarousel />
           </div>
@@ -132,11 +132,27 @@
 }
 
 .banner-image {
-  background-image: linear-gradient(#5396fc , #2079fd );
+  position: relative;
+  background-image: url(/public/assets/images/360_F_75270.jpg);
+  background-position:center center;
+  background-repeat: no-repeat;
+  background-size: cover;
 }
 
 .banner-image::before {
-  background: rgba(53, 111, 238, 0.651); /* Dark overlay to dim the image */
+  content: ""; /* Required for pseudo-elements */
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: #030303bd; /* Your overlay color */
+  opacity: 0.8; /* Adjust the opacity as needed */
+  z-index: 1;
+}
+.banner-image > * {
+  position: relative;
+  z-index: 2;
 }
 
 .overlay-content {
@@ -145,7 +161,7 @@
   position: relative;
 }
 .cta {
-  background: linear-gradient(rgba(2, 2, 2, 0.5), rgba(0, 0, 0, 0.5)), url("/public/assets/images/web-design-banner.jpg") fixed center center;
+  background: linear-gradient(rgba(2, 2, 2, 0.75), rgba(0, 0, 0, 0.75)), url("/public/assets/images/what-is-web-design-infographic.jpg") fixed center center;
     background-size: auto, auto;
   background-size: cover;
   padding: 120px 0;

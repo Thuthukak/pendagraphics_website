@@ -23,6 +23,8 @@ import GraphicDesignCarousel from './components/Home/Services/GraphicDesignCarou
 import ProductDesignCarousel from './components/Home/Services/ProductDesignCarousel.vue';
 import IdentityDesignCarousel from './components/Home/Services/IdentityDesignCarousel.vue';
 import ECommerceCarousel from './components/Home/Services/ECommerceCarousel.vue';
+import FAQ from './components/Home/Faq.vue';
+import FaqComponent from './components/Home/FaqComponent.vue';
 
 import { faBars, 
         faMoon, 
@@ -52,6 +54,7 @@ library.add(faBars,
 const app = createApp({});
 
 app.component('Home', Home);
+app.component('faq', FAQ);
 app.component('Bookings', Bookings);
 app.component('Admin', Admin);
 app.component('Dashboard', Dashboard);
@@ -70,5 +73,6 @@ app.component('GraphicDesignCarousel', GraphicDesignCarousel);
 app.component('ProductDesignCarousel', ProductDesignCarousel);
 app.component('IdentityDesignCarousel', IdentityDesignCarousel);
 app.component('ECommerceCarousel', ECommerceCarousel);
+app.component('faq-component', FaqComponent);
 
 app.mount('#app');

@@ -41,25 +41,6 @@
     </section>
 
 
-    <!-- <section class="hero text-white py-5 position-relative" style="background-color: #f8f9fa;">
-      <div class="container text-center">
-        <h1 class="fw-bold text-dark">Discover the World's <span class="text-primary">Hidden</span> Wonders</h1>
-        <p class="lead text-muted">Find the unique moments and hidden gems that ignite unforgettable experiences. From raw encounters to remarkable destinations, we help you uncover the spark that turns every trip into a cherished year.</p>
-        <button class="btn btn-dark fw-bold mt-3">Plan Your Trip</button>
-      </div>
-      <div class="position-absolute top-0 start-50 translate-middle-x w-100 h-100" style="background: url('https://via.placeholder.com/800x400') center/cover no-repeat; opacity: 0.1;"></div>
-    </section> -->
-
-
-    <!-- Hero Section -->
-    <!-- <section class="hero text-center text-white py-5" style="background: linear-gradient(to right, #007ec7, #000000);">
-      <div class="container">
-        <h1 class="fw-bold">Discover the World's Hidden Wonders</h1>
-        <p class="lead">Find the unique moments and hidden gems that ignite unforgettable experiences.</p>
-        <button class="btn btn-warning text-black fw-bold mt-3">Plan Your Trip</button>
-      </div>
-    </section> -->
-    
     <!-- Our Featured Services -->
     <section class="py-5">
       <div class="container px-4">

@@ -10,6 +10,7 @@ use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\ContactController;
 use App\Http\Controllers\NewsletterController;
+use App\Http\Controllers\HomeController;
 
 // Admin Authentication Routes
 Route::prefix('admin')->group(function () {
@@ -44,9 +45,11 @@ Route::middleware('guest')->group(function () {
         Route::get('/identity-design', [ServicesController::class, 'indexIdentityDesign'])->name('identity-design.index');
         Route::get('/e-commerce', [ServicesController::class, 'indexECommerce'])->name('e-commerce.index');
         Route::get('/digital-marketing', [ServicesController::class, 'indexDigitalMarketing'])->name('digital-marketing.index');
+        
     });
 
     Route::post('/contact-form', [ContactController::class, 'contactForm'])->name('contact.form');
+    Route::get('/faq', [HomeController::class, 'FaqIndex'])->name('faq.index');
     Route::post('/newsletter', [NewsletterController::class, 'store'])->name('newsletter.store');
    
 });
