@@ -70,13 +70,13 @@
               <div class="d-flex align-items-center mb-2">
                 <img src="/public/assets/gifs/worldwide.gif" alt="Web" style="height: 50px; width: 50px; object-fit: cover;" class="me-3">
                 <h4 class="card-title mb-0">
-                  <a href="#" class="text-decoration-none">Web Development</a>
+                  <a href="/services/web-design" class="text-decoration-none">Web Development</a>
                 </h4>
               </div>
               <p>
                 We incorporate the latest design trends, intuitive navigation, and engaging visuals to ensure that your website stands out.
               </p>
-              <a href="#" class="btn btn-primary mt-2">Discover More</a>
+              <a href="/services/web-design" class="btn btn-primary mt-2">Discover More</a>
             </div>
           </div>
           <div class="col-md-4 col-sm-6 mb-4">
@@ -84,13 +84,13 @@
               <div class="d-flex align-items-center mb-2">
                 <img src="/public/assets/gifs/dairy-products.gif" alt="Web" style="height: 50px; width: 50px; object-fit: cover;" class="me-3">
                 <h4 class="card-title mb-0">
-                  <a href="#" class="text-decoration-none">Product Design</a>
+                  <a href="/services/product-design" class="text-decoration-none">Product Design</a>
                 </h4>
               </div>
               <p>
                 We specialize in turning your innovative ideas into tangible products that resonate with your audience and drive success.
               </p>
-              <a href="#" class="btn btn-primary mt-2">Discover More</a>
+              <a href="/services/product-design" class="btn btn-primary mt-2">Discover More</a>
             </div>
           </div>
           <div class="col-md-4 col-sm-6 mb-4">
@@ -98,13 +98,13 @@
               <div class="d-flex align-items-center mb-2">
                 <img src="/public/assets/gifs/design.gif" alt="Web" style="height: 50px; width: 50px; object-fit: cover;" class="me-3">
                 <h4 class="card-title mb-0">
-                  <a href="#" class="text-decoration-none">Graphic Design</a>
+                  <a href="/services/graphic-design" class="text-decoration-none">Graphic Design</a>
                 </h4>
               </div>
               <p>
                 Posters, flyers, and banners, brochures, business cards, infographics, social media graphics, and packaging design.
               </p>
-              <a href="#" class="btn btn-primary mt-2">Discover More</a>
+              <a href="/services/graphic-design" class="btn btn-primary mt-2">Discover More</a>
             </div>
           </div>
           <div class="col-md-4 col-sm-6 mb-4">
@@ -112,13 +112,13 @@
               <div class="d-flex align-items-center mb-2">
                 <img src="/public/assets/gifs/passport.gif" alt="Web" style="height: 50px; width: 50px; object-fit: cover;" class="me-3">
                 <h4 class="card-title mb-0">
-                  <a href="#" class="text-decoration-none">Identity Design</a>
+                  <a href="/services/identity-design" class="text-decoration-none">Identity Design</a>
                 </h4>
               </div>
               <p>
                 We help develop a strong brand identity through logo design, brand guidelines, brand strategy, and brand messaging.
               </p>
-              <a href="#" class="btn btn-primary mt-2">Discover More</a>
+              <a href="/services/identity-design" class="btn btn-primary mt-2">Discover More</a>
             </div>
           </div>
           <div class="col-md-4 col-sm-6 mb-4">
@@ -126,13 +126,13 @@
               <div class="d-flex align-items-center mb-2">
                 <img src="/public/assets/gifs/online-supermarket.gif" alt="Web" style="height: 50px; width: 50px; object-fit: cover;" class="me-3">
                 <h4 class="card-title mb-0">
-                  <a href="#" class="text-decoration-none">E-Commerce Solutions</a>
+                  <a href="/services/e-commerce" class="text-decoration-none">E-Commerce Solutions</a>
                 </h4>
               </div>
               <p>
                 We provide e-commerce design and development services, including online store setup, product listing, payment integration, and order management.
               </p>
-              <a href="#" class="btn btn-primary mt-2">Discover More</a>
+              <a href="/services/e-commerce" class="btn btn-primary mt-2">Discover More</a>
             </div>
           </div>
           <div class="col-md-4 col-sm-6 mb-4">
@@ -140,13 +140,13 @@
               <div class="d-flex align-items-center mb-2">
                 <img src="/public/assets/gifs/responsive-design.gif" alt="Web" style="height: 50px; width: 50px; object-fit: cover;" class="me-3">
                 <h4 class="card-title mb-0">
-                  <a href="#" class="text-decoration-none">Digital Marketing</a>
+                  <a href="/services/digital-marketing" class="text-decoration-none">Digital Marketing</a>
                 </h4>
               </div>
               <p>
                 We provide digital marketing services, including search engine optimization (SEO), social media marketing, content marketing, email marketing, etc. 
               </p>
-              <a href="#" class="btn btn-primary mt-2">Discover More</a>
+              <a href="/services/digital-marketing" class="btn btn-primary mt-2">Discover More</a>
             </div>
           </div>
         </div>

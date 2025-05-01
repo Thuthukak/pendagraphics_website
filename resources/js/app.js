@@ -22,6 +22,7 @@ import WebDesignCarousel from './components/Home/Services/WebDesignCarousel.vue'
 import GraphicDesignCarousel from './components/Home/Services/GraphicDesignCarousel.vue';
 import ProductDesignCarousel from './components/Home/Services/ProductDesignCarousel.vue';
 import IdentityDesignCarousel from './components/Home/Services/IdentityDesignCarousel.vue';
+import ECommerceCarousel from './components/Home/Services/ECommerceCarousel.vue';
 
 import { faBars, 
         faMoon, 
@@ -68,5 +69,6 @@ app.component('WebDesignCarousel', WebDesignCarousel);
 app.component('GraphicDesignCarousel', GraphicDesignCarousel);
 app.component('ProductDesignCarousel', ProductDesignCarousel);
 app.component('IdentityDesignCarousel', IdentityDesignCarousel);
+app.component('ECommerceCarousel', ECommerceCarousel);
 
 app.mount('#app');

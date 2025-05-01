@@ -14,6 +14,12 @@
       <div class="container mt-5 my-5 py-5 px-4">
         <div class="row">
           <div class="col-md-6">
+            <img src="/public/assets/images/homepage-seen-computer-screen.jpg" 
+                alt="Web design" 
+                class="rounded-lg shadow-md"
+                style="width:500px; height:300px; object-fit: cover;"  />
+          </div>
+          <div class="col-md-6 align-self-center">
             <h2 class="fw-bold ">What we offer</h2>
             <ul class="list-disc pl-6 space-y-2 mt-3">
               <li>Custom website design tailored to your brand</li>
@@ -22,12 +28,6 @@
               <li>Modern UI/UX design practices</li>
               <li>Fast loading times and performance optimization</li>
             </ul>
-          </div>
-          <div class="col-md-6">
-            <img src="/public/assets/images/homepage-seen-computer-screen.jpg" 
-                alt="Web design" 
-                class="rounded-lg shadow-md"
-                style="width:500px; height:300px; object-fit: cover;"  />
           </div>
         </div>
       </div>

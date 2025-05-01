@@ -14,14 +14,14 @@
       <div class="container mt-5 my-5 py-5 px-4">
         <div class="row">
           <div class="col-md-6">
-            <h2 class="fw-bold ">Graphic design process</h2>
-            <p>Discover the essence of your brand with Penda Graphics’ meticulously crafted graphic design process. Beginning with in-depth discussions and research, we delve into your brand’s identity and objectives, laying the foundation for our creative journey. Through brainstorming and ideation, we explore diverse concepts and styles, refining them into visually striking designs. Collaboration with our team ensures alignment with your vision, as we meticulously craft each detail to perfection. With your feedback, we make revisions until we achieve the ideal design. Upon approval, we finalize the design and deliver the files, ready for use across various platforms. Our commitment extends beyond delivery, providing ongoing support to ensure your designs continue to reflect your brand’s essence</p>
-          </div>
-          <div class="col-md-6">
             <img src="/public/assets/images/color-bulb.jpg" 
                 alt="Web design" 
                 class="rounded-lg shadow-md"
-                style="width:500px; height:300px; object-fit: cover;"  />
+                style="width:500px; height:400px; object-fit: cover;"  />
+          </div>
+          <div class="col-md-6 align-self-center">
+            <h2 class="fw-bold ">Graphic design process</h2>
+            <p>Discover the essence of your brand with Penda Graphics’ meticulously crafted graphic design process. Beginning with in-depth discussions and research, we delve into your brand’s identity and objectives, laying the foundation for our creative journey. Through brainstorming and ideation, we explore diverse concepts and styles, refining them into visually striking designs. Collaboration with our team ensures alignment with your vision, as we meticulously craft each detail to perfection. With your feedback, we make revisions until we achieve the ideal design. Upon approval, we finalize the design and deliver the files, ready for use across various platforms. Our commitment extends beyond delivery, providing ongoing support to ensure your designs continue to reflect your brand’s essence</p>
           </div>
         </div>
       </div>

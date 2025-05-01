@@ -25,13 +25,17 @@
               <div class="text-white p-2 d-flex align-items-center justify-content-center me-2" style="width: 40px; height: 40px;">
                 <i class="fas fa-phone"></i>
               </div>
-              <span>+27 73 811 4652</span>
+              <span>
+                <a class="text-white" href="tel:+27738114652">+27 73 811 4652</a>
+              </span>
             </li>
             <li class="d-flex align-items-center">
               <div class="text-white p-2 d-flex align-items-center justify-content-center me-2" style="width: 40px; height: 40px;">
                 <i class="fas fa-envelope"></i>
               </div>
-              <span>info@pendagraphics.co.za</span>
+              <span>
+                <a class="text-white" href="mailto:info@pendagraphics.co.za">info@pendagraphics.co.za</a>
+              </span>
             </li>
           </ul>
         </div>
