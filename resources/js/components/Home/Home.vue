@@ -135,7 +135,7 @@
     </section>
 
     <!-- portfolio -->
-    <section>
+    <section id="portfolio">
       <div class="container">
         <Portfolio />
       </div>

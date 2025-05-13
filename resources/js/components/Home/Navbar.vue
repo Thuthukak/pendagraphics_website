@@ -9,7 +9,7 @@
       <!-- Navigation -->
       <div class="hidden md:flex space-x-6 items-center">
         <a href="/" class="nav-item">Home</a>
-        <a href="about-us" class="nav-item">About Us</a>
+        <a href="/about-us" class="nav-item">About Us</a>
 
         <!-- Dropdown - fixing visibility -->
         <div class="relative">
@@ -46,7 +46,7 @@
     <!-- Mobile Menu - fixing text color -->
     <div v-if="isMobileMenuOpen" class="md:hidden bg-shape-primary shadow-md">
       <a href="/" class="block px-6 py-2 text-black">Home</a>
-      <a href="#" class="block px-6 py-2 text-black">About Us</a>
+      <a href="/about-us" class="block px-6 py-2 text-black">About Us</a>
       <button @click="toggleDropdown" class="nav-item dropdown  pl-6  py-2 flex items-center">
             Services
             <svg class="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">

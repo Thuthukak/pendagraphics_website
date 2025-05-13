@@ -16,6 +16,7 @@
                             We specialize in delivering innovative solutions and visually stunning, user-friendly websites tailored to the unique needs of our clients. 
                             With a strong focus on design, creativity, and cutting-edge technology, we elevate brands and leave a lasting impact through our unmatched expertise and dedication to quality.  
                         </p>
+                        <a href="/about-us" class="btn btn-primary mt-2">Discover More</a>
                     </div>
                 </div>
             </div>

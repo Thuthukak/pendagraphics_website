@@ -50,7 +50,9 @@ Route::middleware('guest')->group(function () {
 
     Route::post('/contact-form', [ContactController::class, 'contactForm'])->name('contact.form');
     Route::get('/faq', [HomeController::class, 'FaqIndex'])->name('faq.index');
+    Route::get('/about-us', [HomeController::class, 'AboutUsIndex'])->name('about-us.index');
     Route::post('/newsletter', [NewsletterController::class, 'store'])->name('newsletter.store');
+    Route::get('/contact-us', [HomeController::class, 'HomeIndex'])->name('home.index');
    
 });
 

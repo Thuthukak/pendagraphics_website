@@ -25,6 +25,8 @@ import IdentityDesignCarousel from './components/Home/Services/IdentityDesignCar
 import ECommerceCarousel from './components/Home/Services/ECommerceCarousel.vue';
 import FAQ from './components/Home/Faq.vue';
 import FaqComponent from './components/Home/FaqComponent.vue';
+import AboutUS from './components/Home/AboutUS.vue';
+import ContactUs from './components/Home/ContactUs.vue';
 
 import { faBars, 
         faMoon, 
@@ -74,5 +76,7 @@ app.component('ProductDesignCarousel', ProductDesignCarousel);
 app.component('IdentityDesignCarousel', IdentityDesignCarousel);
 app.component('ECommerceCarousel', ECommerceCarousel);
 app.component('faq-component', FaqComponent);
+app.component('about-us', AboutUS);
+app.component('contact-us', ContactUs);
 
 app.mount('#app');

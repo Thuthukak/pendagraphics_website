@@ -8,7 +8,7 @@
         <!-- Column 1: Logo & Slogan -->
         <div class="col-md-4 mb-4 mb-md-0">
           <img src="/public/assets/images/penda_logo2.png" alt="Logo" class="w-60 mb-3" />
-          <p class="text-white">Empowering Your Brand with Stunning Designs & Websites</p>
+          <p class="text-white">Transforming brands through design and digital innovation since 2019.</p>
         </div>
 
         <!-- Column 2: Contact Info -->
