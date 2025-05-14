@@ -8,8 +8,8 @@
         Where creativity meets strategy to transform your brand's digital presence
       </p>
       <div class="d-flex justify-content-center gap-3">
-        <a href="/portfolio" class="btn btn-light">View Our Work</a>
-        <a href="/contact" class="btn btn-outline-light">Get in Touch</a>
+        <a href="/#portfolio" class="btn btn-light align-self-center py-3">View Our Work</a>
+        <a href="/contact-us" class="btn btn-outline-light">Get in Touch</a>
       </div>
     </div>
   </section>
@@ -32,11 +32,11 @@
         </div>
         <div class="col-lg-6">
           <div class="position-relative">
-            <img src="/public/assets/images/penda_logo2.png" alt="Penda Graphics creative process" class="img-fluid rounded-4 shadow-lg">
+            <img src="/public/assets/images/our_story.png" alt="Penda Graphics creative process" class="img-fluid rounded-4 shadow-md">
             <div class="position-absolute top-0 start-0 translate-middle bg-primary rounded-circle p-3" style="width: 80px; height: 80px;">
               <div class="text-center text-white">
                 <small class="d-block">SINCE</small>
-                <span class="fw-bold">2016</span>
+                <span class="fw-bold">2019</span>
               </div>
             </div>
           </div>
@@ -100,9 +100,9 @@
         <div class="col-md-4">
           <div class="service-card h-100 p-4 text-center">
             <div class="service-icon" style="background-color: rgba(99, 102, 241, 0.1);">
-              <i class="fas fa-pencil-ruler fa-2x text-primary"></i>
+              <i class="fas fa-pencil-ruler fa-2x" style="color: #000000;"></i>
             </div>
-            <h5 class="fw-bold mb-3">Brand & Visual Identity</h5>
+            <h5 class="fw-bold mb-3"><a href="/services/identity-design">Brand & Visual Identity</a></h5>
             <p class="mb-0">
               Logo design, brand guidelines, stationery, marketing collateral, and comprehensive visual systems that tell your brand's story.
             </p>
@@ -111,10 +111,10 @@
         
         <div class="col-md-4">
           <div class="service-card h-100 p-4 text-center">
-            <div class="service-icon" style="background-color: rgba(244, 63, 94, 0.1);">
-              <i class="fas fa-laptop-code fa-2x text-accent"></i>
+            <div class="service-icon" style="background-color: rgba(99, 102, 241, 0.1);">
+              <i class="fas fa-laptop-code fa-2x" style="color: #000000;"></i>
             </div>
-            <h5 class="fw-bold mb-3">Web Design & Development</h5>
+            <h5 class="fw-bold mb-3"><a href="/services/web-design">Web Design & Development</a></h5>
             <p class="mb-0">
               Responsive websites with intuitive user experiences, optimized for performance across all devices and platforms.
             </p>
@@ -123,10 +123,10 @@
         
         <div class="col-md-4">
           <div class="service-card h-100 p-4 text-center">
-            <div class="service-icon" style="background-color: rgba(234, 179, 8, 0.1);">
-              <i class="fas fa-code fa-2x" style="color: #eab308;"></i>
+            <div class="service-icon" style="background-color: rgba(99, 102, 241, 0.1);">
+              <i class="fas fa-code fa-2x" style="color: #000000;"></i>
             </div>
-            <h5 class="fw-bold mb-3">Web Applications</h5>
+            <h5 class="fw-bold mb-3"><a href="/services/web-design">Web Applications</a></h5>
             <p class="mb-0">
               Custom web applications and software solutions that streamline operations, enhance customer experiences, and solve business challenges.
             </p>
@@ -135,10 +135,10 @@
         
         <div class="col-md-4">
           <div class="service-card h-100 p-4 text-center">
-            <div class="service-icon" style="background-color: rgba(34, 197, 94, 0.1);">
-              <i class="fas fa-shopping-cart fa-2x" style="color: #22c55e;"></i>
+            <div class="service-icon" style="background-color: rgba(99, 102, 241, 0.1);">
+              <i class="fas fa-shopping-cart fa-2x" style="color: #000000;"></i>
             </div>
-            <h5 class="fw-bold mb-3">E-commerce Solutions</h5>
+            <h5 class="fw-bold mb-3"><a href="/services/e-commerce">E-commerce Solutions</a></h5>
             <p class="mb-0">
               Online stores built for conversions, with secure payment gateways, inventory management, and seamless shopping experiences.
             </p>
@@ -147,10 +147,10 @@
         
         <div class="col-md-4">
           <div class="service-card h-100 p-4 text-center">
-            <div class="service-icon" style="background-color: rgba(6, 182, 212, 0.1);">
-              <i class="fas fa-bullhorn fa-2x" style="color: #06b6d4;"></i>
+            <div class="service-icon" style="background-color: rgba(99, 102, 241, 0.1);">
+              <i class="fas fa-bullhorn fa-2x" style="color: #000000;"></i>
             </div>
-            <h5 class="fw-bold mb-3">Digital Marketing</h5>
+            <h5 class="fw-bold mb-3"><a href="/services/digital-marketing">Digital Marketing</a></h5>
             <p class="mb-0">
               Strategic campaigns across search, social, and email channels to drive traffic, generate leads, and increase brand awareness.
             </p>
@@ -159,10 +159,10 @@
         
         <div class="col-md-4">
           <div class="service-card h-100 p-4 text-center">
-            <div class="service-icon" style="background-color: rgba(147, 51, 234, 0.1);">
-              <i class="fas fa-box-open fa-2x" style="color: #9333ea;"></i>
+            <div class="service-icon" style="background-color: rgba(99, 102, 241, 0.1);">
+              <i class="fas fa-box-open fa-2x" style="color: #000000;"></i>
             </div>
-            <h5 class="fw-bold mb-3">Print & Packaging</h5>
+            <h5 class="fw-bold mb-3"><a href="/services/product-design">Print & Packaging</a></h5>
             <p class="mb-0">
               Eye-catching print materials and product packaging designed to stand out in physical spaces and on retail shelves.
             </p>
@@ -173,7 +173,7 @@
   </section>
 
   <!-- Team Section -->
-  <section class="py-5 accent-bg">
+  <!-- <section class="py-5 accent-bg">
     <div class="container">
       <h2 class="section-title fw-bold text-center">Meet Our Experts</h2>
       <p class="text-center mb-5" style="max-width: 700px; margin: 0 auto;">
@@ -215,14 +215,14 @@
         </div>
       </div>
     </div>
-  </section>
+  </section> -->
 
   <!-- Approach Section -->
   <section class="py-5">
     <div class="container">
       <div class="row align-items-center">
         <div class="col-lg-6 order-lg-2 mb-4 mb-lg-0">
-          <img src="/public/assets/images/blue-question.webp" alt="Our collaborative process" class="img-fluid rounded-4 shadow-lg">
+          <img src="/public/assets/images/approach.png" alt="Our collaborative process" class="img-fluid ">
         </div>
         <div class="col-lg-6 order-lg-1">
           <h2 class="section-title fw-bold">Our Approach</h2>
@@ -257,7 +257,7 @@
             <p class="lead mb-0">Let's create experiences that engage your audience and drive business growth.</p>
           </div>
           <div class="col-lg-4 text-lg-end">
-            <a href="/contact" class="btn btn-light btn-lg">Start a Project</a>
+            <a href="/contact-us" class="btn btn-light btn-lg">Get Started</a>
           </div>
         </div>
       </div>
@@ -335,7 +335,10 @@ export default {
   --light: #f9fafb;
   --dark: #111827;
 }
+a{
+  text-decoration: none !important;
 
+}
 body {
   font-family: 'Inter', sans-serif;
   color: #111827;
@@ -364,8 +367,8 @@ body {
   height: 100%;
   top: 0;
   left: 0;
+  pointer-events: none;
   background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.05'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
-  opacity: 0.1;
 }
 
 .service-card {
@@ -482,6 +485,7 @@ body {
   height: 100%;
   top: 0;
   left: 0;
+  pointer-events: none;
   background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.1'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
 }
 

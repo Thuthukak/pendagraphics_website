@@ -9,8 +9,9 @@ class Contact extends Model
     protected $fillable = [
         'name',
         'email',
+        'subject',
         'message',
     ];
 
-    protected $table = 'contact_form';
+    protected $table = 'contacts';
 }

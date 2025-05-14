@@ -186,6 +186,16 @@
                   required
                 />
               </div>
+              <div class="mb-3">
+              <input 
+                  type="text" 
+                  id="subject" 
+                  v-model="form.subject" 
+                  class="form-control"
+                  placeholder="Subject"
+                  required
+                />
+            </div>
 
               <div class="mb-3">
                 <textarea
@@ -220,6 +230,7 @@ import axios from "axios";
 const form = ref({
   name: '',
   email: '',
+  subject: '',
   message: '',
 });
 
@@ -232,6 +243,7 @@ const submitForm = async () => {
     form.value = {
       name: '',
       email: '',
+      subject: '',
       message: '',
     };
   } catch (error) {
