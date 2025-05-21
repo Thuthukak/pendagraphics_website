@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin\AuthController;
 use App\Http\Controllers\Admin\PasswordResetController;
 use App\Http\Controllers\ServicesController;
+use App\Http\Controllers\EstimateController;
 use App\Http\Controllers\BarberController;
 use App\Http\Controllers\BookingController;
 use App\Http\Controllers\Admin\DashboardController;
@@ -58,11 +59,15 @@ Route::middleware('guest')->group(function () {
 
 // API Routes (Public API)
 Route::prefix('api')->group(function () {
-    Route::get('/services', [ServicesController::class, 'index'])->name('services.index');
-    Route::get('/barbers', [BarberController::class, 'index'])->name('barbers.index');
-    Route::get('/bookings', [BookingController::class, 'index']);
-    Route::get('/bookings/data', [BookingController::class, 'adminBookingsData'])->name('admin.bookings.data');
-    Route::post('/bookings', [BookingController::class, 'store']);
+    Route::get('/services', [ServicesController::class, 'index'])->name('getServices');
+    Route::post('/estimates', [EstimateController::class, 'store'])->name('estimates.store');
+
+
+    // Route::get('/services', [ServicesController::class, 'index'])->name('services.index');
+    // Route::get('/barbers', [BarberController::class, 'index'])->name('barbers.index');
+    // Route::get('/bookings', [BookingController::class, 'index']);
+    // Route::get('/bookings/data', [BookingController::class, 'adminBookingsData'])->name('admin.bookings.data');
+    // Route::post('/bookings', [BookingController::class, 'store']);
     
 });
 

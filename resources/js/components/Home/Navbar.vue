@@ -30,8 +30,8 @@
         </div>
         <a href="/faq" class="nav-item">FAQ</a>
         <a href="/contact-us" class="nav-item">Contact Us</a>
-        <a href="/admin/auth" class="bg-blue-500 px-4 py-2 rounded text-white hover:bg-blue-600 transition">
-          Get Quote
+        <a @click.prevent="openQuoteModal" class="bg-blue-500 px-4 py-2 rounded text-white hover:bg-blue-600 transition cursor-pointer">
+          Get Free Quote
         </a>
       </div>
 
@@ -68,16 +68,23 @@
     </div>
   </nav>
 
+  <EstimateModal :isOpen="isModalOpen" @close="closeQuoteModal" />
+
 </template>
 
 <script>
-// Keep your original imports
+import EstimateModal from './EstimateModal.vue';
 
 export default {
+  name: 'Navbar',
+  components: {
+    EstimateModal
+  },
   data() {
     return {
       isDropdownOpen: false,
-      isMobileMenuOpen: false
+      isMobileMenuOpen: false,
+      isModalOpen: false
     };
   },
   methods: {
@@ -86,6 +93,12 @@ export default {
     },
     toggleMobileMenu() {
       this.isMobileMenuOpen = !this.isMobileMenuOpen;
+    },
+    openQuoteModal() {
+      this.isModalOpen = true;
+    },
+    closeQuoteModal() {
+      this.isModalOpen = false;
     }
   }
 };

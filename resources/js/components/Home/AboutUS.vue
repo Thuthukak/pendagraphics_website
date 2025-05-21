@@ -272,10 +272,10 @@
           <h5 class="fw-bold mb-3">Penda Graphics</h5>
           <p>Transforming brands through design and digital innovation since 2019.</p>
           <div class="d-flex gap-3 mt-4">
-            <a href="#" class="text-white"><i class="fab fa-facebook-f"></i></a>
-            <a href="#" class="text-white"><i class="fab fa-twitter"></i></a>
-            <a href="#" class="text-white"><i class="fab fa-instagram"></i></a>
-            <a href="#" class="text-white"><i class="fab fa-linkedin-in"></i></a>
+            <a href="https://web.facebook.com/Penda.graphix" class="text-white"><i class="fab fa-facebook-f"></i></a>
+            <!-- <a href="#" class="text-white"><i class="fab fa-twitter"></i></a> -->
+            <a href="https://www.instagram.com/penda_graphics/" class="text-white"><i class="fab fa-instagram"></i></a>
+            <!-- <a href="#" class="text-white"><i class="fab fa-linkedin-in"></i></a> -->
           </div>
         </div>
         <div class="col-lg-2 col-md-4 mb-4 mb-md-0">
@@ -292,8 +292,8 @@
           <ul class="list-unstyled">
             <li class="mb-2"><a href="#" class="text-white-50 text-decoration-none">About</a></li>
             <li class="mb-2"><a href="/#portfolio" class="text-white-50 text-decoration-none">Portfolio</a></li>
-            <li class="mb-2"><a href="#" class="text-white-50 text-decoration-none">Blog</a></li>
-            <li class="mb-2"><a href="#" class="text-white-50 text-decoration-none">Careers</a></li>
+            <!-- <li class="mb-2"><a href="#" class="text-white-50 text-decoration-none">Blog</a></li>
+            <li class="mb-2"><a href="#" class="text-white-50 text-decoration-none">Careers</a></li> -->
           </ul>
         </div>
         <div class="col-lg-4 col-md-4">
@@ -471,7 +471,7 @@ body {
 }
 
 .cta-section {
-  background: linear-gradient(135deg, #f43f5e 0%, #ec4899 100%);
+  background: linear-gradient(135deg, #005e91 0%, #008fdc 100%);
   color: white;
   border-radius: 16px;
   overflow: hidden;

@@ -15,11 +15,10 @@ return new class extends Migration
             $table->id();
             $table->string('name');
             $table->text('description')->nullable();
-            $table->decimal('price', 8, 2);
-            $table->integer('duration'); // Duration in minutes
+            $table->decimal('base_price', 10, 2);
+            $table->boolean('is_active')->default(true);
             $table->timestamps();
         });
-    
     }
 
     /**

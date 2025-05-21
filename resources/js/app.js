@@ -27,6 +27,7 @@ import FAQ from './components/Home/Faq.vue';
 import FaqComponent from './components/Home/FaqComponent.vue';
 import AboutUS from './components/Home/AboutUS.vue';
 import ContactUs from './components/Home/ContactUs.vue';
+import EstimateModal from './components/Home/EstimateModal.vue';
 
 import { faBars, 
         faMoon, 
@@ -78,5 +79,6 @@ app.component('ECommerceCarousel', ECommerceCarousel);
 app.component('faq-component', FaqComponent);
 app.component('about-us', AboutUS);
 app.component('contact-us', ContactUs);
+app.component('estimate-modal', EstimateModal);
 
 app.mount('#app');
