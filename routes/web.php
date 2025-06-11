@@ -26,15 +26,22 @@ Route::prefix('admin')->group(function () {
     Route::middleware('auth')->group(function () {
         Route::get('/{any}', function () { return view('admin.dashboard'); })->where('any', '.*');
         Route::get('/dashboard', [DashboardController::class, 'index'])->name('admin.dashboard');
-        Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
-        Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
-        Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+        Route::get('/profile', [ProfileController::class, 'show']);
+        Route::patch('/profile', [ProfileController::class, 'update']);
+        Route::post('/profile/picture', [ProfileController::class, 'uploadPicture']);
+        Route::delete('/profile/picture', [ProfileController::class, 'removePicture']);
+        Route::delete('/profile', [ProfileController::class, 'destroy']);
     });
+        Route::prefix('api')->group(function () {
+            Route::get('/get/profile-data', [ProfileController::class, 'profileData'])->name('profile.data');
+            Route::get('/profile/data', [ProfileController::class, 'show'])->name('profile.data');
+        });
 });
 
 //Auth and Non-authenticated users
     Route::get('/', function () {
         return view('welcome');
+    });
 
 
     Route::prefix('services')->group(function () {
@@ -53,14 +60,14 @@ Route::prefix('admin')->group(function () {
     Route::post('/newsletter', [NewsletterController::class, 'store'])->name('newsletter.store');
     Route::get('/contact-us', [HomeController::class, 'HomeIndex'])->name('home.index');
    
-});
+
 
 // API Routes (Public API)
 Route::prefix('api')->group(function () {
     Route::get('/services', [ServicesController::class, 'index'])->name('getServices');
     Route::post('/estimates', [EstimateController::class, 'store'])->name('estimates.store');
 
-
+ Route::get('/profile/data', [ProfileController::class, 'show'])->name('profile.data');
     // Route::get('/services', [ServicesController::class, 'index'])->name('services.index');
     // Route::get('/barbers', [BarberController::class, 'index'])->name('barbers.index');
     // Route::get('/bookings', [BookingController::class, 'index']);

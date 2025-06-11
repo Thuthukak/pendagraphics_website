@@ -1,47 +1,71 @@
 <template>
-  <aside class="bg-dark text-white vh-100 d-flex flex-column p-3">
+  <aside class="bg-red-900 text-white h-full flex flex-col p-3 relative">
+
     <!-- Logo Section -->
-    <div class="d-flex align-items-center gap-3 mb-4">
-      <div class="bg-primary text-white d-flex align-items-center justify-content-center rounded-lg" style="width: 40px; height: 40px;">
-        <span class="fw-bold">KFI</span>
+    <div class="flex items-center gap-3 mb-4">
+      <div class="bg-white text-white flex items-center justify-center rounded-lg min-w-[40px] h-10">
+        <span class="font-bold text-sm">
+          <img src="/public/assets/images/p-logo.png" alt="Logo" class="w-8 h-8">
+        </span>
       </div>
-      <h4 class="m-0">KOFI</h4>
+      <h4 
+        v-if="!collapsed" 
+        class="m-0 transition-opacity duration-300"
+        :class="{ 'opacity-0': collapsed }"
+      >
+      <div class="bg-white text-white flex items-center justify-center rounded-lg min-w-[40px] h-10 p-1">
+        <img src="/public/assets/images/penda_logo2.png" alt="Logo" class="w-36 h-8">
+      </div>
+      </h4>
     </div>
 
     <!-- Navigation Links -->
-    <ul class="list-group list-group-flush flex-grow-1">
-      <li class="list-group-item bg-transparent border-0">
-        <router-link to="/admin/dashboard" class="d-flex align-items-center text-white p-2 rounded hover-effect">
-          <font-awesome-icon :icon="['fas', 'home']" class="me-2" />
-          Dashboard
-        </router-link>
-      </li>
-      <li class="list-group-item bg-transparent border-0">
-        <router-link to="/admin/bookings" class="d-flex align-items-center text-white p-2 rounded hover-effect">
-          <font-awesome-icon :icon="['fas', 'calendar-alt']" class="me-2" />
-          Bookings
-        </router-link>
-      </li>
-      <!-- services -->
-       <li class="list-group-item bg-transparent border-0">
-        <router-link to="/admin/services" class="d-flex align-items-center text-white p-2 rounded hover-effect">
-          <font-awesome-icon :icon="['fas', 'building']" class="me-2" />
-          Services
-        </router-link>
-      </li>
-      <li class="list-group-item bg-transparent border-0">
-        <router-link to="/admin/settings" class="d-flex align-items-center text-white p-2 rounded hover-effect">
-          <font-awesome-icon :icon="['fas', 'cog']" class="me-2" />
-          Settings
+    <ul class="list-none flex-grow space-y-1">
+      <li v-for="item in navigationItems" :key="item.path">
+        <router-link 
+          :to="item.path" 
+          class="flex items-center text-white p-2 rounded hover-effect group relative"
+          :class="{ 'justify-center': collapsed }"
+        >
+          <font-awesome-icon :icon="item.icon" class="min-w-[20px]" />
+          <span 
+            v-if="!collapsed" 
+            class="ml-2 transition-opacity duration-300"
+          >
+            {{ item.label }}
+          </span>
+          <!-- Tooltip for collapsed state -->
+          <div 
+            v-if="collapsed"
+            class="absolute left-full ml-2 px-2 py-1 bg-gray-800 text-white text-sm rounded opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 whitespace-nowrap z-20"
+          >
+            {{ item.label }}
+          </div>
         </router-link>
       </li>
     </ul>
 
-    <!-- Logout -->
-    <div>
-      <button @click="logout" class="d-flex align-items-center text-white p-2 rounded hover-effect text-danger">
-        <font-awesome-icon :icon="['fas', 'sign-out-alt']" class="me-2" />
-        Logout
+    <!-- Logout Button -->
+    <div class="mt-auto">
+      <button 
+        @click="logout" 
+        class="flex items-center w-full text-white p-2 rounded hover-effect text-red-400 group relative"
+        :class="{ 'justify-center': collapsed }"
+      >
+        <font-awesome-icon :icon="['fas', 'sign-out-alt']" class="min-w-[20px]" />
+        <span 
+          v-if="!collapsed" 
+          class="ml-2 transition-opacity duration-300"
+        >
+          Logout
+        </span>
+        <!-- Tooltip for collapsed state -->
+        <div 
+          v-if="collapsed"
+          class="absolute left-full ml-2 px-2 py-1 bg-gray-800 text-white text-sm rounded opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 whitespace-nowrap z-20"
+        >
+          Logout
+        </div>
       </button>
     </div>
   </aside>
@@ -56,9 +80,51 @@ export default {
   components: {
     FontAwesomeIcon,
   },
+  props: {
+    collapsed: {
+      type: Boolean,
+      default: false,
+    },
+  },
+  emits: ['toggle'],
+  data() {
+    return {
+      navigationItems: [
+        {
+          path: '/admin/dashboard',
+          label: 'Dashboard',
+          icon: ['fas', 'home'],
+        },
+        {
+          path: '/admin/QueueManagement',
+          label: 'Queue Management',
+          icon: ['fas', 'user-plus'],
+        },
+        {
+          path: '/admin/bookings',
+          label: 'Bookings',
+          icon: ['fas', 'calendar-alt'],
+        },
+        {
+          path: '/admin/services',
+          label: 'Services',
+          icon: ['fas', 'cut'],
+        },
+        {
+          path: '/admin/settings',
+          label: 'Settings',
+          icon: ['fas', 'cog'],
+        },
+      ],
+    };
+  },
   methods: {
     logout() {
       axios.post('/logout').then(() => {
+        window.location.href = '/login';
+      }).catch((error) => {
+        console.error('Logout error:', error);
+        // Fallback logout
         window.location.href = '/login';
       });
     },
@@ -67,19 +133,27 @@ export default {
 </script>
 
 <style scoped>
-/* Sidebar takes full height */
-aside {
-  width: 260px;
-}
-
 /* Hover effect for links */
 .hover-effect {
-  display: block;
   text-decoration: none;
-  transition: background-color 0.3s ease-in-out;
+  transition: all 0.3s ease-in-out;
 }
 
 .hover-effect:hover {
-  background-color: lightblue;
+  background-color: rgba(59, 130, 246, 0.3);
+  transform: translateX(2px);
+}
+
+.router-link-active {
+  background-color: rgba(59, 130, 246, 0.5);
+}
+
+/* Smooth transitions */
+.transition-opacity {
+  transition: opacity 0.3s ease-in-out;
+}
+ul {
+  padding-left:0rem !important;
+  color: #ffffff !important;
 }
 </style>

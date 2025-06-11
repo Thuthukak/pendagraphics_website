@@ -22,6 +22,7 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
+        'profile_picture',
     ];
 
     /**
@@ -33,6 +34,29 @@ class User extends Authenticatable
         'password',
         'remember_token',
     ];
+
+      /**
+     * Get the profile picture URL attribute
+     */
+    public function getProfilePictureUrlAttribute(): ?string
+    {
+        return $this->profile_picture ? asset('storage/' . $this->profile_picture) : null;
+    }
+
+    /**
+     * Boot the model
+     */
+    protected static function boot()
+    {
+        parent::boot();
+
+        // Delete profile picture when user is deleted
+        static::deleting(function ($user) {
+            if ($user->profile_picture && \Storage::disk('public')->exists($user->profile_picture)) {
+                \Storage::disk('public')->delete($user->profile_picture);
+            }
+        });
+    }
 
     /**
      * Get the attributes that should be cast.
