@@ -11,9 +11,9 @@ We've received your estimate request and are excited to work with you on your pr
 | Service | Price |
 |:--------|------:|
 @foreach($services as $estimateService)
-| {{ $estimateService->service->name }} | ${{ number_format($estimateService->price, 2) }} |
+| {{ $estimateService->service->name }} | R{{ number_format($estimateService->price, 2) }} |
 @endforeach
-| **Total Estimate** | **${{ number_format($estimate->total_amount, 2) }}** |
+| **Total Estimate** | **R{{ number_format($estimate->total_amount, 2) }}** |
 @endcomponent
 
 This is an initial estimate based on the services you selected. Our team will review your requirements and may adjust this estimate based on the specific details of your project.

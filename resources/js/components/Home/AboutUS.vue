@@ -32,7 +32,7 @@
         </div>
         <div class="col-lg-6">
           <div class="position-relative">
-            <img src="/public/assets/images/our_story.png" alt="Penda Graphics creative process" class="img-fluid rounded-4 shadow-md">
+            <img src="/public/assets/images/painted_p_logo.png" alt="Penda Graphics creative process" class="img-fluid rounded-4 shadow-md">
             <div class="position-absolute top-0 start-0 translate-middle bg-primary rounded-circle p-3" style="width: 80px; height: 80px;">
               <div class="text-center text-white">
                 <small class="d-block">SINCE</small>

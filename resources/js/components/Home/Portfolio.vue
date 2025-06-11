@@ -65,7 +65,8 @@
     'Product Design',
     'Graphic Design',
     'Digital Marketing',
-    'Identity Design'
+    'Identity Design',
+    'Logo Design'
   ]
   
   const items = ref([
@@ -75,7 +76,7 @@
       title: 'Landing Page Design',
       description: 'Modern and responsive layout for a startup.',
       image: '/assets/images/portfolio/kmcollect.jpg',
-      link: 'https://www.kmcollection.co.za/'
+      link: '#'
     },
     {
       id: 2,
@@ -83,15 +84,15 @@
       title: 'Mobile App Mockup',
       description: 'Clean and intuitive mobile UI design.',
       image: '/assets/images/portfolio/mabura.jpg',
-      link: 'https://example.com/product1'
+      link: '#'
     },
     {
       id: 3,
-      category: 'Graphic Design',
-      title: 'Event Poster',
+      category: 'Logo Design',
+      title: 'Mkay Aqua',
       description: 'Eye-catching poster for music event.',
       image: '/assets/images/portfolio/mkay-aqua.jpg',
-      link: 'https://example.com/graphic1'
+      link: '#'
     },
     {
       id: 4,
@@ -99,7 +100,7 @@
       title: 'Social Media Campaign',
       description: 'Ad creatives and strategy.',
       image: '/assets/images/portfolio/seo.jpg',
-      link: 'https://example.com/marketing1'
+      link: '#'
     },
     {
       id: 5,
@@ -107,7 +108,7 @@
       title: 'Logo & Branding',
       description: 'Custom branding for tech startup.',
       image: '/assets/images/portfolio/bakili.jpg',
-      link: 'https://example.com/identity1'
+      link: '#'
     },
     {
       id: 6,
@@ -115,7 +116,23 @@
       title: 'E-commerce UI',
       description: 'User-friendly online store interface.',
       image: '/assets/images/portfolio/ramohlale.jpg',
-      link: 'https://ramohlale.co.za/wp/'
+      link: '#'
+    },
+    {
+      id: 7,
+      category: 'Logo Design',
+      title: 'Logos',
+      description: 'Mahloma Tsebo Solutions',
+      image: '/assets/images/portfolio/Mahloma_Tsebo_logo_color darkerPurple@2x-80.jpg',
+      link: '#'
+    },
+     {
+      id: 8,
+      category: 'Graphic Design',
+      title: 'Graphic asset',
+      description: 'Mahloma Tsebo Solutions',
+      image: '/assets/images/portfolio/1.png',
+      link: '#'
     }
   ])
   

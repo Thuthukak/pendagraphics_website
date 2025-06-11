@@ -164,7 +164,7 @@
             <div>
               <button 
                 type="submit" 
-                class="w-full bg-gradient-to-r from-blue-600 to-indigo-700 text-white py-3 px-6 rounded-md hover:from-blue-700 hover:to-indigo-800 transition duration-300 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500"
+                class="w-full bg-gradient-to-r from-blue-600 to-indigo-700 text-white py-3 px-6 rounded hover:from-blue-700 hover:to-indigo-800 transition duration-300 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500"
                 :disabled="isSubmitting"
               >
                 <span v-if="isSubmitting">Sending...</span>
@@ -174,7 +174,7 @@
           </form>
           
           <!-- Success Message -->
-          <div v-if="submitted" class="mt-6 p-4 bg-green-100 border border-green-400 text-green-700 rounded-md">
+          <div v-if="submitted" class="mt-6 p-4 bg-green-100 border border-green-400 text-green-700 rounded">
             Thank you for your message! We'll get back to you as soon as possible.
           </div>
         </div>

@@ -44,16 +44,16 @@
         <div class="col-md-4">
           <h5 class="mb-3">Find us on social media</h5>
           <div class="d-flex gap-2">
-            <a href="#" class="text-white p-2 d-flex align-items-center justify-content-center" style="width: 40px; height: 40px;">
+            <a href="https://web.facebook.com/Penda.graphix" class="text-white p-2 d-flex align-items-center justify-content-center" style="width: 40px; height: 40px;">
               <i class="fab fa-facebook-f"></i>
             </a>
-            <a href="#" class="text-white p-2 d-flex align-items-center justify-content-center" style="width: 40px; height: 40px;">
-              <i class="fab fa-twitter"></i>
+            <a href="https://www.instagram.com/penda_graphics/" class="text-white p-2 d-flex align-items-center justify-content-center" style="width: 40px; height: 40px;">
+              <i class="fab fa-instagram"></i>
             </a>
-            <a href="#" class="text-white p-2 d-flex align-items-center justify-content-center" style="width: 40px; height: 40px;">
+            <!-- <a href="#" class="text-white p-2 d-flex align-items-center justify-content-center" style="width: 40px; height: 40px;">
               <i class="fab fa-linkedin"></i>
-            </a>
-            <a href="#" class="text-white p-2 d-flex align-items-center justify-content-center" style="width: 40px; height: 40px;">
+            </a> -->
+            <a href="https://www.youtube.com/@PendaGraphics" class="text-white p-2 d-flex align-items-center justify-content-center" style="width: 40px; height: 40px;">
               <i class="fab fa-youtube"></i>
             </a>
           </div>

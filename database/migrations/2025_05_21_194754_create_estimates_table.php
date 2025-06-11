@@ -16,7 +16,7 @@ return new class extends Migration
             $table->string('name');
             $table->string('email');
             $table->decimal('total_amount', 10, 2);
-            $table->enum('status', ['pending', 'sent', 'accepted', 'declined'])->default('pending');
+            $table->enum('status', ['pending', 'sent', 'accepted', 'declined', 'emailed','email_failed'])->default('pending');
             $table->text('notes')->nullable();
             $table->timestamps();
         });

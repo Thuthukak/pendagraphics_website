@@ -1,7 +1,7 @@
 <template>
   <Layout>
     <!-- hero section -->
-    <section class="about py-5 bg-light">
+    <section class="about py-5 bg-light bg-md-white">
       <div class="container px-4">
         <div class="row align-items-center">
           <div class="col-md-6">
@@ -10,26 +10,27 @@
               <p class="mt-4 text-secondary">
                 We are a team of passionate designers and developers dedicated to creating exceptional digital experiences for our clients.
               </p>
-              <button class="btn btn-primary rounded">Get A Quote</button>   
+              <button @click.prevent="openQuoteModal" class="btn btn-primary rounded">Get A Quote</button>   
             </div>
           </div>
-          <div class="col-md-6">
+          <!-- hero images - hidden on mobile -->
+          <div class="col-md-6 d-none d-md-block">
               <div class="row">
                 <div class="col-md-6">
                   <div class="card border-0 shadow rounded mt-5">                 
-                      <img src="/public/assets/images/branding.jpg" alt="Hero Image" class="w-100 rounded" style="height: 400px; object-fit: cover;">
+                      <img src="/public/assets/images/left.png" alt="Hero Image" class="w-100 rounded" style="height: 400px; object-fit: cover;">
                   </div>
                 </div>
                 <div class="col-md-6">
                   <div class="row">
                     <div class="col-md-12">
                       <div class="card border-0 shadow ">
-                        <img src="/public/assets/images/web-design.jpg" alt="Hero Image" class="w-100 rounded" style="height: 200px; object-fit: cover; ">
+                        <img src="/public/assets/images/top.png" alt="Hero Image" class="w-100 rounded" style="height: 200px; object-fit: cover; ">
                       </div>
                     </div>
                     <div class="col-md-12 mt-4">
                       <div class="card border-0 shadow">
-                        <img src="/public/assets/images/web-design.jpg" alt="Hero Image" class="w-100 rounded" style="height: 200px; object-fit: cover;">
+                        <img src="/public/assets/images/right.png" alt="Hero Image" class="w-100 rounded" style="height: 200px; object-fit: cover;">
                       </div>
                     </div>
                   </div>
@@ -154,15 +155,15 @@
       <div class="container px-4">
         <div class="row">
           <div class="col-md-6">
-            <h2 class="fw-bold text-left">Let’s work together</h2>
+            <h2 class="fw-bold text-left">Let's work together</h2>
             <p class="text-left">
-              We're excited to hear about your vision and explore how we can bring it to life. Whether you're looking to build a modern website, create a strong visual identity, or launch a compelling marketing campaign — we’re here to help.  
+              We're excited to hear about your vision and explore how we can bring it to life. Whether you're looking to build a modern website, create a strong visual identity, or launch a compelling marketing campaign — we're here to help.  
             </p>
             <p class="text-left">
               Fill out the form with your project details, goals, and any specific requirements you have in mind. One of our team members will review your message and get back to you promptly to discuss the next steps.  
             </p>
             <p class="text-left">
-              Let’s turn your ideas into powerful digital experiences — together.
+              Let's turn your ideas into powerful digital experiences — together.
             </p>
           </div>
           <div class="col-md-6">
@@ -218,12 +219,15 @@
       </div>
     </section>
   </Layout>
+  <EstimateModal :isOpen="isModalOpen" @close="closeQuoteModal" />
 </template>
+
 
 <script setup>
 import Layout from "../../Layouts/HomeLayout.vue";
 import Portfolio from "@/components/Home/Portfolio.vue";
 import About from "@/components/Home/About.vue";
+import EstimateModal from "@/components/Home/EstimateModal.vue";
 import { ref} from "vue";
 import axios from "axios";
 
@@ -233,6 +237,8 @@ const form = ref({
   subject: '',
   message: '',
 });
+
+const isModalOpen = ref(false);
 
 const submitForm = async () => {
   try {
@@ -249,6 +255,14 @@ const submitForm = async () => {
   } catch (error) {
     console.error('Form submission error:', error);
   }
+}
+
+const openQuoteModal = () => {
+  isModalOpen.value = true;
+};
+
+const closeQuoteModal = () => {
+  isModalOpen.value = false;
 }
 </script>
 

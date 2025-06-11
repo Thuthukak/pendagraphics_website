@@ -26,18 +26,16 @@ Route::prefix('admin')->group(function () {
     Route::middleware('auth')->group(function () {
         Route::get('/{any}', function () { return view('admin.dashboard'); })->where('any', '.*');
         Route::get('/dashboard', [DashboardController::class, 'index'])->name('admin.dashboard');
-        Route::get('/admin/bookings', [BookingController::class, 'adminBookings'])->name('admin.bookings');
         Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
         Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
         Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
     });
 });
 
-// Client Routes (Public Routes - Non-authenticated users)
-Route::middleware('guest')->group(function () {
+//Auth and Non-authenticated users
     Route::get('/', function () {
         return view('welcome');
-    });
+
 
     Route::prefix('services')->group(function () {
         Route::get('/web-design', [ServicesController::class, 'indexWebDesign'])->name('web-design.index');
