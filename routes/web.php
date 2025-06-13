@@ -65,7 +65,15 @@ Route::prefix('admin')->group(function () {
 // API Routes (Public API)
 Route::prefix('api')->group(function () {
     Route::get('/services', [ServicesController::class, 'index'])->name('getServices');
+    Route::get('/estimates', [EstimateController::class, 'index'])->name('estimates.show');
     Route::post('/estimates', [EstimateController::class, 'store'])->name('estimates.store');
+    Route::put('estimates/{id}/status', [EstimateController::class, 'updateStatus']);
+    Route::put('estimates/bulk-status', [EstimateController::class, 'bulkUpdateStatus']);
+    Route::post('estimates/{id}/resend-email', [EstimateController::class, 'resendEmail']);
+    Route::post('estimates/bulk-email', [EstimateController::class, 'bulkSendEmails']);
+    Route::get('estimates/{id}/pdf', [EstimateController::class, 'downloadPDF']);
+    Route::delete('estimates/{id}', [EstimateController::class, 'destroy']);
+
 
  Route::get('/profile/data', [ProfileController::class, 'show'])->name('profile.data');
     // Route::get('/services', [ServicesController::class, 'index'])->name('services.index');

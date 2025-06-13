@@ -1,5 +1,5 @@
 <template>
-  <aside class="bg-red-900 text-white h-full flex flex-col p-3 relative">
+  <aside class="bg-dark text-white h-full flex flex-col p-3 relative">
 
     <!-- Logo Section -->
     <div class="flex items-center gap-3 mb-4">
@@ -96,19 +96,16 @@ export default {
           icon: ['fas', 'home'],
         },
         {
-          path: '/admin/QueueManagement',
-          label: 'Queue Management',
-          icon: ['fas', 'user-plus'],
-        },
-        {
-          path: '/admin/bookings',
-          label: 'Bookings',
-          icon: ['fas', 'calendar-alt'],
+          path: '/admin/quotations',
+          label: 'Quotations',
+          icon: ['fas', 'clipboard-list'],
         },
         {
           path: '/admin/services',
           label: 'Services',
-          icon: ['fas', 'cut'],
+          // graphic design services
+          icon: ['fas', 'paint-brush'],
+          
         },
         {
           path: '/admin/settings',

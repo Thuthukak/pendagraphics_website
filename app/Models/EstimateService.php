@@ -16,6 +16,10 @@ class EstimateService extends Model
         'notes'
     ];
 
+    protected $casts = [
+        'price' => 'decimal:2',
+    ];
+
     /**
      * Get the estimate this service belongs to.
      */
@@ -31,4 +35,6 @@ class EstimateService extends Model
     {
         return $this->belongsTo(Service::class);
     }
+
+
 }

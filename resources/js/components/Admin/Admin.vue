@@ -4,7 +4,7 @@
         <div class="row min-vh-100 m-0">
           <!-- Hero Image (8 columns) -->
           <div class="col-md-8 d-none d-md-block p-0">
-            <img src="/public/assets/images/hero.jpg" alt="Hero Image" class="w-100 min-vh-100 object-fit-cover">
+            <img src="/public/assets/images/3436542.png" alt="Hero Image" class="w-100 min-vh-100 object-fit-cover">
           </div>
   
           <!-- Auth Form (4 columns) -->

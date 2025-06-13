@@ -16,4 +16,21 @@ class Service extends Model
         'base_price',
         'is_active'
     ];
+
+    protected $casts = [
+        'price' => 'decimal:2',
+        'is_active' => 'boolean',
+    ];
+
+    // Relationship with EstimateService
+    public function estimateServices()
+    {
+        return $this->hasMany(EstimateService::class);
+    }
+
+    // Scope for active services only
+    public function scopeActive($query)
+    {
+        return $query->where('is_active', true);
+    }
 }

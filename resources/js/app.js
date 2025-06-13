@@ -36,9 +36,18 @@ import { faBars,
         faUser, 
         faBell, 
         faCog, 
-        faHome, 
+        faHome,
+        faTrash,
+        faFilePdf, 
         faSignOutAlt,
         faCalendarAlt,
+        faClipboardList,
+        faEye,
+        faSpinner,
+        faPaperPlane,
+        faMailForward,
+        faEnvelope,
+        faPaintBrush
     } from "@fortawesome/free-solid-svg-icons";
 
 library.add(faBars, 
@@ -48,9 +57,20 @@ library.add(faBars,
             faUser, 
             faBell, 
             faCog, 
+            faTrash,
+            faEye,
+            faFilePdf,
             faHome, 
             faSignOutAlt,
-            faCalendarAlt);
+            faClipboardList,
+            faCalendarAlt,
+            faSpinner,
+            faEnvelope,
+            faMailForward,
+            faPaperPlane,
+            faPaintBrush,
+            
+        );
 
 
 
