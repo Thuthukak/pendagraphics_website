@@ -1,7 +1,15 @@
 <template>
   <div class="admin-estimates">
     <div class="header">
-      <h1>Estimate Management</h1>
+      <div class="row">
+        <div class="col-md-6">
+        <h1>Quotation Management</h1>
+        </div>
+        <div class="col-md-6">
+          <button @click.prevent="openQuoteModal" class="btn-primary float-right">Add Quotation</button>
+        </div>
+      
+    <div class="col-md-12">
       <div class="stats">
         <div class="stat-card">
           <span class="stat-label">Total Estimates</span>
@@ -20,6 +28,8 @@
           <span class="stat-value">{{ getEstimatesByStatus('completed').length }}</span>
         </div>
       </div>
+    </div>
+    </div>
     </div>
 
     <!-- Filters -->
@@ -75,7 +85,7 @@
     <!-- Loading State -->
     <div v-if="loading" class="loading">
       <div class="spinner"></div>
-      <p>Loading estimates...</p>
+      <p>Loading quotations...</p>
     </div>
 
     <!-- Estimates Table -->
@@ -192,7 +202,7 @@
       </table>
       
       <div v-if="filteredEstimates.length === 0" class="no-results">
-        <p>No estimates found matching your criteria.</p>
+        <p>No quotations found matching your criteria.</p>
       </div>
     </div>
 
@@ -231,75 +241,77 @@
       </button>
     </div>
 
-    <!-- Estimate Details Modal -->
-    <div v-if="selectedEstimate" class="modal-overlay" @click="closeModal">
-      <div class="modal" @click.stop>
-        <div class="modal-header">
-          <h2>Estimate Details #{{ selectedEstimate.id }}</h2>
-          <button @click="closeModal" class="close-btn">×</button>
-        </div>
-        <div class="modal-body">
-          <div class="detail-grid">
-            <div class="detail-item">
-              <label>Name:</label>
-              <span>{{ selectedEstimate.name }}</span>
-            </div>
-            <div class="detail-item">
-              <label>Email:</label>
-              <span>{{ selectedEstimate.email }}</span>
-            </div>
-            <div class="detail-item">
-              <label>Total Amount:</label>
-              <span>R{{ formatCurrency(selectedEstimate.total_amount) }}</span>
-            </div>
-            <div class="detail-item">
-              <label>Status:</label>
-              <span class="status-badge" :class="selectedEstimate.status">
-                {{ selectedEstimate.status.replace('_', ' ').toUpperCase() }}
-              </span>
-            </div>
-            <div class="detail-item">
-              <label>Created:</label>
-              <span>{{ formatDate(selectedEstimate.created_at) }}</span>
-            </div>
-            <div class="detail-item">
-              <label>Updated:</label>
-              <span>{{ formatDate(selectedEstimate.updated_at) }}</span>
-            </div>
+    <!-- Replace your existing modal section with this -->
+<Teleport to="body">
+  <div v-if="selectedEstimate" class="modal-overlay" @click="closeModal">
+    <div class="modal" @click.stop>
+      <div class="modal-header">
+        <h2>Quote Details #{{ selectedEstimate.id }}</h2>
+        <button @click="closeModal" class="close-btn">×</button>
+      </div>
+      <div class="modal-body">
+        <div class="detail-grid">
+          <div class="detail-item">
+            <label>Name:</label>
+            <span>{{ selectedEstimate.name }}</span>
           </div>
-          
-          <div v-if="selectedEstimate.notes" class="notes-section">
-            <h3>Additional Details:</h3>
-            <p>{{ selectedEstimate.notes }}</p>
+          <div class="detail-item">
+            <label>Email:</label>
+            <span>{{ selectedEstimate.email }}</span>
           </div>
-          
-          <div class="services-section">
-            <h3>Selected Services:</h3>
-            <div class="services-list">
-              <div 
-                v-for="service in selectedEstimate.services" 
-                :key="service.id"
-                class="service-item"
-              >
-                <span class="service-name">{{ service.name }}</span>
-                <span class="service-price">R{{ formatCurrency(service.price) }}</span>
-              </div>
-            </div>
+          <div class="detail-item">
+            <label>Total Amount:</label>
+            <span>R{{ formatCurrency(selectedEstimate.total_amount) }}</span>
+          </div>
+          <div class="detail-item">
+            <label>Status:</label>
+            <span class="status-badge" :class="selectedEstimate.status">
+              {{ selectedEstimate.status.replace('_', ' ').toUpperCase() }}
+            </span>
+          </div>
+          <div class="detail-item">
+            <label>Created:</label>
+            <span>{{ formatDate(selectedEstimate.created_at) }}</span>
+          </div>
+          <div class="detail-item">
+            <label>Updated:</label>
+            <span>{{ formatDate(selectedEstimate.updated_at) }}</span>
           </div>
         </div>
-        <div class="modal-footer">
-          <button @click="resendEmail(selectedEstimate.id)" class="btn-primary">
-            Send Email
-          </button>
-          <button @click="downloadPDF(selectedEstimate.id)" class="btn-secondary">
-            Download PDF
-          </button>
-          <button @click="closeModal" class="btn-secondary">
-            Close
-          </button>
+        
+        <div v-if="selectedEstimate.notes" class="notes-section">
+          <h3>Additional Details:</h3>
+          <p>{{ selectedEstimate.notes }}</p>
+        </div>
+        
+        <div class="services-section">
+          <h3>Selected Services:</h3>
+          <div class="services-list">
+            <div 
+              v-for="service in selectedEstimate.services" 
+              :key="service.id"
+              class="service-item"
+            >
+              <span class="service-name">{{ service.name }}</span>
+              <span class="service-price">R{{ formatCurrency(service.price) }}</span>
+            </div>
+          </div>
         </div>
       </div>
+      <div class="modal-footer">
+        <button @click="resendEmail(selectedEstimate.id)" class="btn-primary">
+          Send Email
+        </button>
+        <button @click="downloadPDF(selectedEstimate.id)" class="btn-secondary">
+          Download PDF
+        </button>
+        <button @click="closeModal" class="btn-secondary">
+          Close
+        </button>
+      </div>
     </div>
+  </div>
+</Teleport>
 
     <!-- Toast Notifications -->
     <div class="toast-container">
@@ -313,11 +325,15 @@
       </div>
     </div>
   </div>
+
+  <QuoteCreateModal :isOpen="isModalOpen" @close="closeQuoteModal" />
+
 </template>
 
 <script setup>
 import { ref, computed, onMounted } from 'vue'
 import { library } from '@fortawesome/fontawesome-svg-core'
+import QuoteCreateModal from './QuoteCreateModal.vue'
 console.log('Available icons:', Object.keys(library.definitions.fas))
 
 
@@ -328,6 +344,7 @@ const selectedEstimate = ref(null)
 const loading = ref(true)
 const sendingEmail = ref(null)
 const toasts = ref([])
+const isModalOpen = ref(false)
 
 // Filters
 const filters = ref({
@@ -447,6 +464,12 @@ const fetchEstimates = async () => {
   }
 }
 
+const openQuoteModal = () => {
+  isModalOpen.value = true
+}
+const closeQuoteModal = () => {
+  isModalOpen.value = false
+}
 const getEstimatesByStatus = (status) => {
   return estimates.value.filter(e => e.status === status)
 }
@@ -588,11 +611,16 @@ const bulkSendEmails = async () => {
 }
 
 const viewEstimate = (estimate) => {
+   console.log('viewEstimate called with:', estimate); // Debug log
   selectedEstimate.value = estimate
+  console.log('selectedEstimate set to:', selectedEstimate.value);
+  document.body.classList.add('modal-open');
 }
 
 const closeModal = () => {
+  console.log('closeModal called');
   selectedEstimate.value = null
+  document.body.classList.remove('modal-open');
 }
 
 const downloadPDF = async (id) => {
@@ -618,7 +646,7 @@ const downloadPDF = async (id) => {
 }
 
 const deleteEstimate = async (id) => {
-  if (!confirm('Are you sure you want to delete this estimate? This action cannot be undone.')) {
+  if (!confirm('Are you sure you want to delete this quote? This action cannot be undone.')) {
     return
   }
 
@@ -633,13 +661,13 @@ const deleteEstimate = async (id) => {
     if (response.ok) {
       estimates.value = estimates.value.filter(e => e.id !== id)
       selectedEstimates.value = selectedEstimates.value.filter(selectedId => selectedId !== id)
-      showToast('Estimate deleted successfully', 'success')
+      showToast('Quote deleted successfully', 'success')
     } else {
-      throw new Error('Failed to delete estimate')
+      throw new Error('Failed to delete quote')
     }
   } catch (error) {
-    showToast('Error deleting estimate', 'error')
-    console.error('Error deleting estimate:', error)
+    showToast('Error deleting quote', 'error')
+    console.error('Error deleting quote:', error)
   }
 }
 
@@ -692,7 +720,7 @@ onMounted(() => {
 })
 </script>
 
-<style scoped>
+<style>
 .admin-estimates {
   padding: 20px;
   max-width: 1400px;
@@ -936,26 +964,31 @@ onMounted(() => {
 }
 
 .modal-overlay {
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background: rgba(0, 0, 0, 0.5);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  z-index: 1000;
+  position: fixed !important;
+  top: 0 !important;
+  left: 0 !important;
+  right: 0 !important;
+  bottom: 0 !important;
+  background: rgba(31, 31, 31, 0.8) !important; 
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  z-index: 999999 !important;
 }
 
 .modal {
-  background: white;
+  background: rgb(255, 255, 255) !important; 
   border-radius: 8px;
   box-shadow: 0 10px 25px rgba(0,0,0,0.3);
   max-width: 600px;
   width: 90%;
   max-height: 90vh;
   overflow-y: auto;
+  position: relative !important;
+  z-index: 1000000 !important;
+  display: block !important;
+  visibility: visible !important;
+  opacity: 1 !important;
 }
 
 .modal-header {

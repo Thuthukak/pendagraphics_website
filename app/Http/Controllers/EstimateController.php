@@ -10,6 +10,8 @@ use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\DB;
 use Barryvdh\DomPDF\Facade\Pdf;
+// validator
+use Validator;
 use Exception;
 
 class EstimateController extends Controller
@@ -236,13 +238,12 @@ class EstimateController extends Controller
                 ->bcc(config('mail.from.address'))
                 ->send(new EstimateRequest($estimate));
 
-            // Update status to emailed if it was previously failed
-            if ($estimate->status === 'email_failed') {
+            // Update status to emailed 
                 $estimate->update([
                     'status' => 'emailed',
                     'updated_at' => now()
-                ]);
-            }
+                
+            ]);
 
             return response()->json([
                 'message' => 'Email sent successfully',

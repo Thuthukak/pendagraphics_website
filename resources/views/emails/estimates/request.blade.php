@@ -3,9 +3,9 @@
 
 Dear {{ $estimate->name }},
 
-We've received your estimate request and are excited to work with you on your project!
+We've received your quotation request and are excited to work with you on your project!
 
-## Your Estimate Summary
+## Your Quotation Summary
 
 @component('mail::table')
 | Service | Price |
@@ -16,7 +16,7 @@ We've received your estimate request and are excited to work with you on your pr
 | **Total Estimate** | **R{{ number_format($estimate->total_amount, 2) }}** |
 @endcomponent
 
-This is an initial estimate based on the services you selected. Our team will review your requirements and may adjust this estimate based on the specific details of your project.
+This is an initial quote based on the services you selected. Our team will review your requirements and may adjust this quotation based on the specific details of your project.
 
 ## What's Next?
 

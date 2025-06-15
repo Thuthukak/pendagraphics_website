@@ -12,6 +12,7 @@ use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\ContactController;
 use App\Http\Controllers\NewsletterController;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\InvoiceController;
 
 // Admin Authentication Routes
 Route::prefix('admin')->group(function () {
@@ -65,6 +66,13 @@ Route::prefix('admin')->group(function () {
 // API Routes (Public API)
 Route::prefix('api')->group(function () {
     Route::get('/services', [ServicesController::class, 'index'])->name('getServices');
+    Route::post('/services', [ServicesController::class, 'store']);
+    Route::get('/services/{service}', [ServicesController::class, 'show']);
+    Route::put('/services/{service}', [ServicesController::class, 'update']);
+    Route::delete('/services/{service}', [ServicesController::class, 'destroy']);
+     // Additional utility routes
+    Route::patch('/services/{service}/toggle-status', [ServicesController::class, 'toggleStatus']);
+    Route::get('/services-active', [ServicesController::class, 'getActiveServices']);
     Route::get('/estimates', [EstimateController::class, 'index'])->name('estimates.show');
     Route::post('/estimates', [EstimateController::class, 'store'])->name('estimates.store');
     Route::put('estimates/{id}/status', [EstimateController::class, 'updateStatus']);
@@ -73,14 +81,13 @@ Route::prefix('api')->group(function () {
     Route::post('estimates/bulk-email', [EstimateController::class, 'bulkSendEmails']);
     Route::get('estimates/{id}/pdf', [EstimateController::class, 'downloadPDF']);
     Route::delete('estimates/{id}', [EstimateController::class, 'destroy']);
+    //invoices
+    Route::get('/invoices', [InvoiceController::class, 'index'])->name('invoices.show');
+
 
 
  Route::get('/profile/data', [ProfileController::class, 'show'])->name('profile.data');
-    // Route::get('/services', [ServicesController::class, 'index'])->name('services.index');
-    // Route::get('/barbers', [BarberController::class, 'index'])->name('barbers.index');
-    // Route::get('/bookings', [BookingController::class, 'index']);
-    // Route::get('/bookings/data', [BookingController::class, 'adminBookingsData'])->name('admin.bookings.data');
-    // Route::post('/bookings', [BookingController::class, 'store']);
+
     
 });
 

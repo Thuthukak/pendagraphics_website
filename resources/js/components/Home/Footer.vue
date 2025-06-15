@@ -50,12 +50,12 @@
             <a href="https://www.instagram.com/penda_graphics/" class="text-white p-2 d-flex align-items-center justify-content-center" style="width: 40px; height: 40px;">
               <i class="fab fa-instagram"></i>
             </a>
-            <!-- <a href="#" class="text-white p-2 d-flex align-items-center justify-content-center" style="width: 40px; height: 40px;">
-              <i class="fab fa-linkedin"></i>
-            </a> -->
             <a href="https://www.youtube.com/@PendaGraphics" class="text-white p-2 d-flex align-items-center justify-content-center" style="width: 40px; height: 40px;">
               <i class="fab fa-youtube"></i>
             </a>
+            <a href="https://www.tiktok.com/@pendagraphics?_t=ZM-8xCbzWLUJ7Q&_r=1" class="text-white p-2 d-flex align-items-center justify-content-center" style="width: 40px; height: 40px;">
+              <i class="fab fa-tiktok"></i>
+            </a> 
           </div>
           <div class="mt-3"> Subscribe to our newsletter</div>
           <form @submit.prevent="subscribe">

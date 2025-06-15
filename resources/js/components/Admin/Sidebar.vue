@@ -101,6 +101,11 @@ export default {
           icon: ['fas', 'clipboard-list'],
         },
         {
+          path: '/admin/invoices',
+          label: 'Invoices',
+          icon: ['fas', 'file-invoice-dollar'],
+        },
+        {
           path: '/admin/services',
           label: 'Services',
           // graphic design services

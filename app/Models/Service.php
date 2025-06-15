@@ -33,4 +33,15 @@ class Service extends Model
     {
         return $query->where('is_active', true);
     }
+
+     /**
+     * Scope a query to search services by name or description.
+     */
+    public function scopeSearch($query, $term)
+    {
+        return $query->where(function ($q) use ($term) {
+            $q->where('name', 'like', "%{$term}%")
+              ->orWhere('description', 'like', "%{$term}%");
+        });
+    }
 }

@@ -47,11 +47,24 @@ import { faBars,
         faPaperPlane,
         faMailForward,
         faEnvelope,
-        faPaintBrush
+        faPaintBrush,
+        faFileInvoiceDollar
     } from "@fortawesome/free-solid-svg-icons";
 
-library.add(faBars, 
-            faMoon, 
+import { 
+    faTiktok,
+    faYoutube,
+    faInstagram,
+    faFacebook
+} from "@fortawesome/free-brands-svg-icons";
+
+library.add(faBars,
+            faFacebook,
+            faInstagram,
+            faYoutube,
+            faTiktok, 
+            faMoon,
+            faFileInvoiceDollar, 
             faSun, 
             faGlobe, 
             faUser, 
