@@ -71,6 +71,7 @@ Route::prefix('api')->group(function () {
 
     Route::get('/services', [ServicesController::class, 'index'])->name('getServices');
     Route::post('/services', [ServicesController::class, 'store']);
+    Route::post('/services/custom', [ServicesController::class, 'storeCustomService']);
     Route::get('/services/{service}', [ServicesController::class, 'show']);
     Route::put('/services/{service}', [ServicesController::class, 'update']);
     Route::delete('/services/{service}', [ServicesController::class, 'destroy']);

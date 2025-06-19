@@ -236,6 +236,7 @@
       :show="showCreateModal || showEditModal"
       :is-editing="showEditModal"
       :invoice="selectedInvoice"
+      :services="services"
       :clients="clients"
       :saving="saving"
       @close="closeModals"
@@ -278,6 +279,7 @@ export default {
     const statistics = ref(null)
     const loading = ref(false)
     const saving = ref(false)
+    const services = ref([])
     
     // Modal states
     const showCreateModal = ref(false)
@@ -414,6 +416,16 @@ export default {
         console.error('Error loading statistics:', error)
       }
     }
+
+    const loadServices = async () => {
+      try {
+        const response = await api.get('/api/services')
+        services.value = response
+      } catch (error) {
+        console.error('Error loading services:', error)
+      }
+    }
+
 
     const handleSaveInvoice = async (formData) => {
       saving.value = true
@@ -601,6 +613,7 @@ export default {
       loadInvoices()
       loadClients()
       loadStatistics()
+      loadServices()
       document.addEventListener('click', handleClickOutside)
     })
 
@@ -615,6 +628,7 @@ export default {
       statistics,
       loading,
       saving,
+      services,
       filters,
       sorting,
       pagination,

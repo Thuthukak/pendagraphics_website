@@ -128,6 +128,50 @@ public function store(Request $request)
 }
 
 /**
+ * Store custom service.
+ */
+
+public function storeCustomService(Request $request)
+{
+    Log::info('we are in the store custom service method', ['request_data' => $request->all()]);
+    
+    try {
+
+        $validatedData = Validator::make($requestData, [
+            'name' => 'required|string|max:255|unique:services,name',
+            'description' => 'required|string|max:1000',
+            'base_price' => 'required|numeric|min:0|max:999999.99',
+            'is_active' => 'required|boolean',
+        ])->validate();
+
+        Log::info('validatedData', $validatedData);
+
+        $service = Service::create($validatedData);
+
+        Log::info('Service created', ['service' => $service->toArray()]);
+
+        return response()->json([
+            'message' => 'Service created successfully',
+            'service' => $service
+        ], 201);
+
+    } catch (ValidationException $e) {
+        Log::error('Validation failed', ['errors' => $e->errors()]);
+        return response()->json([
+            'message' => 'Validation failed',
+            'errors' => $e->errors()
+        ], 422);
+
+    } catch (\Exception $e) {
+        Log::error('Error creating service', ['error' => $e->getMessage(), 'trace' => $e->getTraceAsString()]);
+        return response()->json([
+            'message' => 'Error creating service',
+            'error' => $e->getMessage()
+        ], 500);
+    }
+}
+
+/**
  * Display the specified service.
  */
 public function show(Service $service)
