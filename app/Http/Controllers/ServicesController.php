@@ -251,6 +251,28 @@ public function toggleStatus(Service $service)
         ], 500);
     }
 }
+
+    /**
+     * Get services formatted for select dropdown
+     */
+    public function forSelect(Request $request): JsonResponse
+    {
+        $services = Service::active()
+            ->select('id', 'name', 'description', 'base_price')
+            ->orderBy('name')
+            ->get()
+            ->map(function ($service) {
+                return [
+                    'value' => $service->id,
+                    'label' => $service->name,
+                    'description' => $service->description,
+                    'base_price' => $service->base_price,
+                    'formatted_price' => $service->formatted_base_price,
+                ];
+            });
+
+        return response()->json($services);
+    }
 }
 
 

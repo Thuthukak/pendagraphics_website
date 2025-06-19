@@ -26,6 +26,7 @@ class Client extends Model
         'name',
         'phoneNumber',
         'email',
+        'deleted_at',
     ];
 
     public function bookings()

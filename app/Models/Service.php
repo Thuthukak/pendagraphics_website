@@ -4,23 +4,27 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 
 class Service extends Model
 {
     use HasFactory;
+    
 
     protected $fillable = [
         'name',
         'description',
         'base_price',
-        'is_active'
+        'is_active',
+        
     ];
 
     protected $casts = [
         'price' => 'decimal:2',
         'is_active' => 'boolean',
     ];
+  
 
     // Relationship with EstimateService
     public function estimateServices()
@@ -43,5 +47,16 @@ class Service extends Model
             $q->where('name', 'like', "%{$term}%")
               ->orWhere('description', 'like', "%{$term}%");
         });
+    }
+
+      public function invoiceItems(): HasMany
+    {
+        return $this->hasMany(InvoiceItem::class);
+    }
+
+    // Accessors
+    public function getFormattedBasePriceAttribute(): string
+    {
+        return '$' . number_format($this->base_price, 2);
     }
 }

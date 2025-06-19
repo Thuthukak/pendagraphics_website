@@ -13,6 +13,8 @@ use App\Http\Controllers\ContactController;
 use App\Http\Controllers\NewsletterController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\InvoiceController;
+use App\Http\Controllers\ClientController;
+
 
 // Admin Authentication Routes
 Route::prefix('admin')->group(function () {
@@ -65,6 +67,8 @@ Route::prefix('admin')->group(function () {
 
 // API Routes (Public API)
 Route::prefix('api')->group(function () {
+     Route::get('/profile/data', [ProfileController::class, 'show'])->name('profile.data');
+
     Route::get('/services', [ServicesController::class, 'index'])->name('getServices');
     Route::post('/services', [ServicesController::class, 'store']);
     Route::get('/services/{service}', [ServicesController::class, 'show']);
@@ -72,6 +76,7 @@ Route::prefix('api')->group(function () {
     Route::delete('/services/{service}', [ServicesController::class, 'destroy']);
      // Additional utility routes
     Route::patch('/services/{service}/toggle-status', [ServicesController::class, 'toggleStatus']);
+    Route::get('services/select', [ServicesController::class, 'forSelect']);
     Route::get('/services-active', [ServicesController::class, 'getActiveServices']);
     Route::get('/estimates', [EstimateController::class, 'index'])->name('estimates.show');
     Route::post('/estimates', [EstimateController::class, 'store'])->name('estimates.store');
@@ -83,10 +88,23 @@ Route::prefix('api')->group(function () {
     Route::delete('estimates/{id}', [EstimateController::class, 'destroy']);
     //invoices
     Route::get('/invoices', [InvoiceController::class, 'index'])->name('invoices.show');
+    Route::post('/invoices', [InvoiceController::class, 'store']); 
+    Route::get('/invoices/clients', [ClientController::class, 'index']);
+    Route::get('/invoices/{invoice}', [InvoiceController::class, 'show']); 
+    Route::put('/invoices/{invoice}', [InvoiceController::class, 'update']); 
+    Route::delete('/invoices/{invoice}', [InvoiceController::class, 'destroy']); 
+    // Special actions
+    Route::post('/invoices/{invoice}/send', [InvoiceController::class, 'markAsSent']); 
+    Route::post('/invoices/{invoice}/payment', [InvoiceController::class, 'recordPayment']); 
+    Route::post('/invoices/{invoice}/duplicate', [InvoiceController::class, 'duplicate']); 
+    
+    // Statistics and reporting
+    Route::get('/invoices/statistics', [InvoiceController::class, 'statistics']); 
+    
+    // Helper endpoints
+    Route::get('/invoices/clients/list', [InvoiceController::class, 'getClients']); 
 
-
-
- Route::get('/profile/data', [ProfileController::class, 'show'])->name('profile.data');
+    Route::get('/invoices/profile/data', [ProfileController::class, 'show'])->name('profile.data');
 
     
 });
