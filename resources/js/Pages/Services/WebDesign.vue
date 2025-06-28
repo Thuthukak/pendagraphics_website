@@ -119,7 +119,7 @@
   <script setup>
   import Navbar from "@/components/Home/Navbar.vue";
   import Footer from "@/components/Home/Footer.vue";
-  import WebDesignCarousel from "./WebDesignCarousel.vue";
+  import WebDesignCarousel from "@/components/Home/Services/WebDesignCarousel.vue";
 
 
   </script>

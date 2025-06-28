@@ -1,5 +1,6 @@
 <template>
   <Layout>
+    <Head :title="Home" />
     <!-- hero section -->
     <section class="about py-5 bg-light bg-md-white">
       <div class="container px-4">
@@ -224,12 +225,14 @@
 
 
 <script setup>
+import { Head } from '@inertiajs/vue3'
 import Layout from "../Layouts/HomeLayout.vue";
 import Portfolio from "@/components/Home/Portfolio.vue";
 import About from "@/components/Home/About.vue";
 import EstimateModal from "@/components/Home/EstimateModal.vue";
 import { ref} from "vue";
 import axios from "axios";
+
 
 const form = ref({
   name: '',
