@@ -21,16 +21,5 @@ class DatabaseSeeder extends Seeder
             ['name' => 'Jonas', 'email' => 'Jonas@example.com', 'password' => Hash::make('password')],
             ['name' => 'Mike', 'email' => 'mike@example.com', 'password' => Hash::make('password')],
         ];
-
-        foreach ($users as $userData) {
-            $user = User::create($userData);
-
-            // Create a corresponding barber
-            Barber::create([
-                'user_id' => $user->id,
-                'phone' => fake()->phoneNumber(),
-                'bio' => fake()->sentence(),
-            ]);
-        }
     }
 }

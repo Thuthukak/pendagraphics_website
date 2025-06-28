@@ -29,9 +29,6 @@ class Client extends Model
         'deleted_at',
     ];
 
-    public function bookings()
-    {
-        return $this->hasMany(Booking::class);
-    }
+    
 
 }

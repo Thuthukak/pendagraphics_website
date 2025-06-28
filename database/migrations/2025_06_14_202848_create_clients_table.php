@@ -23,7 +23,7 @@ return new class extends Migration
             $table->string('country')->nullable();
             $table->string('tax_number')->nullable(); // VAT/Tax ID
             $table->boolean('is_active')->default(true);
-            $table->delete('deleted_at');
+            $table->softDeletes();
             $table->timestamps();
             
             // Indexes
