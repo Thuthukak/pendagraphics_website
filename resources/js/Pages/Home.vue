@@ -224,7 +224,7 @@
 
 
 <script setup>
-import Layout from "../../Layouts/HomeLayout.vue";
+import Layout from "../Layouts/HomeLayout.vue";
 import Portfolio from "@/components/Home/Portfolio.vue";
 import About from "@/components/Home/About.vue";
 import EstimateModal from "@/components/Home/EstimateModal.vue";

@@ -1,33 +1,14 @@
 import './bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
+import '../css/app.css';
 import '../css/custom.css';
-import { createApp } from 'vue';
-import App from './components/App.vue';
-import Home from './components/Home/Home.vue';
-import Bookings from './components/Home/Bookings.vue';
-import Admin from './components/Admin/Admin.vue';
-import Dashboard from './components/Admin/Dashboard/Dashboard.vue'; 
-import DashboardLayout from './Layouts/DashboardLayout.vue';
+import { createApp, h } from 'vue';
+import { createInertiaApp } from '@inertiajs/vue3';
+import { resolvePageComponent } from 'laravel-vite-plugin/inertia-helpers';
+import { ZiggyVue } from 'ziggy-js';
 import { library } from "@fortawesome/fontawesome-svg-core";
 import { FontAwesomeIcon } from "@fortawesome/vue-fontawesome"; 
 import router from './router'; 
-
-import WebDesign from './components/Home/Services/WebDesign.vue';
-import ProductDesign from './components/Home/Services/ProductDesign.vue';
-import GraphicDesign from './components/Home/Services/GraphicDesign.vue';
-import ECommerce from './components/Home/Services/ECommerce.vue';
-import DigitalMarketing from './components/Home/Services/DigitalMarketing.vue';
-import IdentityDesign from './components/Home/Services/IdentityDesign.vue';
-import WebDesignCarousel from './components/Home/Services/WebDesignCarousel.vue';
-import GraphicDesignCarousel from './components/Home/Services/GraphicDesignCarousel.vue';
-import ProductDesignCarousel from './components/Home/Services/ProductDesignCarousel.vue';
-import IdentityDesignCarousel from './components/Home/Services/IdentityDesignCarousel.vue';
-import ECommerceCarousel from './components/Home/Services/ECommerceCarousel.vue';
-import FAQ from './components/Home/Faq.vue';
-import FaqComponent from './components/Home/FaqComponent.vue';
-import AboutUS from './components/Home/AboutUS.vue';
-import ContactUs from './components/Home/ContactUs.vue';
-import EstimateModal from './components/Home/EstimateModal.vue';
 
 import { faBars, 
         faMoon, 
@@ -86,6 +67,21 @@ library.add(faBars,
         );
 
 
+const appName = import.meta.env.VITE_APP_NAME || 'Laravel';
+
+createInertiaApp({
+    title: (title) => `${title} - ${appName}`,
+    resolve: (name) => resolvePageComponent(`./Pages/${name}.vue`, import.meta.glob('./Pages/**/*.vue')),
+    setup({ el, App, props, plugin }) {
+        return createApp({ render: () => h(App, props) })
+            .use(plugin)
+            .use(ZiggyVue)
+            .mount(el);
+    },
+    progress: {
+        color: '#4B5563',
+    },
+});
 
 const app = createApp({});
 

@@ -7,6 +7,7 @@ use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Facades\Validator;
 use App\Models\Service;
 use Illuminate\Support\Facades\Log;
+use Inertia\Inertia;
 
 class ServicesController extends Controller
 {
@@ -51,34 +52,58 @@ class ServicesController extends Controller
     }
     public function indexWebDesign()
     {
-        return view('services.web-design');
+        return Inertia::render('Services/WebDesign', [
+            'title' => 'Professional Web Design Services',
+            'description' => 'Custom web design and development services that create stunning, responsive websites for your business.',
+            'keywords' => 'web design, website development, responsive design, custom websites'
+        ]);
     }
 
     public function indexGraphicDesign()
     {
-        return view('services.graphic-design');
+        return Inertia::render('Services/GraphicDesign', [
+            'title' => 'Creative Graphic Design Services',
+            'description' => 'Professional graphic design services including logos, brochures, business cards, and marketing materials.',
+            'keywords' => 'graphic design, logo design, brochures, business cards, marketing materials'
+        ]);
     }
 
-    public function indexProductDesign()
+
+   public function indexProductDesign()
     {
-        return view('services.product-design');
+        return Inertia::render('Services/ProductDesign', [
+            'title' => 'Innovative Product Design Services',
+            'description' => 'Transform your ideas into tangible products with our expert product design and development services.',
+            'keywords' => 'product design, product development, innovation, prototyping'
+        ]);
     }
 
     public function indexIdentityDesign()
     {
-        return view('services.identity-design');
+        return Inertia::render('Services/IdentityDesign', [
+            'title' => 'Brand Identity Design Services',
+            'description' => 'Create a strong brand identity with our comprehensive branding and identity design services.',
+            'keywords' => 'brand identity, branding, logo design, brand strategy, brand guidelines'
+        ]);
     }
 
     public function indexECommerce()
     {
-        return view('services.e-commerce');
+        return Inertia::render('Services/ECommerce', [
+            'title' => 'E-Commerce Development Solutions',
+            'description' => 'Complete e-commerce solutions including online store setup, payment integration, and order management.',
+            'keywords' => 'e-commerce, online store, shopping cart, payment integration, order management'
+        ]);
     }
 
     public function indexDigitalMarketing()
     {
-        return view('services.digital-marketing');
+        return Inertia::render('Services/DigitalMarketing', [
+            'title' => 'Digital Marketing Services',
+            'description' => 'Comprehensive digital marketing services including SEO, social media marketing, and content marketing.',
+            'keywords' => 'digital marketing, SEO, social media marketing, content marketing, email marketing'
+        ]);
     }
-
 /**
  * Store a newly created service.
  */

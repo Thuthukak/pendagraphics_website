@@ -14,6 +14,7 @@ use App\Http\Controllers\NewsletterController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\InvoiceController;
 use App\Http\Controllers\ClientController;
+use Inertia\Inertia;
 
 
 // Admin Authentication Routes
@@ -43,7 +44,7 @@ Route::prefix('admin')->group(function () {
 
 //Auth and Non-authenticated users
     Route::get('/', function () {
-        return view('welcome');
+        return Inertia::render('Home');
     });
 
 
