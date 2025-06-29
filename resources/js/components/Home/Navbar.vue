@@ -3,7 +3,10 @@
     <div class="container mx-auto flex justify-between items-center py-4 px-6">
       <!-- Logo - keeping original path -->
       <a href="#" class="text-xl font-bold">
-        <img src="/public/assets/images/penda_logo.png" alt="Logo" style="width: 160px; height: auto;" />
+        <img 
+        :src="seo.og_image"
+         alt="Logo" 
+         style="width: 160px; height: auto;" />
       </a>
 
       <!-- Navigation -->
@@ -79,6 +82,9 @@ export default {
   name: 'Navbar',
   components: {
     EstimateModal
+  },
+  props: {
+      seo: Object,
   },
   data() {
     return {

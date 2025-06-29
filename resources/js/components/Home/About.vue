@@ -5,7 +5,15 @@
             <div class="row">
                 <div class="col-md-6 col-lg-6 ">
                     <div>
-                        <img src="/public/assets/images/p-logo.png" alt="Hero Image" class="w-100 rounded" style="height: 400px; object-fit: cover;">
+                        <img 
+                            :src="aboutImage" 
+                            alt="Penda Graphics Logo - Professional Digital Design Company" 
+                            class="w-100 rounded" 
+                            style="height: 400px; object-fit: cover;"
+                            loading="lazy"
+                            width="400"
+                            height="400"
+                        >
                     </div>
                 </div>
                 <div class="col-md-6 col-lg-6">
@@ -23,4 +31,12 @@
         </div>
     </section>
 </template>
+<script>
+    export default {
+        props: {
+            aboutImage: String,
+        }
+    }
+     
+</script>
           

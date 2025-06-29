@@ -43,10 +43,7 @@ Route::prefix('admin')->group(function () {
 });
 
 //Auth and Non-authenticated users
-    Route::get('/', function () {
-        return Inertia::render('Home');
-    });
-
+    Route::get('/', [HomeController::class, 'Home'])->name('home');
 
     Route::prefix('services')->group(function () {
         Route::get('/web-design', [ServicesController::class, 'indexWebDesign'])->name('web-design.index');

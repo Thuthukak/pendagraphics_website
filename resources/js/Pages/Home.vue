@@ -1,162 +1,150 @@
 <template>
-  <Layout>
-    <Head :title="Home" />
-    <!-- hero section -->
+  <Layout :seo="seo">
+    <Head>
+      <title>{{ seo.title }}</title>
+      <meta name="description" :content="seo.description" />
+      <meta name="keywords" :content="seo.keywords" />
+      <link rel="canonical" :href="seo.canonical_url" />
+      
+      <!-- Open Graph -->
+      <meta property="og:title" :content="seo.og_title" />
+      <meta property="og:description" :content="seo.og_description" />
+      <meta property="og:image" :content="seo.og_image" />
+      <meta property="og:url" :content="seo.og_url" />
+      <meta property="og:type" content="website" />
+      <meta property="og:site_name" content="Your Company Name" />
+      
+      <!-- Twitter Card -->
+      <meta name="twitter:card" :content="seo.twitter_card" />
+      <meta name="twitter:title" :content="seo.og_title" />
+      <meta name="twitter:description" :content="seo.og_description" />
+      <meta name="twitter:image" :content="seo.og_image" />
+      
+      <!-- Additional SEO -->
+      <meta name="robots" content="index, follow" />
+      <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+      <meta name="theme-color" content="#0d6efd" />
+      
+      <!-- Structured Data will be added via JavaScript -->
+    </Head>
+
+    <!-- Hero Section -->
     <section class="about py-5 bg-light bg-md-white">
       <div class="container px-4">
         <div class="row align-items-center">
           <div class="col-md-6">
             <div class="content">
-              <h2 class="fw-bold">Empowering Your Brand with Stunning Designs & Websites</h2>
+              <h1 class="fw-bold">Empowering Your Brand with Stunning Designs & Websites</h1>
               <p class="mt-4 text-secondary">
                 We are a team of passionate designers and developers dedicated to creating exceptional digital experiences for our clients.
               </p>
               <button @click.prevent="openQuoteModal" class="btn btn-primary rounded">Get A Quote</button>   
             </div>
           </div>
-          <!-- hero images - hidden on mobile -->
+          <!-- Hero images - Server-side rendered, no lazy loading for above-the-fold content -->
           <div class="col-md-6 d-none d-md-block">
-              <div class="row">
-                <div class="col-md-6">
-                  <div class="card border-0 shadow rounded mt-5">                 
-                      <img src="/public/assets/images/left.png" alt="Hero Image" class="w-100 rounded" style="height: 400px; object-fit: cover;">
-                  </div>
+            <div class="row">
+              <div class="col-md-6">
+                <div class="card border-0 shadow rounded mt-5">                 
+                  <img 
+                    :src="heroImages.left" 
+                    alt="Professional web design showcase - Modern website interface" 
+                    class="w-100 rounded" 
+                    style="height: 400px; object-fit: cover;"
+                    width="300"
+                    height="400"
+                  >
                 </div>
-                <div class="col-md-6">
-                  <div class="row">
-                    <div class="col-md-12">
-                      <div class="card border-0 shadow ">
-                        <img src="/public/assets/images/top.png" alt="Hero Image" class="w-100 rounded" style="height: 200px; object-fit: cover; ">
-                      </div>
+              </div>
+              <div class="col-md-6">
+                <div class="row">
+                  <div class="col-md-12">
+                    <div class="card border-0 shadow">
+                      <img 
+                        :src="heroImages.top" 
+                        alt="Creative graphic design portfolio - Brand identity showcase" 
+                        class="w-100 rounded" 
+                        style="height: 200px; object-fit: cover;"
+                        width="300"
+                        height="200"
+                      >
                     </div>
-                    <div class="col-md-12 mt-4">
-                      <div class="card border-0 shadow">
-                        <img src="/public/assets/images/right.png" alt="Hero Image" class="w-100 rounded" style="height: 200px; object-fit: cover;">
-                      </div>
+                  </div>
+                  <div class="col-md-12 mt-4">
+                    <div class="card border-0 shadow">
+                      <img 
+                        :src="heroImages.right" 
+                        alt="Digital marketing success - Analytics and growth visualization" 
+                        class="w-100 rounded" 
+                        style="height: 200px; object-fit: cover;"
+                        width="300"
+                        height="200"
+                      >
                     </div>
                   </div>
                 </div>
               </div>
+            </div>
           </div>
         </div>
       </div>
     </section>
-
 
     <!-- Our Featured Services -->
     <section class="py-5">
       <div class="container px-4">
         <h2 class="fw-bold mb-4 text-center">Our Featured Services</h2>
         <div class="row">
-          <div class="col-md-4 col-sm-6 mb-4">
-            <div class="card p-3 service-card border-0">
+          <div 
+            v-for="(service, index) in services" 
+            :key="index"
+            class="col-md-4 col-sm-6 mb-4"
+          >
+            <article class="card p-3 service-card border-0">
               <div class="d-flex align-items-center mb-2">
-                <img src="/public/assets/gifs/worldwide.gif" alt="Web" style="height: 50px; width: 50px; object-fit: cover;" class="me-3">
-                <h4 class="card-title mb-0">
-                  <a href="/services/web-design" class="text-decoration-none">Web Development</a>
-                </h4>
+                <img 
+                  :src="service.icon" 
+                  :alt="`${service.title} service icon`" 
+                  style="height: 50px; width: 50px; object-fit: cover;" 
+                  class="me-3"
+                  loading="lazy"
+                  width="50"
+                  height="50"
+                >
+                <h3 class="card-title mb-0 h4">
+                  <a :href="service.url" class="text-decoration-none">{{ service.title }}</a>
+                </h3>
               </div>
-              <p>
-                We incorporate the latest design trends, intuitive navigation, and engaging visuals to ensure that your website stands out.
-              </p>
-              <a href="/services/web-design" class="btn btn-primary mt-2">Discover More</a>
-            </div>
-          </div>
-          <div class="col-md-4 col-sm-6 mb-4">
-            <div class="card p-3 service-card border-0">
-              <div class="d-flex align-items-center mb-2">
-                <img src="/public/assets/gifs/dairy-products.gif" alt="Web" style="height: 50px; width: 50px; object-fit: cover;" class="me-3">
-                <h4 class="card-title mb-0">
-                  <a href="/services/product-design" class="text-decoration-none">Product Design</a>
-                </h4>
-              </div>
-              <p>
-                We specialize in turning your innovative ideas into tangible products that resonate with your audience and drive success.
-              </p>
-              <a href="/services/product-design" class="btn btn-primary mt-2">Discover More</a>
-            </div>
-          </div>
-          <div class="col-md-4 col-sm-6 mb-4">
-            <div class="card p-3 service-card border-0">
-              <div class="d-flex align-items-center mb-2">
-                <img src="/public/assets/gifs/design.gif" alt="Web" style="height: 50px; width: 50px; object-fit: cover;" class="me-3">
-                <h4 class="card-title mb-0">
-                  <a href="/services/graphic-design" class="text-decoration-none">Graphic Design</a>
-                </h4>
-              </div>
-              <p>
-                Posters, flyers, and banners, brochures, business cards, infographics, social media graphics, and packaging design.
-              </p>
-              <a href="/services/graphic-design" class="btn btn-primary mt-2">Discover More</a>
-            </div>
-          </div>
-          <div class="col-md-4 col-sm-6 mb-4">
-            <div class="card p-3 service-card border-0">
-              <div class="d-flex align-items-center mb-2">
-                <img src="/public/assets/gifs/passport.gif" alt="Web" style="height: 50px; width: 50px; object-fit: cover;" class="me-3">
-                <h4 class="card-title mb-0">
-                  <a href="/services/identity-design" class="text-decoration-none">Identity Design</a>
-                </h4>
-              </div>
-              <p>
-                We help develop a strong brand identity through logo design, brand guidelines, brand strategy, and brand messaging.
-              </p>
-              <a href="/services/identity-design" class="btn btn-primary mt-2">Discover More</a>
-            </div>
-          </div>
-          <div class="col-md-4 col-sm-6 mb-4">
-            <div class="card p-3 service-card border-0">
-              <div class="d-flex align-items-center mb-2">
-                <img src="/public/assets/gifs/online-supermarket.gif" alt="Web" style="height: 50px; width: 50px; object-fit: cover;" class="me-3">
-                <h4 class="card-title mb-0">
-                  <a href="/services/e-commerce" class="text-decoration-none">E-Commerce Solutions</a>
-                </h4>
-              </div>
-              <p>
-                We provide e-commerce design and development services, including online store setup, product listing, payment integration, and order management.
-              </p>
-              <a href="/services/e-commerce" class="btn btn-primary mt-2">Discover More</a>
-            </div>
-          </div>
-          <div class="col-md-4 col-sm-6 mb-4">
-            <div class="card p-3 service-card border-0">
-              <div class="d-flex align-items-center mb-2">
-                <img src="/public/assets/gifs/responsive-design.gif" alt="Web" style="height: 50px; width: 50px; object-fit: cover;" class="me-3">
-                <h4 class="card-title mb-0">
-                  <a href="/services/digital-marketing" class="text-decoration-none">Digital Marketing</a>
-                </h4>
-              </div>
-              <p>
-                We provide digital marketing services, including search engine optimization (SEO), social media marketing, content marketing, email marketing, etc. 
-              </p>
-              <a href="/services/digital-marketing" class="btn btn-primary mt-2">Discover More</a>
-            </div>
+              <p>{{ service.description }}</p>
+              <a :href="service.url" class="btn btn-primary mt-2">Discover More</a>
+            </article>
           </div>
         </div>
       </div>
     </section>
 
-    <!-- portfolio -->
-    <section id="portfolio">
+    <!-- Portfolio -->
+    <section id="portfolio" aria-labelledby="portfolio-heading">
       <div class="container">
         <Portfolio />
       </div>
     </section>
 
-    <!-- about -->
-    <section>
+    <!-- About -->
+    <section aria-labelledby="about-heading">
       <div class="container mt-4">
-        <About />
+        <About
+          :aboutImage="aboutImage"
+           />
       </div>
     </section>
 
-    
-    <!-- form -->
-    <section class="py-5 text-center bg-dark text-white">
+    <!-- Contact Form -->
+    <section class="py-5 text-center bg-dark text-white" aria-labelledby="contact-heading">
       <div class="container px-4">
         <div class="row">
           <div class="col-md-6">
-            <h2 class="fw-bold text-left">Let's work together</h2>
+            <h2 id="contact-heading" class="fw-bold text-left">Let's work together</h2>
             <p class="text-left">
               We're excited to hear about your vision and explore how we can bring it to life. Whether you're looking to build a modern website, create a strong visual identity, or launch a compelling marketing campaign — we're here to help.  
             </p>
@@ -168,50 +156,63 @@
             </p>
           </div>
           <div class="col-md-6">
-            <form  @submit.prevent="submitForm" class="p-4 shadow rounded bg-white">
+            <form @submit.prevent="submitForm" class="p-4 shadow rounded bg-white" novalidate>
               <div class="mb-3">
+                <label for="name" class="visually-hidden">Name</label>
                 <input
+                  id="name"
                   type="text"
                   v-model="form.name"
                   class="form-control"
                   placeholder="Enter your name"
                   required
+                  aria-required="true"
                 />
               </div>
 
               <div class="mb-3">
+                <label for="email" class="visually-hidden">Email</label>
                 <input
+                  id="email"
                   type="email"
                   v-model="form.email"
                   class="form-control"
                   placeholder="Enter your email"
                   required
+                  aria-required="true"
                 />
               </div>
+
               <div class="mb-3">
-              <input 
+                <label for="subject" class="visually-hidden">Subject</label>
+                <input 
+                  id="subject"
                   type="text" 
-                  id="subject" 
                   v-model="form.subject" 
                   class="form-control"
                   placeholder="Subject"
                   required
+                  aria-required="true"
                 />
-            </div>
+              </div>
 
               <div class="mb-3">
+                <label for="message" class="visually-hidden">Message</label>
                 <textarea
+                  id="message"
                   class="form-control"
                   v-model="form.message"
                   rows="4"
                   placeholder="Enter your message"
                   required
+                  aria-required="true"
                 ></textarea>
               </div>
 
               <div class="text-end">
-                <button type="submit" class="btn btn-primary">
-                  Send Message
+                <button type="submit" class="btn btn-primary" :disabled="isSubmitting">
+                  <span v-if="isSubmitting">Sending...</span>
+                  <span v-else>Send Message</span>
                 </button>
               </div>
             </form>
@@ -220,9 +221,9 @@
       </div>
     </section>
   </Layout>
+  
   <EstimateModal :isOpen="isModalOpen" @close="closeQuoteModal" />
 </template>
-
 
 <script setup>
 import { Head } from '@inertiajs/vue3'
@@ -230,9 +231,17 @@ import Layout from "../Layouts/HomeLayout.vue";
 import Portfolio from "@/components/Home/Portfolio.vue";
 import About from "@/components/Home/About.vue";
 import EstimateModal from "@/components/Home/EstimateModal.vue";
-import { ref} from "vue";
+import { ref, onMounted } from "vue";
 import axios from "axios";
 
+// Props from server
+const props = defineProps({
+  heroImages: Object,
+  aboutImage: String,
+  services: Array,
+  seo: Object,
+  structuredData: String,
+});
 
 const form = ref({
   name: '',
@@ -242,8 +251,26 @@ const form = ref({
 });
 
 const isModalOpen = ref(false);
+const isSubmitting = ref(false);
+
+// Add structured data to head on component mount
+onMounted(() => {
+  if (props.structuredData) {
+    const script = document.createElement('script');
+    script.type = 'application/ld+json';
+    script.textContent = props.structuredData;
+    document.head.appendChild(script);
+  }
+});
+
+// Structured Data for SEO (fallback computed property for reference)
+// This is now handled server-side and injected via onMounted
 
 const submitForm = async () => {
+  if (isSubmitting.value) return;
+  
+  isSubmitting.value = true;
+  
   try {
     const response = await axios.post('/contact-form', form.value);
     console.log(response.data);
@@ -255,8 +282,15 @@ const submitForm = async () => {
       subject: '',
       message: '',
     };
+    
+    // You might want to show a success message here
+    alert('Thank you! Your message has been sent successfully.');
+    
   } catch (error) {
     console.error('Form submission error:', error);
+    alert('Sorry, there was an error sending your message. Please try again.');
+  } finally {
+    isSubmitting.value = false;
   }
 }
 
@@ -269,13 +303,23 @@ const closeQuoteModal = () => {
 }
 </script>
 
-
 <style scoped>
-
-.service-card:hover{
+.service-card:hover {
   box-shadow: 0 0 10px rgba(48, 48, 48, 0.3);
   transform: scale(1.05);
   transition: transform 0.3s ease;
 }
 
+/* Improve accessibility */
+.visually-hidden {
+  position: absolute !important;
+  width: 1px !important;
+  height: 1px !important;
+  padding: 0 !important;
+  margin: -1px !important;
+  overflow: hidden !important;
+  clip: rect(0, 0, 0, 0) !important;
+  white-space: nowrap !important;
+  border: 0 !important;
+}
 </style>

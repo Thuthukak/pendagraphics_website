@@ -1,10 +1,10 @@
 <template>
   <div class="min-h-screen flex flex-col">
-    <Navbar />
+    <Navbar :seo="seo" />
     <main class="flex-grow">
       <slot></slot>
     </main>
-    <Footer />
+    <Footer :seo="seo" />
   </div>
 </template>
   
@@ -14,5 +14,9 @@
   
   export default {
     components: {  Navbar, Footer },
+    props: {
+      seo: Object,
+    },
   };
+  
   </script>
