@@ -5,9 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
 
-class HomeController extends Controller
+class HomeController extends BaseController
 {
-
     public function Home()
     {
         // Define hero images for server-side rendering
@@ -19,7 +18,6 @@ class HomeController extends Controller
 
         $aboutImage = asset('assets/images/p-logo.png');
 
-        // Define service icons for server-side rendering
         $serviceIcons = [
             'web_development' => asset('assets/gifs/worldwide.gif'),
             'product_design' => asset('assets/gifs/dairy-products.gif'),
@@ -29,18 +27,11 @@ class HomeController extends Controller
             'digital_marketing' => asset('assets/gifs/responsive-design.gif'),
         ];
 
-        // SEO and Open Graph data
-        $seoData = [
-            'title' => 'Professional Web Design & Digital Marketing Services',
+        // Customize SEO data for home page
+        $seoData = $this->mergeSeoData([
             'description' => 'We are a team of passionate designers and developers dedicated to creating exceptional digital experiences. Specializing in web development, graphic design, branding, and digital marketing.',
-            'keywords' => 'web design, web development, graphic design, digital marketing, branding, logo design, SEO, e-commerce',
-            'og_title' => 'Empowering Your Brand with Stunning Designs & Websites',
             'og_description' => 'Professional web design and development services. Create stunning websites, powerful branding, and effective digital marketing campaigns.',
-            'og_image' => asset('assets/images/penda_logo2.png'), // Create this image (1200x630px)
-            'og_url' => url('/'),
-            'twitter_card' => 'summary_large_image',
-            'canonical_url' => url('/'),
-        ];
+        ]);
 
         // Services data for better SEO
         $services = [
@@ -82,7 +73,7 @@ class HomeController extends Controller
             ],
         ];
 
-        // Structured Data for SEO (define after $services)
+        // Structured Data for SEO
         $structuredData = [
             '@context' => 'https://schema.org',
             '@type' => 'Organization',
@@ -97,9 +88,10 @@ class HomeController extends Controller
             ],
             'sameAs' => [
                 // Add your social media URLs here
-                // 'https://www.facebook.com/yourcompany',
-                // 'https://www.twitter.com/yourcompany',
-                // 'https://www.linkedin.com/company/yourcompany'
+                'https://web.facebook.com/Penda.graphix',
+                'https://www.instagram.com/penda_graphics/',
+                'https://www.youtube.com/@PendaGraphics',
+                'https://www.tiktok.com/@pendagraphics?_t=ZM-8xCbzWLUJ7Q&_r=1',
             ],
             'service' => array_map(function($service) {
                 return [

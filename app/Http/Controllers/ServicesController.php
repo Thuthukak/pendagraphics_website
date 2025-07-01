@@ -9,7 +9,7 @@ use App\Models\Service;
 use Illuminate\Support\Facades\Log;
 use Inertia\Inertia;
 
-class ServicesController extends Controller
+class ServicesController extends BaseController
 {
     public function index(Request $request): JsonResponse
     {
@@ -50,21 +50,37 @@ class ServicesController extends Controller
             ], 500);
         }
     }
+
+
     public function indexWebDesign()
     {
+        $seoData = $this->getBaseSeoData();
+        // Override specific SEO data for this page
+        $seoData['title'] = 'Professional Web Design Services';
+        $seoData['description'] = 'We specialize in web design and development services, creating visually stunning and functional websites for businesses and organizations.';
+        $seoData['keywords'] = 'web design, website development, responsive design, user-friendly websites';
+        $seoData['og_title'] = 'Professional Web Design Services';
+        $seoData['canonical_url'] = url('/services/web-design');
+        $seoData['sec_img'] = asset('assets/images/homepage-seen-computer-screen.jpg');
+
         return Inertia::render('Services/WebDesign', [
-            'title' => 'Professional Web Design Services',
-            'description' => 'Custom web design and development services that create stunning, responsive websites for your business.',
-            'keywords' => 'web design, website development, responsive design, custom websites'
+            'seo' => $seoData
         ]);
     }
 
     public function indexGraphicDesign()
     {
+        $seoData = $this->getBaseSeoData();
+        // Override specific SEO data for this page
+        $seoData['title'] = 'Professional Graphic Design Services';
+        $seoData['description'] = 'We specialize in graphic design services, creating visually stunning and engaging designs for businesses and organizations.';
+        $seoData['keywords'] = 'graphic design, branding, logo design, user-friendly websites';
+        $seoData['og_title'] = 'Professional Graphic Design Services';
+        $seoData['canonical_url'] = url('/services/graphic-design');
+        $seoData['sec_img'] = asset('assets/images/color-bulb.jpg');
+
         return Inertia::render('Services/GraphicDesign', [
-            'title' => 'Creative Graphic Design Services',
-            'description' => 'Professional graphic design services including logos, brochures, business cards, and marketing materials.',
-            'keywords' => 'graphic design, logo design, brochures, business cards, marketing materials'
+            'seo' => $seoData
         ]);
     }
 

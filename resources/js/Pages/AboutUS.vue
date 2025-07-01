@@ -172,51 +172,6 @@
     </div>
   </section>
 
-  <!-- Team Section -->
-  <!-- <section class="py-5 accent-bg">
-    <div class="container">
-      <h2 class="section-title fw-bold text-center">Meet Our Experts</h2>
-      <p class="text-center mb-5" style="max-width: 700px; margin: 0 auto;">
-        The talented minds behind our creative solutions and technical innovations
-      </p>
-      
-      <div class="row g-4">
-        <div class="col-lg-4 col-md-6">
-          <div class="team-member mb-4">
-            <img src="/public/assets/images/penda_logo2.png" alt="Lebo Mokoena" class="img-fluid w-100">
-            <div class="team-info mx-3 text-center">
-              <h5 class="fw-bold mb-1">Lebo Mokoena</h5>
-              <p class="text-primary mb-2">Creative Director</p>
-              <p class="small mb-0">Leading our creative vision with over a decade of brand design expertise.</p>
-            </div>
-          </div>
-        </div>
-        
-        <div class="col-lg-4 col-md-6">
-          <div class="team-member mb-4">
-            <img src="/public/assets/images/blue-question.webp" alt="Thabo Ndlovu" class="img-fluid w-100">
-            <div class="team-info mx-3 text-center">
-              <h5 class="fw-bold mb-1">Thabo Ndlovu</h5>
-              <p class="text-primary mb-2">Technical Director</p>
-              <p class="small mb-0">Architect of our web applications and technical solutions.</p>
-            </div>
-          </div>
-        </div>
-        
-        <div class="col-lg-4 col-md-6">
-          <div class="team-member mb-4">
-            <img src="/public/assets/images/blue-question.webp" alt="Naledi Dlamini" class="img-fluid w-100">
-            <div class="team-info mx-3 text-center">
-              <h5 class="fw-bold mb-1">Naledi Dlamini</h5>
-              <p class="text-primary mb-2">Strategy Director</p>
-              <p class="small mb-0">Developing targeted strategies that align brands with business objectives.</p>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section> -->
-
   <!-- Approach Section -->
   <section class="py-5">
     <div class="container">
