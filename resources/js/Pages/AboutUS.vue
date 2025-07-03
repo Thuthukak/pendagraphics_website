@@ -1,4 +1,49 @@
 <template>
+  <Head>
+      <title>{{ seo.title }}</title>
+      <meta name="description" :content="seo.description" />
+      <meta name="keywords" :content="seo.keywords" />
+      <link rel="canonical" :href="seo.canonical_url" />
+     
+      <!-- Open Graph -->
+      <meta property="og:title" :content="seo.og_title" />
+      <meta property="og:description" :content="seo.og_description" />
+      <meta property="og:image" :content="seo.og_image" />
+      <meta property="og:url" :content="seo.og_url" />
+      <meta property="og:type" :content="seo.og_type" />
+      <meta property="og:site_name" :content="seo.og_site_name" />
+     
+      <!-- Twitter Card -->
+      <meta name="twitter:card" :content="seo.twitter_card" />
+      <meta name="twitter:title" :content="seo.twitter_title" />
+      <meta name="twitter:description" :content="seo.twitter_description" />
+      <meta name="twitter:image" :content="seo.twitter_image" />
+     
+      <!-- Additional SEO -->
+      <meta name="robots" :content="seo.robots" />
+      <meta name="author" :content="seo.author" />
+      <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+      <meta name="theme-color" :content="seo.theme_color" />
+      <meta name="msapplication-TileColor" :content="seo.msapplication_TileColor" />
+      <meta name="apple-mobile-web-app-capable" :content="seo.apple_mobile_web_app_capable" />
+      <meta name="apple-mobile-web-app-status-bar-style" :content="seo.apple_mobile_web_app_status_bar_style" />
+      
+      <!-- Geo tags -->
+      <meta name="geo.region" :content="seo.geo_region" />
+      <meta name="geo.placename" :content="seo.geo_placename" />
+      <meta name="geo.position" :content="seo.geo_position" />
+      <meta name="ICBM" :content="seo.ICBM" />
+      
+      <!-- Content freshness -->
+      <meta name="last-modified" :content="seo.last_modified" />
+      <meta property="article:published_time" :content="seo.published_time" />
+      <meta property="article:modified_time" :content="seo.modified_time" />
+      
+      <!-- Preload important images -->
+      <link v-for="image in seo.preload_images" :key="image" rel="preload" :href="image" as="image" />
+      
+      <!-- Structured Data will be added via JavaScript -->
+    </Head>
   <Navbar :seo="seo"/>
   <Head>
       <title>{{ seo.title }}</title>
@@ -305,9 +350,64 @@
 
 <script>
 import Navbar from '@/components/Home/Navbar.vue';
+import { onMounted, computed } from 'vue'
+
 export default {
+  name: 'AboutUS',
   components: { Navbar },
-  props: ['seo'],
+  props: {
+    seo: {
+      type: Object,
+      required: true
+    },
+    structuredData: {
+      type: Object,
+      required: true
+    },
+    businessInfo: {
+      type: Object,
+      required: true
+    },
+    socialMedia: {
+      type: Object,
+      required: true
+    },
+    images: {
+      type: Object,
+      required: true
+    }
+  },
+  setup(props) {
+    // Computed property to JSON encode structured data
+    const structuredDataJson = computed(() => {
+      return JSON.stringify(props.structuredData)
+    })
+    
+    onMounted(() => {
+      // You can now use the structured data in your component logic
+      console.log('Structured Data:', props.structuredData)
+      console.log('Business Info:', props.businessInfo)
+      console.log('Social Media:', props.socialMedia)
+      console.log('Images:', props.images)
+      
+      // Example: Initialize a map with the coordinates
+      if (props.businessInfo.location.coordinates) {
+        const { lat, lng } = props.businessInfo.location.coordinates
+        // Initialize your map here
+        console.log(`Map coordinates: ${lat}, ${lng}`)
+      }
+      
+      // Example: Set up social media tracking
+      Object.entries(props.socialMedia).forEach(([platform, url]) => {
+        console.log(`${platform}: ${url}`)
+      })
+    })
+    
+    return {
+      structuredDataJson
+    }
+  },
+
   data() {
     return {
       currentYear: new Date().getFullYear(),

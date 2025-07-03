@@ -113,17 +113,76 @@ class HomeController extends BaseController
 
 
     public function FaqIndex () {
-
-         $seoData = $this->mergeSeoData([
-            'title' => '',
-            'description' => '',
-            'og_description' => '',
-        ]);
-
-        return Inertia::render('Faq', [
-            'seo' => $seoData, 
-        ]);
-    }
+    $seoData = $this->mergeSeoData([
+        'title' => 'FAQ - Frequently Asked Questions About Our Web Design, Graphic Design, Branding, E-commerce, and Digital Marketing Services | Penda Graphics',
+        'description' => 'Get answers to common questions about web design, graphic design, branding, e-commerce solutions, and digital marketing services. Expert advice from Penda Graphics South Africa.',
+        'keywords' => 'FAQ, web design questions, graphic design FAQ, branding questions, e-commerce FAQ, digital marketing help, website design cost, logo design questions, South Africa web design',
+        'og_title' => 'Frequently Asked Questions | Penda Graphics Design Services',
+        'og_description' => 'Find answers to your questions about our web design, branding, and digital marketing services. Get expert insights from South Africa\'s leading creative agency.',
+        'canonical_url' => config('app.url') . '/faq',
+    ]);
+    
+    // Add structured data for FAQ
+    $structuredData = [
+        '@context' => 'https://schema.org',
+        '@type' => 'FAQPage',
+        'mainEntity' => [
+            [
+                '@type' => 'Question',
+                'name' => 'Do you build responsive websites?',
+                'acceptedAnswer' => [
+                    '@type' => 'Answer',
+                    'text' => 'Yes, all our websites are mobile-friendly and fully responsive across devices.'
+                ]
+            ],
+            [
+                '@type' => 'Question',
+                'name' => 'How much does web design cost?',
+                'acceptedAnswer' => [
+                    '@type' => 'Answer',
+                    'text' => 'The cost of web design can vary widely depending on factors such as the complexity of the project, the level of customization required, the experience of the design team, and additional services such as SEO or content creation. It\'s best to discuss your specific needs and budget with a web design agency to get an accurate quote.'
+                ]
+            ],
+            [
+                '@type' => 'Question',
+                'name' => 'What types of designs do you offer?',
+                'acceptedAnswer' => [
+                    '@type' => 'Answer',
+                    'text' => 'We offer everything from logos and flyers to packaging and promotional materials.'
+                ]
+            ],
+            [
+                '@type' => 'Question',
+                'name' => 'Do you offer payment gateway integration?',
+                'acceptedAnswer' => [
+                    '@type' => 'Answer',
+                    'text' => 'Yes, we integrate with major gateways like PayFast, PayPal, and Stripe.'
+                ]
+            ],
+            [
+                '@type' => 'Question',
+                'name' => 'Do you manage social media accounts?',
+                'acceptedAnswer' => [
+                    '@type' => 'Answer',
+                    'text' => 'Yes, we can manage and grow your social media presence across multiple platforms.'
+                ]
+            ],
+            [
+                '@type' => 'Question',
+                'name' => 'What types of identity design services do you offer?',
+                'acceptedAnswer' => [
+                    '@type' => 'Answer',
+                    'text' => 'We offer everything from logo design to brand guidelines.'
+                ]
+            ]
+        ]
+    ];
+    
+    return Inertia::render('Faq', [
+        'seo' => $seoData, 
+        'structuredData' => json_encode($structuredData),
+    ]);
+}
 
     public function AboutUsIndex () {
 
@@ -137,7 +196,7 @@ class HomeController extends BaseController
         // Open Graph (Facebook, LinkedIn, etc.)
         'og_title' => 'About Penda Graphics - Digital Design & Development Experts',
         'og_description' => 'From boutique design studio to full-service digital agency. Transforming brands through innovative design and technology since 2019. Web development, branding, and digital marketing specialists.',
-        'og_image' => asset('assets/images/og-about-penda-graphics.jpg'), // Consider creating a specific OG image
+        'og_image' => asset('assets\images\penda_logo2.png'),
         'og_url' => url('/about-us'),
         'og_type' => 'website',
         'og_site_name' => 'Penda Graphics',
@@ -146,7 +205,7 @@ class HomeController extends BaseController
         'twitter_card' => 'summary_large_image',
         'twitter_title' => 'About Penda Graphics - Digital Design & Development Experts',
         'twitter_description' => 'From boutique design studio to full-service digital agency. Transforming brands through innovative design and technology since 2019.',
-        'twitter_image' => asset('assets/images/twitter-about-penda-graphics.jpg'), // Consider creating a Twitter-optimized image
+        'twitter_image' => asset('assets\images\painted_p_logo.png'),
         
         // Additional SEO data
         'author' => 'Penda Graphics',
@@ -157,33 +216,6 @@ class HomeController extends BaseController
         'geo_placename' => 'Kempton Park, Gauteng, South Africa',
         'geo_position' => '-26.1186;28.2294',
         'ICBM' => '-26.1186, 28.2294',
-        
-        // Schema.org structured data
-        'schema_type' => 'Organization',
-        'schema_name' => 'Penda Graphics',
-        'schema_description' => 'Digital design and development agency specializing in web development, branding, graphic design, and digital marketing solutions.',
-        'schema_url' => url('/'),
-        'schema_logo' => asset('assets/images/penda-graphics-logo.png'),
-        'schema_image' => asset('assets/images/penda-graphics-team.jpg'),
-        'schema_address' => [
-            'streetAddress' => 'Birch Acres',
-            'addressLocality' => 'Kempton Park',
-            'addressRegion' => 'Gauteng',
-            'addressCountry' => 'ZA'
-        ],
-        'schema_contact' => [
-            'telephone' => '+27738114652',
-            'email' => 'info@pendagraphics.co.za'
-        ],
-        'schema_founded' => '2019',
-        'schema_services' => [
-            'Web Design & Development',
-            'Graphic Design',
-            'Brand Identity Design',
-            'Digital Marketing',
-            'Web Applications',
-            'E-commerce Solutions'
-        ],
         
         // Page-specific images
         'sec_img' => asset('assets/images/painted_p_logo.png'),
@@ -201,23 +233,6 @@ class HomeController extends BaseController
         'apple_mobile_web_app_capable' => 'yes',
         'apple_mobile_web_app_status_bar_style' => 'default',
         
-        // Local business information
-        'business_hours' => [
-            'monday' => '08:00-17:00',
-            'tuesday' => '08:00-17:00',
-            'wednesday' => '08:00-17:00',
-            'thursday' => '08:00-17:00',
-            'friday' => '08:00-17:00',
-            'saturday' => '09:00-13:00',
-            'sunday' => 'closed'
-        ],
-        
-        // Social media links
-        'social_media' => [
-            'facebook' => 'https://web.facebook.com/Penda.graphix',
-            'instagram' => 'https://www.instagram.com/penda_graphics/',
-        ],
-        
         // Performance and technical SEO
         'preload_images' => [
             asset('assets/images/painted_p_logo.png'),
@@ -229,9 +244,151 @@ class HomeController extends BaseController
         'published_time' => '2019-01-01T00:00:00+00:00',
         'modified_time' => now()->toISOString(),
     ]);
+
+    // Structured Data for Schema.org
+    $structuredData = [
+        '@context' => 'https://schema.org',
+        '@type' => 'Organization',
+        'name' => 'Penda Graphics',
+        'description' => 'Digital design and development agency specializing in web development, branding, graphic design, and digital marketing solutions.',
+        'url' => url('/'),
+        'logo' => asset('assets/images/penda-graphics-logo.png'),
+        'image' => asset('assets/images/penda-graphics-team.jpg'),
+        'address' => [
+            '@type' => 'PostalAddress',
+            'streetAddress' => 'Birch Acres',
+            'addressLocality' => 'Kempton Park',
+            'addressRegion' => 'Gauteng',
+            'addressCountry' => 'ZA'
+        ],
+        'contactPoint' => [
+            '@type' => 'ContactPoint',
+            'telephone' => '+27738114652',
+            'email' => 'info@pendagraphics.co.za',
+            'contactType' => 'customer service'
+        ],
+        'foundingDate' => '2019',
+        'sameAs' => [
+            'https://web.facebook.com/Penda.graphix',
+            'https://www.instagram.com/penda_graphics/',
+        ],
+        'hasOfferCatalog' => [
+            '@type' => 'OfferCatalog',
+            'name' => 'Digital Services',
+            'itemListElement' => [
+                [
+                    '@type' => 'Offer',
+                    'itemOffered' => [
+                        '@type' => 'Service',
+                        'name' => 'Web Design & Development'
+                    ]
+                ],
+                [
+                    '@type' => 'Offer',
+                    'itemOffered' => [
+                        '@type' => 'Service',
+                        'name' => 'Graphic Design'
+                    ]
+                ],
+                [
+                    '@type' => 'Offer',
+                    'itemOffered' => [
+                        '@type' => 'Service',
+                        'name' => 'Brand Identity Design'
+                    ]
+                ],
+                [
+                    '@type' => 'Offer',
+                    'itemOffered' => [
+                        '@type' => 'Service',
+                        'name' => 'Digital Marketing'
+                    ]
+                ],
+                [
+                    '@type' => 'Offer',
+                    'itemOffered' => [
+                        '@type' => 'Service',
+                        'name' => 'Web Applications'
+                    ]
+                ],
+                [
+                    '@type' => 'Offer',
+                    'itemOffered' => [
+                        '@type' => 'Service',
+                        'name' => 'E-commerce Solutions'
+                    ]
+                ]
+            ]
+        ],
+        'openingHoursSpecification' => [
+            [
+                '@type' => 'OpeningHoursSpecification',
+                'dayOfWeek' => ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday'],
+                'opens' => '08:00',
+                'closes' => '17:00'
+            ],
+            [
+                '@type' => 'OpeningHoursSpecification',
+                'dayOfWeek' => 'Saturday',
+                'opens' => '09:00',
+                'closes' => '13:00'
+            ]
+        ]
+    ];
+
+    // Business information for component use
+    $businessInfo = [
+        'hours' => [
+            'monday' => '08:00-17:00',
+            'tuesday' => '08:00-17:00',
+            'wednesday' => '08:00-17:00',
+            'thursday' => '08:00-17:00',
+            'friday' => '08:00-17:00',
+            'saturday' => '09:00-13:00',
+            'sunday' => 'closed'
+        ],
+        'contact' => [
+            'phone' => '+27738114652',
+            'email' => 'info@pendagraphics.co.za'
+        ],
+        'location' => [
+            'address' => 'Birch Acres, Kempton Park, Gauteng, South Africa',
+            'coordinates' => [
+                'lat' => -26.1186,
+                'lng' => 28.2294
+            ]
+        ],
+        'founded' => '2019',
+        'services' => [
+            'Web Design & Development',
+            'Graphic Design',
+            'Brand Identity Design',
+            'Digital Marketing',
+            'Web Applications',
+            'E-commerce Solutions'
+        ]
+    ];
+
+    // Social media links
+    $socialMedia = [
+        'facebook' => 'https://web.facebook.com/Penda.graphix',
+        'instagram' => 'https://www.instagram.com/penda_graphics/',
+    ];
+
+    // Images for the component
+    $images = [
+        'logo' => asset('assets/images/painted_p_logo.png'),
+        'approach' => asset('assets/images/approach.png'),
+        'team' => asset('assets\images\painted_p_logo.png'),
+        'company_logo' => asset('public\assets\images\penda_logo2.png')
+    ];
     
     return Inertia::render('AboutUS', [
         'seo' => $seoData,
+        'structuredData' => $structuredData,
+        'businessInfo' => $businessInfo,
+        'socialMedia' => $socialMedia,
+        'images' => $images
     ]);
 }
 
