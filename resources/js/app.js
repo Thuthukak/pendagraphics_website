@@ -34,7 +34,19 @@ import {
     faEnvelope,
     faPaintBrush,
     faFileInvoiceDollar,
-    faCheck
+    faCheck,
+    faLightbulb,
+    faPalette,
+    faDesktop,
+    faSignature,
+    faIdBadge,
+    faPencilRuler,
+    faLaptopCode,
+    faCode,
+    faShoppingCart,
+    faBullhorn,
+    faBoxOpen,
+
 } from "@fortawesome/free-solid-svg-icons";
 
 import { 
@@ -70,7 +82,19 @@ library.add(
     faMailForward,
     faPaperPlane,
     faPaintBrush,
-    faCheck
+    faCheck,
+    faLightbulb,
+    faPalette,
+    faDesktop,
+    faSignature,
+    faIdBadge,
+    faPencilRuler,
+    faLaptopCode,
+    faCode,
+    faShoppingCart,
+    faBullhorn,
+    faBoxOpen
+
 );
 
 const appName = import.meta.env.VITE_APP_NAME || 'Laravel';

@@ -59,7 +59,7 @@ Route::prefix('admin')->group(function () {
     Route::get('/faq', [HomeController::class, 'FaqIndex'])->name('faq.index');
     Route::get('/about-us', [HomeController::class, 'AboutUsIndex'])->name('about-us.index');
     Route::post('/newsletter', [NewsletterController::class, 'store'])->name('newsletter.store');
-    Route::get('/contact-us', [HomeController::class, 'HomeIndex'])->name('home.index');
+    Route::get('/contact-us', [HomeController::class, 'ContactIndex'])->name('contact.index');
    
 
 

@@ -54,14 +54,16 @@ class ServicesController extends BaseController
 
     public function indexWebDesign()
     {
-        $seoData = $this->getBaseSeoData();
+        $seoData = $this->mergeSeoData([
         // Override specific SEO data for this page
-        $seoData['title'] = 'Professional Web Design Services';
-        $seoData['description'] = 'We specialize in web design and development services, creating visually stunning and functional websites for businesses and organizations.';
-        $seoData['keywords'] = 'web design, website development, responsive design, user-friendly websites';
-        $seoData['og_title'] = 'Professional Web Design Services';
-        $seoData['canonical_url'] = url('/services/web-design');
-        $seoData['sec_img'] = asset('assets/images/homepage-seen-computer-screen.jpg');
+        'title' => 'Professional Web Design Services',
+        'description' => 'We specialize in web design and development services, creating visually stunning and functional websites for businesses and organizations.',
+        'keywords' => 'web design, website development, responsive design, user-friendly websites',
+        'og_title' => 'Professional Web Design Services',
+        'canonical_url' => url('/services/web-design'),
+        'sec_img' => asset('assets/images/homepage-seen-computer-screen.jpg'),
+
+        ]);
 
         return Inertia::render('Services/WebDesign', [
             'seo' => $seoData
@@ -70,14 +72,16 @@ class ServicesController extends BaseController
 
     public function indexGraphicDesign()
     {
-        $seoData = $this->getBaseSeoData();
+        $seoData = $this->mergeSeoData([
         // Override specific SEO data for this page
-        $seoData['title'] = 'Professional Graphic Design Services';
-        $seoData['description'] = 'We specialize in graphic design services, creating visually stunning and engaging designs for businesses and organizations.';
-        $seoData['keywords'] = 'graphic design, branding, logo design, user-friendly websites';
-        $seoData['og_title'] = 'Professional Graphic Design Services';
-        $seoData['canonical_url'] = url('/services/graphic-design');
-        $seoData['sec_img'] = asset('assets/images/color-bulb.jpg');
+        'title' => 'Professional Graphic Design Services',
+        'description' => 'We specialize in graphic design services, creating visually stunning and engaging designs for businesses and organizations.',
+        'keywords' => 'graphic design, branding, logo design, user-friendly websites',
+        'og_title' => 'Professional Graphic Design Services',
+        'canonical_url' => url('/services/graphic-design'),
+        'sec_img' => asset('assets/images/color-bulb.jpg'),
+
+        ]);
 
         return Inertia::render('Services/GraphicDesign', [
             'seo' => $seoData
@@ -87,39 +91,86 @@ class ServicesController extends BaseController
 
    public function indexProductDesign()
     {
+        $seoData = $this->mergeSeoData([
+
+        // Override specific SEO data for this page
+        'title' => 'Product Design Services',
+        'description' => 'Transform your ideas into impactful products with Penda Graphics. We specialize in product label design, mockups, color palettes, and brand-aligned packaging solutions.',
+        'keywords' => 'product design, packaging design, label design, product mockups, brand packaging, color palette design, graphic design South Africa',
+        'og_title' => 'Professional Product Design – Labels, Mockups & Packaging',
+        'og_description' => 'From concept to shelf, Penda Graphics delivers stunning product visuals that connect with your audience.',
+        'canonical_url' => url('/services/product-design'),
+        'sec_img' => asset('assets/images/product_design.png'),
+
+        ]);
+
         return Inertia::render('Services/ProductDesign', [
-            'title' => 'Innovative Product Design Services',
-            'description' => 'Transform your ideas into tangible products with our expert product design and development services.',
-            'keywords' => 'product design, product development, innovation, prototyping'
+            'seo' => $seoData
         ]);
     }
 
     public function indexIdentityDesign()
     {
+        $seoData = $this->mergeSeoData([
+
+        // Override specific SEO data for this page
+        'title' => 'Identity Design & Branding Services',
+        'description' => 'Build a consistent and professional brand identity with Penda Graphics. We offer logo design, business cards, letterheads, and branded stationery to define your visual identity.',
+        'keywords' => 'identity design, brand identity, logo design, business card design, letterhead design, brand stationery, branding South Africa',
+        'og_title' => 'Professional Identity Design – Logo, Stationery & Brand Assets',
+        'og_description' => 'Craft a cohesive visual identity with Penda Graphics. From logos to business cards, we make your brand unforgettable.',
+        'canonical_url' => url('/services/identity-design'),
+        'sec_img' => asset('assets/images/Digital-Marketing-Agency.jpg'),
+
+        ]);
+
         return Inertia::render('Services/IdentityDesign', [
-            'title' => 'Brand Identity Design Services',
-            'description' => 'Create a strong brand identity with our comprehensive branding and identity design services.',
-            'keywords' => 'brand identity, branding, logo design, brand strategy, brand guidelines'
+            'seo' => $seoData
         ]);
     }
 
-    public function indexECommerce()
+
+   public function indexECommerce()
     {
+        $seoData = $this->mergeSeoData([
+
+        // Override specific SEO data for this page
+        'title' => 'E-Commerce Website Design & Development',
+        'description' => 'Launch your online store with Penda Graphics. We create custom e-commerce websites that are secure, scalable, and designed to convert visitors into customers.',
+        'keywords' => 'e-commerce website, online store design, e-commerce development, online shop South Africa, Laravel e-commerce, sell online, secure checkout, mobile commerce',
+        'og_title' => 'Sell Online with a Powerful E-Commerce Website',
+        'og_description' => 'From custom-built online stores to mobile-friendly e-commerce platforms, Penda Graphics helps your business grow online.',
+        'canonical_url' => url('/services/e-commerce'),
+        'sec_img' => asset('assets/images/ecommerce-mcommerce.webp'),
+
+        ]);
+
         return Inertia::render('Services/ECommerce', [
-            'title' => 'E-Commerce Development Solutions',
-            'description' => 'Complete e-commerce solutions including online store setup, payment integration, and order management.',
-            'keywords' => 'e-commerce, online store, shopping cart, payment integration, order management'
+            'seo' => $seoData
         ]);
     }
+
 
     public function indexDigitalMarketing()
     {
+        $seoData = $this->mergeSeoData([
+
+        // Override specific SEO data for this page
+        'title' => 'Digital Marketing Services',
+        'description' => 'Grow your brand online with Penda Graphics. We offer SEO, social media marketing, email campaigns, and targeted digital strategies to increase your visibility and drive results.',
+        'keywords' => 'digital marketing, SEO South Africa, social media marketing, email marketing, online advertising, content marketing, brand awareness, digital campaigns',
+        'og_title' => 'Results-Driven Digital Marketing Solutions',
+        'og_description' => 'Boost your online presence with expert SEO, social media, and email marketing services tailored for business growth.',
+        'canonical_url' => url('/services/digital-marketing'),
+        'sec_img' => asset('assets/images/Digital-Marketing-Agency.jpg'),
+
+        ]);
+
         return Inertia::render('Services/DigitalMarketing', [
-            'title' => 'Digital Marketing Services',
-            'description' => 'Comprehensive digital marketing services including SEO, social media marketing, and content marketing.',
-            'keywords' => 'digital marketing, SEO, social media marketing, content marketing, email marketing'
+            'seo' => $seoData
         ]);
     }
+
 /**
  * Store a newly created service.
  */

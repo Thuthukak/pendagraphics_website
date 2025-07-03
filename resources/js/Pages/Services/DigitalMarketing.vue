@@ -1,5 +1,5 @@
 <template>
-    <navbar />
+    <navbar :seo="seo"/>
     <!-- banner -->
     <section id="apply" class="cta">
       <div class="container px-5" data-aos="zoom-in">
@@ -14,9 +14,11 @@
       <div class="container mt-5 my-5 py-5 px-4">
         <div class="row">
             <div class="col-md-5">
-            <img src="/public/assets/images/Digital-Marketing-Agency.jpg" 
+            <img 
+                :src="seo.sec_img" 
                 alt="Web design" 
                 class="shadow-lg rounded align-self-center"
+                loading="lazy"
                 style="width:500px; height:400px; object-fit: cover;"  />
           </div>
           <div class="col-md-7 align-self-center">
@@ -84,14 +86,17 @@
   </div>
 </section>
 
-    <Footer />
+    <Footer :seo="seo" />
   </template>
   
   <script setup>
   import Navbar from "@/components/Home/Navbar.vue";
   import Footer from "@/components/Home/Footer.vue";
-  import ECommerceCarousel from "./ECommerceCarousel.vue";
+  import ECommerceCarousel from "@/components/Home/Services/ECommerceCarousel.vue";
 
+  defineProps({
+    seo: Object,
+  });
 
   </script>
 

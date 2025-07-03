@@ -1,5 +1,32 @@
 <template>
-    <navbar />
+    <navbar :seo="seo"/>
+    <Head>
+      <title>{{ seo.title }}</title>
+      <meta name="description" :content="seo.description" />
+      <meta name="keywords" :content="seo.keywords" />
+      <link rel="canonical" :href="seo.canonical_url" />
+      
+      <!-- Open Graph -->
+      <meta property="og:title" :content="seo.og_title" />
+      <meta property="og:description" :content="seo.og_description" />
+      <meta property="og:image" :content="seo.og_image" />
+      <meta property="og:url" :content="seo.og_url" />
+      <meta property="og:type" :content="seo.og_type" />
+      <meta property="og:site_name" :content="seo.og_site_name" />
+      
+      <!-- Twitter Card -->
+      <meta name="twitter:card" :content="seo.twitter_card" />
+      <meta name="twitter:title" :content="seo.og_title" />
+      <meta name="twitter:description" :content="seo.og_description" />
+      <meta name="twitter:image" :content="seo.og_image" />
+      
+      <!-- Additional SEO -->
+      <meta name="robots" content="index, follow" />
+      <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+      <meta name="theme-color" content="#0d6efd" />
+      
+    </Head>
+
     <!-- banner -->
     <section id="apply" class="cta">
       <div class="container px-5" data-aos="zoom-in">
@@ -14,9 +41,11 @@
       <div class="container mt-5 my-5 py-5 px-4">
         <div class="row">
             <div class="col-md-5">
-            <img src="/public/assets/images/product_design.png" 
+            <img 
+                :src="seo.sec_img" 
                 alt="Web design" 
                 class="align-self-center"
+                loading="lazy"
                 style="width:400px; height:400px; object-fit: cover;"  />
           </div>
           <div class="col-md-7 align-self-center">
@@ -34,7 +63,7 @@
       <div class="col-md-4 col-sm-6 mt-4 mb-4">
         <div class="p-3 border-0 text-white d-flex align-items-center justify-content-between gap-3 icon-box">
             <div class="icon-circle">
-                <i class="fas fa-lightbulb"></i>
+                <font-awesome-icon icon="lightbulb" />
             </div>
             <div>
                 <h3 class="fw-bold mb-1">Innovative Ideas</h3>
@@ -46,7 +75,7 @@
       <div class="col-md-4 col-sm-6 mt-4 mb-4">
         <div class="p-3 border-0 text-white d-flex align-items-center justify-content-between gap-3 icon-box">
             <div class="icon-circle">
-                <i class="fas fa-box-open"></i>
+                <font-awesome-icon icon="palette" />
             </div>
             <div>
                 <h3 class="fw-bold mb-1">Packaging Design</h3>
@@ -58,7 +87,7 @@
       <div class="col-md-4 col-sm-6 mt-4 mb-4">
         <div class="p-3 border-0 text-white d-flex align-items-center justify-content-between gap-3 icon-box">
             <div class="icon-circle">
-                <i class="fas fa-crop-alt"></i>
+                <font-awesome-icon icon="desktop" />
             </div>
             <div>
                 <h3 class="fw-bold mb-1">Mockups & Visualization</h3>
@@ -94,14 +123,17 @@
 
     
   
-    <Footer />
+    <Footer :seo="seo" />
   </template>
   
   <script setup>
   import Navbar from "@/components/Home/Navbar.vue";
   import Footer from "@/components/Home/Footer.vue";
-import ProductDesignCarousel from "./ProductDesignCarousel.vue";
+  import ProductDesignCarousel from "@/components/Home/Services/ProductDesignCarousel.vue";
 
+  const props = defineProps({
+    seo: Object,
+  });
 
   </script>
 

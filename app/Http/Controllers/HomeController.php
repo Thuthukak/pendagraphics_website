@@ -113,14 +113,200 @@ class HomeController extends BaseController
 
 
     public function FaqIndex () {
-        return view('faq');
+
+         $seoData = $this->mergeSeoData([
+            'description' => '',
+            'og_description' => '',
+        ]);
+
+        return Inertia::render('Faq', [
+            'seo' => $seoData, 
+        ]);
     }
 
     public function AboutUsIndex () {
-        return view('about-us');
-    }
 
-    public function HomeIndex () {
-        return view('contact-us');
-    }
+    $seoData = $this->mergeSeoData([
+        // Basic SEO
+        'title' => 'About Us | Digital Design & Development Agency',
+        'description' => 'Discover Penda Graphics\' journey from boutique design studio to comprehensive digital solutions provider. Specializing in web development, branding, graphic design, and digital marketing since 2019.',
+        'keywords' => 'about Penda Graphics, digital design agency, web development company, graphic design studio, branding experts, digital marketing agency, web applications, e-commerce solutions, UI/UX design, Laravel development, Vue.js, responsive web design, logo design, brand identity, Kempton Park, South Africa',
+        'canonical_url' => url('/about-us'),
+        
+        // Open Graph (Facebook, LinkedIn, etc.)
+        'og_title' => 'About Penda Graphics - Digital Design & Development Experts',
+        'og_description' => 'From boutique design studio to full-service digital agency. Transforming brands through innovative design and technology since 2019. Web development, branding, and digital marketing specialists.',
+        'og_image' => asset('assets/images/og-about-penda-graphics.jpg'), // Consider creating a specific OG image
+        'og_url' => url('/about-us'),
+        'og_type' => 'website',
+        'og_site_name' => 'Penda Graphics',
+        
+        // Twitter Card
+        'twitter_card' => 'summary_large_image',
+        'twitter_title' => 'About Penda Graphics - Digital Design & Development Experts',
+        'twitter_description' => 'From boutique design studio to full-service digital agency. Transforming brands through innovative design and technology since 2019.',
+        'twitter_image' => asset('assets/images/twitter-about-penda-graphics.jpg'), // Consider creating a Twitter-optimized image
+        
+        // Additional SEO data
+        'author' => 'Penda Graphics',
+        'robots' => 'index, follow',
+        'revisit_after' => '7 days',
+        'language' => 'en-US',
+        'geo_region' => 'ZA-GP',
+        'geo_placename' => 'Kempton Park, Gauteng, South Africa',
+        'geo_position' => '-26.1186;28.2294',
+        'ICBM' => '-26.1186, 28.2294',
+        
+        // Schema.org structured data
+        'schema_type' => 'Organization',
+        'schema_name' => 'Penda Graphics',
+        'schema_description' => 'Digital design and development agency specializing in web development, branding, graphic design, and digital marketing solutions.',
+        'schema_url' => url('/'),
+        'schema_logo' => asset('assets/images/penda-graphics-logo.png'),
+        'schema_image' => asset('assets/images/penda-graphics-team.jpg'),
+        'schema_address' => [
+            'streetAddress' => 'Birch Acres',
+            'addressLocality' => 'Kempton Park',
+            'addressRegion' => 'Gauteng',
+            'addressCountry' => 'ZA'
+        ],
+        'schema_contact' => [
+            'telephone' => '+27738114652',
+            'email' => 'info@pendagraphics.co.za'
+        ],
+        'schema_founded' => '2019',
+        'schema_services' => [
+            'Web Design & Development',
+            'Graphic Design',
+            'Brand Identity Design',
+            'Digital Marketing',
+            'Web Applications',
+            'E-commerce Solutions'
+        ],
+        
+        // Page-specific images
+        'sec_img' => asset('assets/images/painted_p_logo.png'),
+        'sec_img2' => asset('assets/images/approach.png'),
+        
+        // Breadcrumbs
+        'breadcrumbs' => [
+            ['name' => 'Home', 'url' => url('/')],
+            ['name' => 'About Us', 'url' => url('/about-us')]
+        ],
+        
+        // Additional meta tags
+        'theme_color' => '#005e91',
+        'msapplication_TileColor' => '#005e91',
+        'apple_mobile_web_app_capable' => 'yes',
+        'apple_mobile_web_app_status_bar_style' => 'default',
+        
+        // Local business information
+        'business_hours' => [
+            'monday' => '08:00-17:00',
+            'tuesday' => '08:00-17:00',
+            'wednesday' => '08:00-17:00',
+            'thursday' => '08:00-17:00',
+            'friday' => '08:00-17:00',
+            'saturday' => '09:00-13:00',
+            'sunday' => 'closed'
+        ],
+        
+        // Social media links
+        'social_media' => [
+            'facebook' => 'https://web.facebook.com/Penda.graphix',
+            'instagram' => 'https://www.instagram.com/penda_graphics/',
+        ],
+        
+        // Performance and technical SEO
+        'preload_images' => [
+            asset('assets/images/painted_p_logo.png'),
+            asset('assets/images/approach.png')
+        ],
+        
+        // Content freshness
+        'last_modified' => now()->toISOString(),
+        'published_time' => '2019-01-01T00:00:00+00:00',
+        'modified_time' => now()->toISOString(),
+    ]);
+    
+    return Inertia::render('AboutUS', [
+        'seo' => $seoData,
+    ]);
+}
+
+    public function ContactIndex() {
+    // Customize SEO data for contact page
+    $seoData = $this->mergeSeoData([
+        'title' => 'Contact Us | Get in Touch with Penda Graphics',
+        'description' => 'Contact Penda Graphics for professional web design, branding, and digital marketing services in South Africa. Call +27 73 811 4652 or email info@pendagraphics.co.za for a free consultation.',
+        'keywords' => 'contact Penda Graphics, web design consultation, South Africa web design, Kempton Park web design, contact web designer, get quote web design, branding consultation, digital marketing contact',
+        'og_title' => 'Contact Penda Graphics | Professional Web Design & Branding Services',
+        'og_description' => 'Ready to elevate your brand? Contact our expert team for web design, branding, and digital marketing services. Located in Kempton Park, serving all of South Africa.',
+        'og_type' => 'website',
+        'og_url' => url('/contact'),
+        'canonical_url' => url('/contact'),
+        'twitter_title' => 'Contact Penda Graphics | Web Design & Digital Solutions',
+        'twitter_description' => 'Get in touch with Penda Graphics for professional web design, branding, and digital marketing services in South Africa.',
+    ]);
+
+    // Structured Data for SEO (separate from seoData for cleaner organization)
+    $structuredData = [
+        '@context' => 'https://schema.org',
+        '@type' => 'ContactPage',
+        'mainEntity' => [
+            '@type' => 'LocalBusiness',
+            'name' => 'Penda Graphics',
+            'description' => 'Professional web design, branding, and digital marketing services',
+            'url' => config('app.url'),
+            'telephone' => '+27738114652',
+            'email' => 'info@pendagraphics.co.za',
+            'address' => [
+                '@type' => 'PostalAddress',
+                'addressLocality' => 'Birch Acres',
+                'addressRegion' => 'Gauteng',
+                'addressCountry' => 'ZA',
+                'postalCode' => '1618'
+            ],
+            'geo' => [
+                '@type' => 'GeoCoordinates',
+                'latitude' => -26.052120488886704,
+                'longitude' => 28.182524335456343
+            ],
+            'openingHours' => 'Mo-Fr 09:00-17:00',
+            'sameAs' => [
+                'https://web.facebook.com/Penda.graphix',
+                'https://www.instagram.com/penda_graphics/',
+                'https://www.youtube.com/@PendaGraphics',
+                'https://www.tiktok.com/@pendagraphics'
+            ],
+            'priceRange' => '$',
+            'areaServed' => [
+                '@type' => 'Country',
+                'name' => 'South Africa'
+            ],
+            'serviceType' => [
+                'Web Design',
+                'Web Development',
+                'Branding',
+                'Graphic Design',
+                'Digital Marketing',
+                'SEO Services'
+            ]
+        ]
+    ];
+
+    // Additional contact-specific data
+    $contactInfo = [
+        'phone' => '+27738114652',
+        'email' => 'info@pendagraphics.co.za',
+        'address' => 'Birch Acres, Kempton Park, Gauteng, South Africa',
+        'business_hours' => 'Monday - Friday: 9am - 5pm'
+    ];
+
+    return Inertia::render('ContactUs', [
+        'seo' => $seoData,
+        'structuredData' => json_encode($structuredData),
+        'contactInfo' => $contactInfo,
+    ]);
+}
 }

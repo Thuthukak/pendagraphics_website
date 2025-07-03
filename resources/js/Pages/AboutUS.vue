@@ -1,5 +1,32 @@
 <template>
-  <Navbar />
+  <Navbar :seo="seo"/>
+  <Head>
+      <title>{{ seo.title }}</title>
+      <meta name="description" :content="seo.description" />
+      <meta name="keywords" :content="seo.keywords" />
+      <link rel="canonical" :href="seo.canonical_url" />
+      
+      <!-- Open Graph -->
+      <meta property="og:title" :content="seo.og_title" />
+      <meta property="og:description" :content="seo.og_description" />
+      <meta property="og:image" :content="seo.og_image" />
+      <meta property="og:url" :content="seo.og_url" />
+      <meta property="og:type" :content="seo.og_type" />
+      <meta property="og:site_name" :content="seo.og_site_name" />
+      
+      <!-- Twitter Card -->
+      <meta name="twitter:card" :content="seo.twitter_card" />
+      <meta name="twitter:title" :content="seo.og_title" />
+      <meta name="twitter:description" :content="seo.og_description" />
+      <meta name="twitter:image" :content="seo.og_image" />
+      
+      <!-- Additional SEO -->
+      <meta name="robots" content="index, follow" />
+      <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+      <meta name="theme-color" content="#0d6efd" />
+      
+    </Head>
+
   <!-- Hero Section -->
   <section class="hero-section">
     <div class="container text-center py-5">
@@ -32,7 +59,10 @@
         </div>
         <div class="col-lg-6">
           <div class="position-relative">
-            <img src="/public/assets/images/painted_p_logo.png" alt="Penda Graphics creative process" class="img-fluid rounded-4 shadow-md">
+            <img 
+              :src="seo.sec_img" 
+              alt="Penda Graphics creative process" 
+              class="img-fluid rounded-4 shadow-md">
             <div class="position-absolute top-0 start-0 translate-middle bg-primary rounded-circle p-3" style="width: 80px; height: 80px;">
               <div class="text-center text-white">
                 <small class="d-block">SINCE</small>
@@ -100,7 +130,7 @@
         <div class="col-md-4">
           <div class="service-card h-100 p-4 text-center">
             <div class="service-icon" style="background-color: rgba(99, 102, 241, 0.1);">
-              <i class="fas fa-pencil-ruler fa-2x" style="color: #000000;"></i>
+              <font-awesome-icon :icon="['fas', 'pencil-ruler']" class="fa-2x" style="color: #000000;"></font-awesome-icon>
             </div>
             <h5 class="fw-bold mb-3"><a href="/services/identity-design">Brand & Visual Identity</a></h5>
             <p class="mb-0">
@@ -112,7 +142,7 @@
         <div class="col-md-4">
           <div class="service-card h-100 p-4 text-center">
             <div class="service-icon" style="background-color: rgba(99, 102, 241, 0.1);">
-              <i class="fas fa-laptop-code fa-2x" style="color: #000000;"></i>
+              <font-awesome-icon :icon="['fas', 'laptop-code']" class="fa-2x" style="color: #000000;"></font-awesome-icon>
             </div>
             <h5 class="fw-bold mb-3"><a href="/services/web-design">Web Design & Development</a></h5>
             <p class="mb-0">
@@ -124,7 +154,7 @@
         <div class="col-md-4">
           <div class="service-card h-100 p-4 text-center">
             <div class="service-icon" style="background-color: rgba(99, 102, 241, 0.1);">
-              <i class="fas fa-code fa-2x" style="color: #000000;"></i>
+              <font-awesome-icon :icon="['fas', 'code']" class="fa-2x" style="color: #000000;"></font-awesome-icon>
             </div>
             <h5 class="fw-bold mb-3"><a href="/services/web-design">Web Applications</a></h5>
             <p class="mb-0">
@@ -136,7 +166,7 @@
         <div class="col-md-4">
           <div class="service-card h-100 p-4 text-center">
             <div class="service-icon" style="background-color: rgba(99, 102, 241, 0.1);">
-              <i class="fas fa-shopping-cart fa-2x" style="color: #000000;"></i>
+              <font-awesome-icon :icon="['fas', 'shopping-cart']" class="fa-2x" style="color: #000000;"></font-awesome-icon>
             </div>
             <h5 class="fw-bold mb-3"><a href="/services/e-commerce">E-commerce Solutions</a></h5>
             <p class="mb-0">
@@ -148,7 +178,7 @@
         <div class="col-md-4">
           <div class="service-card h-100 p-4 text-center">
             <div class="service-icon" style="background-color: rgba(99, 102, 241, 0.1);">
-              <i class="fas fa-bullhorn fa-2x" style="color: #000000;"></i>
+              <font-awesome-icon :icon="['fas', 'bullhorn']" class="fa-2x" style="color: #000000;"></font-awesome-icon>
             </div>
             <h5 class="fw-bold mb-3"><a href="/services/digital-marketing">Digital Marketing</a></h5>
             <p class="mb-0">
@@ -160,7 +190,7 @@
         <div class="col-md-4">
           <div class="service-card h-100 p-4 text-center">
             <div class="service-icon" style="background-color: rgba(99, 102, 241, 0.1);">
-              <i class="fas fa-box-open fa-2x" style="color: #000000;"></i>
+              <font-awesome-icon :icon="['fas', 'box-open']" class="fa-2x" style="color: #000000;"></font-awesome-icon>
             </div>
             <h5 class="fw-bold mb-3"><a href="/services/product-design">Print & Packaging</a></h5>
             <p class="mb-0">
@@ -177,7 +207,10 @@
     <div class="container">
       <div class="row align-items-center">
         <div class="col-lg-6 order-lg-2 mb-4 mb-lg-0">
-          <img src="/public/assets/images/approach.png" alt="Our collaborative process" class="img-fluid ">
+          <img 
+            :src="seo.sec_img2" 
+            alt="Our collaborative process" 
+            class="img-fluid ">
         </div>
         <div class="col-lg-6 order-lg-1">
           <h2 class="section-title fw-bold">Our Approach</h2>
@@ -274,6 +307,7 @@
 import Navbar from '@/components/Home/Navbar.vue';
 export default {
   components: { Navbar },
+  props: ['seo'],
   data() {
     return {
       currentYear: new Date().getFullYear(),

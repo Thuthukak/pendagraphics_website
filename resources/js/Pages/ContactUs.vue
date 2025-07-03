@@ -1,5 +1,37 @@
 <template>
-    <Navbar />
+    <Navbar :seo="seo" />
+    <Head>
+      <title>{{ seo.title }}</title>
+      <meta name="description" :content="seo.description" />
+      <meta name="keywords" :content="seo.keywords" />
+      
+      <!-- Open Graph / Facebook -->
+      <meta property="og:type" :content="seo.og_type" />
+      <meta property="og:url" :content="seo.og_url" />
+      <meta property="og:title" :content="seo.og_title" />
+      <meta property="og:description" :content="seo.og_description" />
+      <meta property="og:image" :content="seo.og_image" />
+      <meta property="og:site_name" :content="seo.og_site_name" />
+      
+      <!-- Twitter -->
+      <meta property="twitter:card" :content="seo.twitter_card" />
+      <meta property="twitter:url" :content="seo.og_url" />
+      <meta property="twitter:title" :content="seo.twitter_title || seo.og_title" />
+      <meta property="twitter:description" :content="seo.twitter_description || seo.og_description" />
+      <meta property="twitter:image" :content="seo.og_image" />
+      
+      <!-- Contact-specific meta tags -->
+      <meta name="contact:phone" :content="contactInfo?.phone" />
+      <meta name="contact:email" :content="contactInfo?.email" />
+      <meta name="geo.region" content="ZA-GP" />
+      <meta name="geo.placename" content="Kempton Park" />
+      <meta name="geo.position" content="-26.052120488886704;28.182524335456343" />
+      <meta name="ICBM" content="-26.052120488886704, 28.182524335456343" />
+      
+      <!-- Canonical URL -->
+      <link rel="canonical" :href="seo.canonical_url" />
+    </Head>
+
     <div class="min-h-screen bg-gray-50">
       <!-- Header Section -->
       <div class="banner py-16">
@@ -191,15 +223,23 @@
         </div>
       </div>
     </div>
-    <Footer />
+    <Footer :seo="seo" />
   </div>
 </template>
 
 <script setup>
 import { ref, reactive } from 'vue';
 import axios from 'axios';
-import Navbar from './Navbar.vue';
-import Footer from './Footer.vue';
+import Navbar from '@/components/Home/Navbar.vue';
+import Footer from '@/components/Home/Footer.vue';
+import { onMounted } from 'vue';
+
+const props = defineProps({
+  seo: Object,
+  structuredData: String,
+  contactInfo: Object
+});
+
 
 // Form data
 const form = ref({
@@ -217,6 +257,16 @@ const errors = reactive({
   email: '',
   subject: '',
   message: ''
+});
+
+
+onMounted(() => {
+  if (props.structuredData) {
+    const script = document.createElement('script');
+    script.type = 'application/ld+json';
+    script.textContent = props.structuredData;
+    document.head.appendChild(script);
+  }
 });
 
 // Form validation

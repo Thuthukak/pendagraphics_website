@@ -1,5 +1,5 @@
 <template>
-    <Layout>
+    <Layout :seo="seo">
       <!-- banner section -->
       <section id="apply" class="cta">
       <div class="container" data-aos="zoom-in">
@@ -25,15 +25,19 @@
   </template>
   
   <script setup>
-  import Layout from "../../Layouts/HomeLayout.vue";
-import FaqComponent from "./FaqComponent.vue";
+  import Layout from "@/Layouts/HomeLayout.vue";
+  import FaqComponent from "@/components/Home/FaqComponent.vue";
+  
+  defineProps({
+    seo: Object,
+  });
   
   </script>
   
   <style scoped>
     .cta {
   background: linear-gradient(rgba(2, 2, 2, 0.65), rgba(0, 0, 0, 0.65)), url("/public/assets/images/blue-question.webp") fixed center center;
-    background-size: auto, auto;
+  background-size: auto, auto;
   background-size: cover;
   padding: 120px 0;
 }
