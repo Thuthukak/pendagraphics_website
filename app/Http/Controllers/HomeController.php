@@ -115,6 +115,7 @@ class HomeController extends BaseController
     public function FaqIndex () {
 
          $seoData = $this->mergeSeoData([
+            'title' => '',
             'description' => '',
             'og_description' => '',
         ]);
