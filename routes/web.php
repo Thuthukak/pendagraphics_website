@@ -21,9 +21,8 @@ use Inertia\Inertia;
 Route::prefix('admin')->group(function () {
     // Guest Middleware (only for login & register pages)
     Route::middleware('guest')->group(function () {
-        Route::get('/auth', function () {
-            return view('admin.auth');
-        })->name('admin.auth');
+       
+        Route::get('/auth', [HomeController::class, 'AdminAuth'])->name('admin.auth');
     });
     
     // Authenticated Middleware (for authenticated admin actions)

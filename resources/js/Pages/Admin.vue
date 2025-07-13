@@ -1,17 +1,20 @@
 <template>
-    <Layout>
+    <Layout :seo="seo">
       <div class="container-fluid p-0">
         <div class="row min-vh-100 m-0">
           <!-- Hero Image (8 columns) -->
           <div class="col-md-8 d-none d-md-block p-0">
-            <img src="/public/assets/images/3436542.png" alt="Hero Image" class="w-100 min-vh-100 object-fit-cover">
+            <img 
+            :src="seo.hero_image" 
+            alt="Hero Image" 
+            class="w-100 min-vh-100 object-fit-cover">
           </div>
   
           <!-- Auth Form (4 columns) -->
           <div class="col-md-4 d-flex align-items-center justify-content-center p-0">
             <div class="w-100 bg-white p-4">
               <h2 class="text-center fw-bold mb-3">
-                {{ isLogin ? "Barber Login" : "Register as Barber" }}
+                {{ isLogin ? "Admin Login" : "Register as Admin" }}
               </h2>
   
               <form @submit.prevent="handleSubmit">
@@ -63,13 +66,16 @@
   </template>
   
   <script>
-  import Layout from "../../Layouts/HomeLayout.vue";
+  import Layout from "../Layouts/HomeLayout.vue";
   import { ref } from "vue";
   import axios from "axios";
   
   export default {
     components: {
       Layout,
+    },
+    props: {
+      seo: Object,
     },
     setup() {
       const isLogin = ref(true);
