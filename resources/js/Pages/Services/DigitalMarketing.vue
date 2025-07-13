@@ -54,7 +54,7 @@
         <div class="p-3 border-0 text-white d-flex align-items-center justify-content-between gap-3 icon-box">
         <div>
             <h3 class="fw-bold mb-1">Social Media</h3>
-            <p class="mb-0">Our dedicated team will oversee your brand’s presence across all major social media platforms and networks.s.</p>
+            <p class="mb-0">Our dedicated team will oversee your brand’s presence across all major social media platforms and networks.</p>
         </div>
         </div>
       </div>

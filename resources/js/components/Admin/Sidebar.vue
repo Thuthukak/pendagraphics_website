@@ -3,20 +3,20 @@
 
     <!-- Logo Section -->
     <div class="flex items-center gap-3 mb-4">
-      <div class="bg-white text-white flex items-center justify-center rounded-lg min-w-[40px] h-10">
-        <span class="font-bold text-sm">
-          <img src="/public/assets/images/p-logo.png" alt="Logo" class="w-8 h-8">
-        </span>
-      </div>
-      <h4 
-        v-if="!collapsed" 
-        class="m-0 transition-opacity duration-300"
-        :class="{ 'opacity-0': collapsed }"
-      >
       <div class="bg-white text-white flex items-center justify-center rounded-lg min-w-[40px] h-10 p-1">
-        <img src="/public/assets/images/penda_logo2.png" alt="Logo" class="w-36 h-8">
+        <img 
+          v-if="collapsed" 
+          src="/assets/images/p-logo.png" 
+          alt="Logo" 
+          class="w-8 h-8"
+        >
+        <img 
+          v-else 
+          src="/assets/images/penda_logo2.png" 
+          alt="Logo" 
+          class="w-40 h-8"
+        >
       </div>
-      </h4>
     </div>
 
     <!-- Navigation Links -->
