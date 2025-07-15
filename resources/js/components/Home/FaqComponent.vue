@@ -68,22 +68,7 @@
           </div>
         </transition>
       </div>
-    </div>
-
-    <!-- Related Questions Section -->
-    <div class="max-w-4xl mx-auto mt-8" v-if="relatedQuestions.length > 0">
-      <div class="bg-light rounded-lg p-4">
-        <h3 class="h5 mb-3">Related Questions You Might Find Helpful</h3>
-        <div class="row">
-          <div class="col-md-6" v-for="question in relatedQuestions" :key="question">
-            <p class="mb-2">
-              <i class="fas fa-question-circle text-primary me-2"></i>
-              {{ question }}
-            </p>
-          </div>
-        </div>
-      </div>
-    </div>
+    </div>    
   </section>
 </template>
 

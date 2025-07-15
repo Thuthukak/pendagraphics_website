@@ -124,7 +124,7 @@
                   @click="handleSubmit"
                   :disabled="!hasSelectedServices || !name || !email || submitting"
                   :class="[
-                    'w-full py-3 px-6 rounded-lg font-bold text-white transition-colors',
+                    'w-full py-3 px-6 rounded font-bold text-white transition-colors',
                     (hasSelectedServices && name && email && !submitting) ? 'bg-indigo-600 hover:bg-indigo-700' : 'bg-gray-400 cursor-not-allowed'
                   ]"
                 >

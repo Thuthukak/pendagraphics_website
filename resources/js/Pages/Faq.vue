@@ -34,6 +34,7 @@
     
     <!-- Structured Data from onMount -->
   </Head>
+  
   <Layout :seo="seo">
     <!-- Hero Section -->
     <section id="apply" class="cta">
