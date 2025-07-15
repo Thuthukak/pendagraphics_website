@@ -112,6 +112,22 @@ class HomeController extends BaseController
     }
 
 
+    public function AdminAuth () {
+
+        $seoData = $this->mergeSeoData([
+            'title' => 'Admin Authentication - Penda Graphics',
+            'description' => 'Admin Authentication page for Penda Graphics',
+            'keywords' => 'Penda Graphics, Web Design, Graphic Design, Branding, E-commerce, Digital Marketing',
+            'og_title' => 'Admin Authentication | Penda Graphics',
+            'hero_image' => asset('assets/images/3436542.png'),
+        ]);
+
+        return Inertia::render('Admin', [
+            'seo' => $seoData
+        ]);
+    }
+
+
     public function FaqIndex () {
     $seoData = $this->mergeSeoData([
         'title' => 'FAQ - Frequently Asked Questions About Our Web Design, Graphic Design, Branding, E-commerce, and Digital Marketing Services | Penda Graphics',
