@@ -16,7 +16,7 @@ We've received your quotation request and are excited to work with you on your p
 | **Total Estimate** | **R{{ number_format($estimate->total_amount, 2) }}** |
 @endcomponent
 
-This is an initial quote based on the services you selected. Our team will review your requirements and may adjust this quotation based on the specific details of your project.
+Please note: The prices listed above are estimates based on the services you selected. Final pricing may vary after we discuss your specific requirements in detail.
 
 ## What's Next?
 

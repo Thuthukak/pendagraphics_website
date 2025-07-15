@@ -26,7 +26,7 @@ return [
     |
     */
 
-    'logo' => env('APP_LOGO', '/images/logo.png'),
+    'logo' => env('APP_LOGO', '/assets/images/penda_logo2.png'),
 
     /*
     |--------------------------------------------------------------------------
