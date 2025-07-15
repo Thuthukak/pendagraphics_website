@@ -319,7 +319,6 @@ const submitForm = async () => {
   try {
     isSubmitting.value = true;
     
-    // API endpoint - replace with your actual endpoint
     const response = await axios.post('/contact-form', form.value);
     
     // Handle successful submission

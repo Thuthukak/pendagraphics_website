@@ -339,7 +339,11 @@
                 <tr>
                     <td class="logo-cell">
                         <div class="company-logo">
-                            <img src="{{ config('app.logo') }}" alt="{{ config('app.name') }}" />
+                            <p>relative path: {{ config('app.logo') }}</p>
+                            <p>Full URL: {{ asset(config('app.logo')) }}</p>
+                            <p>File exists: {{ file_exists(public_path(config('app.logo'))) ? 'Yes' : 'No' }}</p>
+<p>Full file path: {{ public_path(config('app.logo')) }}</p>
+                            <img src="{{ asset('/assets/images/penda_logo2.png') }}" alt="{{ config('app.name') }}" />
                         </div>
                     </td>
                     <td class="company-info-cell">

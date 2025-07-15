@@ -216,6 +216,11 @@
                 </button>
               </div>
             </form>
+
+            <!-- Success Message -->
+            <div v-if="submitted" class="mt-6 p-4 bg-green-100 border border-green-400 text-green-700 rounded">
+            Thank you for your message! We'll get back to you as soon as possible.
+          </div>
           </div>
         </div>
       </div>
@@ -252,6 +257,7 @@ const form = ref({
 
 const isModalOpen = ref(false);
 const isSubmitting = ref(false);
+const submitted = ref(false);
 
 // Add structured data to head on component mount
 onMounted(() => {
@@ -263,8 +269,6 @@ onMounted(() => {
   }
 });
 
-// Structured Data for SEO (fallback computed property for reference)
-// This is now handled server-side and injected via onMounted
 
 const submitForm = async () => {
   if (isSubmitting.value) return;
@@ -275,6 +279,9 @@ const submitForm = async () => {
     const response = await axios.post('/contact-form', form.value);
     console.log(response.data);
 
+    if (response.status === 200 || response.status === 201) {
+      submitted.value = true;
+
     // Reset form
     form.value = {
       name: '',
@@ -282,6 +289,7 @@ const submitForm = async () => {
       subject: '',
       message: '',
     };
+    }
     
     // You might want to show a success message here
     alert('Thank you! Your message has been sent successfully.');
