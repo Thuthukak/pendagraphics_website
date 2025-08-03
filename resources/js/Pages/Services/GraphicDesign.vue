@@ -125,6 +125,7 @@
   </template>
   
   <script setup>
+  import { Head } from "@inertiajs/vue3";
   import Navbar from "@/components/Home/Navbar.vue";
   import Footer from "@/components/Home/Footer.vue";
   import GraphicDesignCarousel from "@/components/Home/Services/GraphicDesignCarousel.vue";
@@ -133,6 +134,7 @@
     seo: Object,
   });
   
+  console.log('SEO Data received:', props.seo);
 
 
   </script>

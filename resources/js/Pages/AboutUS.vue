@@ -351,10 +351,11 @@
 <script>
 import Navbar from '@/components/Home/Navbar.vue';
 import { onMounted, computed } from 'vue'
+import { Head } from '@inertiajs/vue3'
 
 export default {
   name: 'AboutUS',
-  components: { Navbar },
+  components: { Navbar, Head },
   props: {
     seo: {
       type: Object,
@@ -385,21 +386,21 @@ export default {
     
     onMounted(() => {
       // You can now use the structured data in your component logic
-      console.log('Structured Data:', props.structuredData)
-      console.log('Business Info:', props.businessInfo)
-      console.log('Social Media:', props.socialMedia)
-      console.log('Images:', props.images)
+      // console.log('Structured Data:', props.structuredData)
+      // console.log('Business Info:', props.businessInfo)
+      // console.log('Social Media:', props.socialMedia)
+      // console.log('Images:', props.images)
       
       // Example: Initialize a map with the coordinates
       if (props.businessInfo.location.coordinates) {
         const { lat, lng } = props.businessInfo.location.coordinates
         // Initialize your map here
-        console.log(`Map coordinates: ${lat}, ${lng}`)
+        // console.log(`Map coordinates: ${lat}, ${lng}`)
       }
       
       // Example: Set up social media tracking
       Object.entries(props.socialMedia).forEach(([platform, url]) => {
-        console.log(`${platform}: ${url}`)
+        // console.log(`${platform}: ${url}`)
       })
     })
     

@@ -1,5 +1,5 @@
 <template>
-    <div class="max-w-5xl mx-auto mt-8">
+    <div class="max-w-5xl mx-auto mt-8 px-0">
       <!-- Main Image -->
       <div class="relative">
         <img
@@ -23,7 +23,8 @@
       </div>
   
       <!-- Thumbnails -->
-      <div class="flex mt-4 gap-2 justify-center">
+    <div class="overflow-x-auto mt-4">
+      <div class="flex mt-4 gap-2 justify-center min-w-max px-2">
         <img
           v-for="(img, index) in images"
           :key="index"
@@ -36,6 +37,7 @@
           }"
         />
       </div>
+    </div>
     </div>
   </template>
   

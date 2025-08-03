@@ -77,7 +77,7 @@ class HomeController extends BaseController
         $structuredData = [
             '@context' => 'https://schema.org',
             '@type' => 'Organization',
-            'name' => 'Your Company Name',
+            'name' => 'Penda Graphics',
             'description' => $seoData['description'],
             'url' => $seoData['og_url'],
             'logo' => $seoData['og_image'],

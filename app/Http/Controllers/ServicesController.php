@@ -67,7 +67,7 @@ class ServicesController extends BaseController
 
         return Inertia::render('Services/WebDesign', [
             'seo' => $seoData
-        ]);
+        ])->with('seo', $seoData);
     }
 
     public function indexGraphicDesign()
@@ -85,7 +85,7 @@ class ServicesController extends BaseController
 
         return Inertia::render('Services/GraphicDesign', [
             'seo' => $seoData
-        ]);
+        ])->with('seo', $seoData);
     }
 
 

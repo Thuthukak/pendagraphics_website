@@ -12,7 +12,7 @@
       <meta property="og:image" :content="seo.og_image" />
       <meta property="og:url" :content="seo.og_url" />
       <meta property="og:type" content="website" />
-      <meta property="og:site_name" content="Your Company Name" />
+      <meta property="og:site_name" content="Penda Graphics" />
       
       <!-- Twitter Card -->
       <meta name="twitter:card" :content="seo.twitter_card" />

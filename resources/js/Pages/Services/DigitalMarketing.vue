@@ -92,7 +92,7 @@
   <script setup>
   import Navbar from "@/components/Home/Navbar.vue";
   import Footer from "@/components/Home/Footer.vue";
-  import ECommerceCarousel from "@/components/Home/Services/ECommerceCarousel.vue";
+
 
   defineProps({
     seo: Object,
@@ -137,7 +137,7 @@
   position: relative;
 }
 .cta {
-  background: linear-gradient(rgba(2, 2, 2, 0.5), rgba(0, 0, 0, 0.692)), url("/assets/images/marketing digital transformation.jpg") fixed center center;
+  background: linear-gradient(rgba(2, 2, 2, 0.5), rgba(0, 0, 0, 0.692)), url(/assets/images/marketing_digital_transformation.jpg) fixed center center;
     background-size: auto, auto;
   background-size: cover;
   padding: 120px 0;

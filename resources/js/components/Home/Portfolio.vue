@@ -74,7 +74,7 @@
       id: 1,
       category: 'Web Design',
       title: 'Landing Page Design',
-      description: 'Modern and responsive layout for a startup.',
+      description: 'Modern and responsive E-commerce website.',
       image: '/assets/images/portfolio/kmcollect.jpg',
       link: '#'
     },
@@ -96,10 +96,10 @@
     },
     {
       id: 4,
-      category: 'Digital Marketing',
-      title: 'Social Media Campaign',
-      description: 'Ad creatives and strategy.',
-      image: '/assets/images/portfolio/seo.jpg',
+      category: 'Logo Design',
+      title: 'ETAERC',
+      description: 'ETAERC Logo',
+      image: '/assets/images/portfolio/ETAERC_Logov2.png',
       link: '#'
     },
     {
@@ -113,8 +113,8 @@
     {
       id: 6,
       category: 'Web Design',
-      title: 'E-commerce UI',
-      description: 'User-friendly online store interface.',
+      title: 'Ramohlale Industries',
+      description: 'Custom website for an industrial company.',
       image: '/assets/images/portfolio/ramohlale.jpg',
       link: '#'
     },
@@ -126,14 +126,46 @@
       image: '/assets/images/portfolio/Mahloma_Tsebo_logo_color darkerPurple@2x-80.jpg',
       link: '#'
     },
-     {
+    {
       id: 8,
+      category: 'Web Design',
+      title: 'SHAPE CRM',
+      description: 'A custom CRM Application for a international scholarships and internships.',
+      image: '/assets/images/portfolio/Screenshot 2025-07-25 at 22.55.57.png',
+      link: '#'
+    },
+    {
+      id: 9,
       category: 'Graphic Design',
       title: 'Graphic asset',
       description: 'Mahloma Tsebo Solutions',
       image: '/assets/images/portfolio/1.png',
       link: '#'
-    }
+    },
+    {
+      id: 10,
+      category: 'Digital Marketing',
+      title: 'Social Media Campaign',
+      description: 'Ad creatives and strategy.',
+      image: '/assets/images/portfolio/seo.jpg',
+      link: '#'
+    },
+    {
+      id: 11,
+      category: 'Logo Design',
+      title: 'Seloko Guest lodge logo',
+      description: 'Seloko Guest lodge logo',
+      image: '/assets/images/portfolio/Seloko.png',
+      link: '#'
+    },
+    {
+      id: 12,
+      category: 'Product Design',
+      title: 'MK Aqua bottle Mockup',
+      description: 'MK Aqua bottle Mockup',
+      image: '/assets/images/portfolio/mk_aqua_bottle.jpeg',
+      link: '#'
+    },
   ])
   
   const filteredItems = computed(() => {

@@ -4,7 +4,7 @@
       <!-- Desktop Navigation -->
       <div class="hidden md:flex justify-between items-center py-4">
         <!-- Logo -->
-        <a href="#" class="text-xl font-bold">
+        <a href="/" class="text-xl font-bold">
           <img 
             :src="seo.og_image"
             alt="Logo" 
@@ -47,7 +47,7 @@
       <!-- Mobile Navigation -->
       <div class="md:hidden flex justify-between items-center py-3">
         <!-- Mobile Logo -->
-        <a href="#" class="text-xl font-bold">
+        <a href="/" class="text-xl font-bold">
           <img 
             :src="seo.og_image"
             alt="Logo" 

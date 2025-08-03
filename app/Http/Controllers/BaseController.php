@@ -16,7 +16,7 @@ abstract class BaseController extends Controller
             'description' => 'Penda Graphics is a South African creative agency offering professional web design, development, branding, and digital marketing services to help businesses grow online.',
             'keywords' => 'Penda Graphics, web design South Africa, website development, branding, graphic design, logo design, digital marketing, SEO, UI/UX, Laravel, Vue, e-commerce, identity design',
             'og_title' => 'Penda Graphics | Elevate Your Brand with Design & Digital Excellence',
-            'og_description' => 'We build websites, design brands, and create digital experiences that help businesses stand out and succeed.',
+            'og_description' => 'Penda Graphics is a South African creative agency offering professional web design, development, branding, and digital marketing services to help businesses grow online.',
             'og_image' => asset('assets/images/penda_logo2.png'),
             'og_type' => 'website',
             'og_site_name' => 'Penda Graphics',
