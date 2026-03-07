@@ -45,11 +45,20 @@
   import { ref } from 'vue'
  
   const images = ref([
+    '/assets/images/web-carousel/neema_landing.png',
+    '/assets/images/web-carousel/neema_about.png',
+    '/assets/images/web-carousel/neema_service.png',
+    '/assets/images/web-carousel/neema_contact.png',
+    '/assets/images/web-carousel/mech_landing.png',
+    '/assets/images/web-carousel/mech_about.png',
+    '/assets/images/web-carousel/mech_services.png',
     '/assets/images/web-carousel/ramo-home.jpg',
     '/assets/images/web-carousel/ramo-services.jpg',
     '/assets/images/web-carousel/km-home-page.jpg',
     '/assets/images/web-carousel/km-shop-page.jpg',
     '/assets/images/web-carousel/km-login-page.jpg',
+    '/assets/images/web-carousel/pro_landing.png',
+    '/assets/images/web-carousel/pro_services.png',
   ])
  
   const activeIndex = ref(0)

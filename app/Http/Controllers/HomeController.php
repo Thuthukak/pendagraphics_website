@@ -401,7 +401,7 @@ class HomeController extends BaseController
     
     return Inertia::render('AboutUS', [
         'seo' => $seoData,
-        'structuredData' => json_encode($structuredData),
+        'structuredData' => $structuredData,
         'businessInfo' => $businessInfo,
         'socialMedia' => $socialMedia,
         'images' => $images

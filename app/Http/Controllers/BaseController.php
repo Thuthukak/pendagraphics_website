@@ -17,30 +17,13 @@ abstract class BaseController extends Controller
             'keywords' => 'Penda Graphics, web design South Africa, website development, branding, graphic design, logo design, digital marketing, SEO, UI/UX, Laravel, Vue, e-commerce, identity design',
             'og_title' => 'Penda Graphics | Elevate Your Brand with Design & Digital Excellence',
             'og_description' => 'Penda Graphics is a South African creative agency offering professional web design, development, branding, and digital marketing services to help businesses grow online.',
-            'og_image' => $this->getFullImageUrl('assets/images/penda_logo2.png'),
+            'og_image' => asset('assets/images/penda_logo2.png'),
             'og_type' => 'website',
             'og_site_name' => 'Penda Graphics',
             'og_url' => config('app.url'),
             'twitter_card' => 'summary_large_image',
-            'twitter_image' => $this->getFullImageUrl('assets/images/penda_logo2.png'),
             'canonical_url' => config('app.url'),
         ];
-    }
-
-    /**
-     * Get full URL for images to ensure they work in social sharing
-     */
-    protected function getFullImageUrl($path)
-    {
-        // Ensure we have the full URL including domain
-        $url = asset($path);
-        
-        // If the URL doesn't start with http, make it absolute
-        if (!str_starts_with($url, 'http')) {
-            $url = config('app.url') . '/' . ltrim($path, '/');
-        }
-        
-        return $url;
     }
 
     /**
@@ -48,18 +31,7 @@ abstract class BaseController extends Controller
      */
     protected function mergeSeoData(array $customData = [])
     {
-        $baseData = $this->getBaseSeoData();
-        $mergedData = array_merge($baseData, $customData);
-        
-        // Ensure images are full URLs
-        if (isset($mergedData['og_image'])) {
-            $mergedData['og_image'] = $this->getFullImageUrl($mergedData['og_image']);
-        }
-        
-        if (isset($mergedData['twitter_image'])) {
-            $mergedData['twitter_image'] = $this->getFullImageUrl($mergedData['twitter_image']);
-        }
-        
-        return $mergedData;
+        return array_merge($this->getBaseSeoData(), $customData);
     }
+
 }

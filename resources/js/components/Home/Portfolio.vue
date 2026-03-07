@@ -79,18 +79,26 @@
       link: '#'
     },
     {
+      id: 17,
+      category: 'Web Design',
+      title: 'Neema Trading Website',
+      description: 'Comprehensive business solutions.',
+      image: '/assets/images/web-carousel/neema_landing.png',
+      link: 'https://neematradings.co.za/'
+    },
+    {
       id: 2,
       category: 'Product Design',
-      title: 'Mobile App Mockup',
-      description: 'Clean and intuitive mobile UI design.',
+      title: 'Maburas Hot Sauce',
+      description: 'Maburas Hot Sauce branding and packaging.',
       image: '/assets/images/portfolio/mabura.jpg',
       link: '#'
     },
     {
       id: 3,
       category: 'Logo Design',
-      title: 'Mkay Aqua',
-      description: 'Eye-catching poster for music event.',
+      title: 'Mkay Aqua Logo',
+      description: 'Mkay Aqua.',
       image: '/assets/images/portfolio/mkay-aqua.jpg',
       link: '#'
     },
@@ -111,6 +119,14 @@
       link: '#'
     },
     {
+      id: 20,
+      category: 'Logo Design',
+      title: 'Mech MAsters Engineering Logo',
+      description: 'Mech MAsters Engineering Logo',
+      image: '/assets/images/logo-carousel/mechmasters_logo_official.jpg',
+      link: 'https://mechmasters.co.za/'
+    },
+    {
       id: 6,
       category: 'Web Design',
       title: 'Ramohlale Industries',
@@ -121,7 +137,7 @@
     {
       id: 7,
       category: 'Logo Design',
-      title: 'Logos',
+      title: 'Mahloma Tsebo Solutions Logo',
       description: 'Mahloma Tsebo Solutions',
       image: '/assets/images/portfolio/Mahloma_Tsebo_logo_color darkerPurple@2x-80.jpg',
       link: '#'
@@ -140,6 +156,14 @@
       title: 'Graphic asset',
       description: 'Mahloma Tsebo Solutions',
       image: '/assets/images/portfolio/1.png',
+      link: '#'
+    },
+    {
+      id: 14,
+      category: 'Logo Design',
+      title: 'Changam Logo',
+      description: 'Changam Logo',
+      image: '/assets/images/logo-carousel/changam-logo-color-lower@2x-80.jpg',
       link: '#'
     },
     {
@@ -165,6 +189,46 @@
       description: 'MK Aqua bottle Mockup',
       image: '/assets/images/portfolio/mk_aqua_bottle.jpeg',
       link: '#'
+    },
+    {
+      id: 13,
+      category: 'Logo Design',
+      title: '1Destination Logo',
+      description: '1Destination Logo',
+      image: '/assets/images/logo-carousel/1D-logo-color-vert@2x-80.jpg',
+      link: '#'
+    },
+    {
+      id: 15,
+      category: 'Logo Design',
+      title: 'Neema Trading Logo',
+      description: 'Neema Trading Logo',
+      image: '/assets/images/logo-carousel/neema_logo.png',
+      link: '#'
+    },
+    {
+      id: 16,
+      category: 'Logo Design',
+      title: 'Pro Health Solutions Logo',
+      description: 'Pro Health Solutions Logo',
+      image: '/assets/images/logo-carousel/phs_logo_color_vert@2x-80.jpg',
+      link: '#'
+    },
+    {
+      id: 18,
+      category: 'Web Design',
+      title: 'Mech Trading Website',
+      description: 'Mechanical and Engineering.',
+      image: '/assets/images/web-carousel/mech_landing.png',
+      link: 'https://mechmasters.co.za/'
+    },
+    {
+      id: 19,
+      category: 'Web Design',
+      title: 'Pro Health Solutions Website',
+      description: 'Business health and wellness solutions.',
+      image: '/assets/images/web-carousel/pro_landing.png',
+      link: 'https://prohsolutions.co.za'
     },
   ])
   

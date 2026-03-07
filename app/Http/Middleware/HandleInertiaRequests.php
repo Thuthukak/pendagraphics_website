@@ -21,12 +21,6 @@ class HandleInertiaRequests extends Middleware
             'auth' => [
                 'user' => $request->user(),
             ],
-            // Add global meta data that will be available on all pages
-            'globalMeta' => [
-                'site_name' => config('app.name', 'Penda Graphics'),
-                'default_image' => asset('assets/images/penda_logo2.png'),
-                'site_url' => config('app.url'),
-            ],
         ];
 
         // Only add Ziggy if the class exists
