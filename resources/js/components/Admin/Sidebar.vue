@@ -113,9 +113,14 @@ export default {
           
         },
         {
-          path: '/admin/settings',
-          label: 'Settings',
-          icon: ['fas', 'cog'],
+          path: '/admin/enquiries',
+          label: 'Enquiries',
+          icon: ['fas', 'clipboard-list'],
+        },
+        {
+          path: '/admin/users',
+          label: 'Users',
+          icon: ['fas', 'user-cog'],
         },
       ],
     };
@@ -123,11 +128,11 @@ export default {
   methods: {
     logout() {
       axios.post('/logout').then(() => {
-        window.location.href = '/login';
+        window.location.href = '/admin/auth';
       }).catch((error) => {
         console.error('Logout error:', error);
         // Fallback logout
-        window.location.href = '/login';
+        window.location.href = '/admin/auth';
       });
     },
   },

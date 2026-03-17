@@ -14,6 +14,8 @@ use App\Http\Controllers\NewsletterController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\InvoiceController;
 use App\Http\Controllers\ClientController;
+use App\Http\Controllers\UserController;
+use App\Http\Controllers\InvitationController;
 use Inertia\Inertia;
 
 
@@ -21,7 +23,7 @@ use Inertia\Inertia;
 Route::prefix('admin')->group(function () {
     // Guest Middleware (only for login & register pages)
     Route::middleware('guest')->group(function () {
-       
+
         Route::get('/auth', [HomeController::class, 'AdminAuth'])->name('admin.auth');
     });
     
@@ -66,6 +68,13 @@ Route::prefix('admin')->group(function () {
 Route::prefix('api')->group(function () {
      Route::get('/profile/data', [ProfileController::class, 'show'])->name('profile.data');
 
+     //contacts
+    Route::get('/contacts', [ContactController::class, 'index']);
+    Route::get('/contacts/{id}', [ContactController::class, 'show']);
+    Route::post('/contacts', [ContactController::class, 'contactForm']);
+    Route::put('/contacts/{id}', [ContactController::class, 'update']);
+    Route::delete('/contacts/{id}', [ContactController::class, 'destroy']);
+
     Route::get('/services', [ServicesController::class, 'index'])->name('getServices');
     Route::post('/services', [ServicesController::class, 'store']);
     Route::post('/services/custom', [ServicesController::class, 'storeCustomService']);
@@ -103,6 +112,20 @@ Route::prefix('api')->group(function () {
     Route::get('/invoices/clients/list', [InvoiceController::class, 'getClients']); 
 
     Route::get('/invoices/profile/data', [ProfileController::class, 'show'])->name('profile.data');
+
+     // Invitations
+    Route::get('/invitations', [InvitationController::class, 'index'])
+        ->name('invitations.index');
+    
+    Route::post('/invitations', [InvitationController::class, 'store'])
+        ->name('invitations.store');
+    
+    Route::delete('/invitations/{invitation}', [InvitationController::class, 'destroy'])
+        ->name('invitations.destroy');
+
+    // Users
+    Route::get('/users', [UserController::class, 'index']);
+    Route::delete('/users/{user}', [UserController::class, 'destroy']);
 
     
 });

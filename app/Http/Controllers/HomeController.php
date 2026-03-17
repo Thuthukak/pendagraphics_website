@@ -120,6 +120,7 @@ class HomeController extends BaseController
             'keywords' => 'Penda Graphics, Web Design, Graphic Design, Branding, E-commerce, Digital Marketing',
             'og_title' => 'Admin Authentication | Penda Graphics',
             'hero_image' => asset('assets/images/3436542.png'),
+            'logo' => asset('assets/images/penda_logo2.png'),
         ]);
 
         return Inertia::render('Admin', [

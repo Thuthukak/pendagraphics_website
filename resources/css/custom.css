@@ -1,3 +1,81 @@
-a{
-    text-decoration: none !important;
+brand primary variable and brand secondary variable */
+:root {
+  --brand-primary: #0082c9;
+  --brand-secondary: #fabf3d;
+  --brand-tertiary: #e41c25;
+}
+/* General styles */
+.bg-penda-primary {
+  background-color: #0082c9;
+}
+
+.penda-color-primary {
+  color: #0082c9;
+}
+
+.bg-penda-secondary {
+  background-color: #212529;
+}
+.penda-btn-secondary:hover {
+  background-color: #ffaf04
+}
+.text-penda-primary {
+  color: #171718;
+}
+.text-penda-secondary {
+  color: #0082c9;
+}
+
+.penda-hover-effect {
+  text-decoration: none;
+  transition: all 0.3s ease-in-out;
+}
+.penda-hover-effect:hover {
+  background-color: #fabf3d;
+  transform: translateX(2px);
+}
+.penda-btn {
+  padding: 10px 20px;
+  border-radius: 5px;
+  font-size: 16px;
+  cursor: pointer;
+  border: none; /* Remove default button border */
+}
+.penda-btn-sm {
+  padding: 5px 10px;
+  border-radius: 5px;
+  font-size: 16px;
+  cursor: pointer;
+  border: none; /* Remove default button border */
+}
+.penda-btn-primary {
+  background-color: #0082c9;
+  color: white;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+.penda-btn:hover {
+  background-color: #fabf3d;
+  color: white;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+.penda-btn-outline-secondary {
+  background-color: transparent;
+  color: #70a0b9;
+  border: 2px solid #fabf3d;
+}
+.penda-btn-outline-secondary:hover {
+  background-color: rgb(212, 147, 6);
+  color: white;
+}
+.penda-btn-outline-primary {
+  background-color: transparent;
+  color: #6c8b9c;
+  border: 2px solid #0082c9;
+}
+.penda-btn-primary:hover {
+  background-color: #025c8c;
+}
+.penda-btn-secondary {
+  background-color: #fabf3d;
+  color: white;
 }

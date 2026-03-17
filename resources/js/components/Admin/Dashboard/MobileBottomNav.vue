@@ -92,19 +92,19 @@ export default {
       ],
       moreItems: [
         {
-          action: 'settings',
-          label: 'Settings',
-          icon: ['fas', 'cog'],
-        },
-        {
           action: 'profile',
           label: 'Profile',
           icon: ['fas', 'user'],
         },
         {
-          action: 'notifications',
-          label: 'Notifications',
-          icon: ['fas', 'bell'],
+          path: '/admin/enquiries',
+          label: 'Enquiries',
+          icon: ['fas', 'clipboard-list'],
+        },
+        {
+          path: '/admin/users',
+          label: 'Users',
+          icon: ['fas', 'user-cog'],
         },
         {
           action: 'home',
@@ -129,6 +129,12 @@ export default {
           break;
         case 'profile':
           this.$router.push('/admin/profile');
+          break;
+        case 'enquiries':
+          this.$router.push('/admin/enquiries');
+          break;
+        case 'users':
+          this.$router.push('/admin/users');
           break;
         case 'notifications':
           console.log('View notifications');

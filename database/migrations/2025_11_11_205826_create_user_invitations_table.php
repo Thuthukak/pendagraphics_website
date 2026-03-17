@@ -11,12 +11,13 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('contacts', function (Blueprint $table) {
+        Schema::create('user_invitations', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
-            $table->string('email');
-            $table->string('service');
-            $table->text('message');
+            $table->string('email')->unique();
+            $table->string('token')->unique();
+            $table->foreignId('invited_by')->constrained('users')->onDelete('cascade');
+            $table->timestamp('expires_at');
+            $table->timestamp('accepted_at')->nullable();
             $table->timestamps();
         });
     }
@@ -26,6 +27,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('contact_form');
+        Schema::dropIfExists('user_invitations');
     }
 };

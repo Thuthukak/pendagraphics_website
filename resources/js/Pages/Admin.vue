@@ -1,5 +1,5 @@
 <template>
-    <Layout :seo="seo">
+    <!-- <Layout :seo="seo"> -->
       <div class="container-fluid p-0">
         <div class="row min-vh-100 m-0">
           <!-- Hero Image (8 columns) -->
@@ -11,31 +11,34 @@
           </div>
   
           <!-- Auth Form (4 columns) -->
-          <div class="col-md-4 d-flex align-items-center justify-content-center p-0">
-            <div class="w-100 bg-white p-4">
-              <h2 class="text-center fw-bold mb-3">
+          <div class="col-md-4 d-flex bg-white align-items-center justify-content-center p-0">
+            <div class="w-100  p-4">
+                <div class="d-flex justify-content-center mb-4 mt-1">
+                  <img :src="seo.logo" alt="Logo" style="max-width: 150px;">
+                </div>
+              <h2 class="text-center text-dark fw-bold mb-5">
                 {{ isLogin ? "Admin Login" : "Register as Admin" }}
               </h2>
   
               <form @submit.prevent="handleSubmit">
                 <div class="mb-3">
-                  <label class="form-label">Email</label>
+                  <label class="form-label text-dark">Email</label>
                   <input v-model="form.email" type="email" class="form-control">
                 </div>
   
                 <div class="mb-3">
-                  <label class="form-label">Password</label>
+                  <label class="form-label text-dark">Password</label>
                   <input v-model="form.password" type="password" class="form-control">
                 </div>
 
                 <div v-if="!isLogin" class="mb-3">
-                <label class="form-label">Confirm Password</label>
+                <label class="form-label text-dark">Confirm Password</label>
                   <input v-model="form.password_confirmation" type="password" class="form-control">
                 </div>
                               <!-- Forgot Password (Only in login mode) -->
-                <div v-if="isLogin" class="mb-3 text-end">
+                <!-- <div v-if="isLogin" class="mb-3 text-end">
                   <a href="forgot-password" class="text-decoration-none text-primary">Forgot Password?</a>
-                </div>
+                </div> -->
   
                 <!-- Extra fields for registration -->
                 <div v-if="!isLogin" class="mb-3">
@@ -48,21 +51,16 @@
                   <input v-model="form.phone" type="text" class="form-control">
                 </div>
   
-                <button type="submit" class="btn btn-primary w-100">
+                <button type="submit" class="penda-btn penda-btn-primary border w-100">
                   {{ isLogin ? "Login" : "Register" }}
                 </button>
               </form>
-  
-              <div class="text-center mt-3">
-                <p @click="toggleForm" class="text-primary" style="cursor: pointer;">
-                  {{ isLogin ? "Don't have an account? Sign up" : "Already have an account? Login" }}
-                </p>
-              </div>
+
             </div>
           </div>
         </div>
       </div>
-    </Layout>
+    <!-- </Layout> -->
   </template>
   
   <script>
@@ -122,6 +120,7 @@
   
   <style scoped>
   /* Remove spacing between navbar/footer and content */
+
   .container-fluid {
     height: 100vh;
     overflow: hidden;

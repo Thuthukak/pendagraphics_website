@@ -28,7 +28,9 @@ import { faBars,
         faMailForward,
         faEnvelope,
         faPaintBrush,
-        faFileInvoiceDollar
+        faFileInvoiceDollar,
+        faUserCog,
+        faPencil
     } from "@fortawesome/free-solid-svg-icons";
 
 import { 
@@ -48,10 +50,12 @@ library.add(faBars,
             faSun, 
             faGlobe, 
             faUser, 
-            faBell, 
+            faBell,
+            faUserCog,
             faCog, 
             faTrash,
             faEye,
+            faPencil,
             faFilePdf,
             faHome, 
             faSignOutAlt,

@@ -158,13 +158,37 @@
           <div class="col-md-6">
             <form @submit.prevent="submitForm" class="p-4 shadow rounded bg-white" novalidate>
               <div class="mb-3">
-                <label for="name" class="visually-hidden">Name</label>
+                <label for="name" class="visually-hidden">Name *</label>
                 <input
                   id="name"
                   type="text"
                   v-model="form.name"
                   class="form-control"
                   placeholder="Enter your name"
+                  required
+                  aria-required="true"
+                />
+              </div>
+
+              <div class="mb-3">
+                <label for="company" class="visually-hidden">Company</label>
+                <input
+                  id="company"
+                  type="text"
+                  v-model="form.company"
+                  class="form-control"
+                  placeholder="Enter your company name"
+                />
+              </div>
+
+              <div class="mb-3">
+                <label for="phone" class="visually-hidden">Phone Number *</label>
+                <input
+                  id="phone"
+                  type="tel"
+                  v-model="form.phone"
+                  class="form-control"
+                  placeholder="Enter your phone number"
                   required
                   aria-required="true"
                 />
@@ -178,22 +202,26 @@
                   v-model="form.email"
                   class="form-control"
                   placeholder="Enter your email"
-                  required
                   aria-required="true"
                 />
               </div>
 
               <div class="mb-3">
-                <label for="subject" class="visually-hidden">Subject</label>
-                <input 
-                  id="subject"
-                  type="text" 
-                  v-model="form.subject" 
-                  class="form-control"
-                  placeholder="Subject"
+                <label class="visually-hidden">Service *</label>
+                <select 
+                  v-model="form.service" 
+                  class="form-select" 
+                  placeholder="Select a service" 
                   required
-                  aria-required="true"
-                />
+                  >
+                  <option value="">Select a service</option>
+                  <option value="website-design">Website Design</option>
+                  <option value="Logo-Design">Logo Design</option>
+                  <option value="Graphic Design">Graphic Design</option>
+                  <option value="Business Card Design">Business Card Design</option>
+                  <option value="banner-billboard-design">Banner/Billboard Design</option>
+                  <option value="enquiry">General Enquiry</option>
+                </select>
               </div>
 
               <div class="mb-3">
@@ -250,8 +278,9 @@ const props = defineProps({
 
 const form = ref({
   name: '',
+  company: '',
+  phone: '',
   email: '',
-  subject: '',
   message: '',
 });
 
@@ -285,8 +314,9 @@ const submitForm = async () => {
     // Reset form
     form.value = {
       name: '',
+      company: '',
+      phone: '',
       email: '',
-      subject: '',
       message: '',
     };
     }

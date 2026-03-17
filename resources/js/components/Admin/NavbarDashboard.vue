@@ -14,7 +14,7 @@
         <!-- Mobile Logo -->
         <div v-if="isMobile" class="d-flex align-items-center">
           <div class="bg-white text-white d-flex align-items-center justify-content-center  me-2">
-            <img src="/public/assets/images/penda_logo2.png" alt="Logo" class="w-32 h-8">
+            <img src="/assets/images/logo/mechmasters_logo.png" alt="Logo" class="w-30 h-14">
           </div>
         </div>
       </div>
@@ -23,14 +23,14 @@
       <div class="d-flex align-items-center gap-2 gap-md-3">
         
         <!-- Dark Mode Toggle -->
-        <button @click="toggleDarkMode" class="btn text-secondary p-2">
+        <!-- <button @click="toggleDarkMode" class="btn text-secondary p-2">
           <font-awesome-icon :icon="darkMode ? icons.faSun : icons.faMoon" />
-        </button>
+        </button> -->
 
         <!-- Language Switcher -->
-        <button @click="changeLocale" class="btn text-secondary p-2">
+        <!-- <button @click="changeLocale" class="btn text-secondary p-2">
           <font-awesome-icon :icon="icons.faGlobe" />
-        </button>
+        </button> -->
 
         <!-- Profile Dropdown -->
         <div class="position-relative">
@@ -68,21 +68,23 @@
           <ul 
             v-if="dropdownOpen" 
             class="dropdown-menu show position-absolute end-0 mt-2 shadow rounded border-0"
-            style="min-width: 200px;"
+            style="min-width: 220px; max-width: 280px;"
           >
             <li class="px-3 py-2 border-bottom">
               <div class="d-flex align-items-center">
                 <img 
                   :src="currentAvatar" 
                   alt="Profile" 
-                  class="rounded-circle me-2" 
+                  class="rounded-circle penda-color-primary me-2 flex-shrink-0" 
                   width="40" 
                   height="40"
                   @error="handleImageError"
                 />
-                <div>
-                  <div class="fw-semibold">{{ user.name || 'User' }}</div>
-                  <small class="text-muted">{{ user.email || 'No email' }}</small>
+                <div class="min-w-0 flex-grow-1">
+                  <div class="fw-semibold text-truncate">{{ user.name || 'User' }}</div>
+                  <small class="text-muted d-block text-truncate" :title="user.email">
+                    {{ user.email || 'No email' }}
+                  </small>
                 </div>
               </div>
             </li>
@@ -180,7 +182,7 @@ export default {
       notifications: {
         count: 0,
       },
-      defaultAvatar: "https://ui-avatars.com/api/?name=User&background=6366f1&color=fff&size=100",
+      defaultAvatar: "https://ui-avatars.com/api/?name=User&background=0082c9&color=fff&size=100",
       icons: { 
         faBars, 
         faMoon, 
@@ -214,7 +216,7 @@ export default {
         this.loadingUser = true;
         this.apiStatus = 'loading';
         
-        console.log('Fetching user data from /api/profile/data...');
+        // console.log('Fetching user data from /api/profile/data...');
         
         // Add timeout and better error handling
         const response = await axios.get('/api/profile/data', {
@@ -225,8 +227,8 @@ export default {
           }
         });
         
-        console.log('API Response:', response);
-        console.log('Response Data:', response.data);
+        // console.log('API Response:', response);
+        // console.log('Response Data:', response.data);
         
         if (response.data) {
           // Handle different possible response structures
@@ -242,7 +244,7 @@ export default {
             userData = response.data.data.user;
           }
           
-          console.log('Processed user data:', userData);
+          // console.log('Processed user data:', userData);
           
           this.user = {
             name: userData.name || userData.first_name || userData.username || '',
@@ -250,11 +252,11 @@ export default {
             profile_picture: userData.profile_picture || userData.profile_photo_url || userData.avatar || '',
           };
           
-          console.log('Final user object:', this.user);
+          // console.log('Final user object:', this.user);
           
           // Update default avatar with user's name
           if (!this.user.profile_picture && this.user.name) {
-            this.defaultAvatar = `https://ui-avatars.com/api/?name=${encodeURIComponent(this.user.name)}&background=6366f1&color=fff&size=100`;
+            this.defaultAvatar = `https://ui-avatars.com/api/?name=${encodeURIComponent(this.user.name)}&background=0082c9&color=fff&size=100`;
           }
           
           this.apiStatus = 'success';
@@ -309,10 +311,10 @@ export default {
     applyDarkMode() {
       if (this.darkMode) {
         document.documentElement.classList.add("dark");
-        document.body.classList.add("bg-dark", "text-light",);
+        document.body.classList.add("bg-dark", "text-dark",);
       } else {
         document.documentElement.classList.remove("dark");
-        document.body.classList.remove("bg-dark", "text-light");
+        document.body.classList.remove("bg-dark", "text-dark");
       }
     },
     
@@ -393,4 +395,14 @@ export default {
   width: 1rem;
   height: 1rem;
 }
+.min-w-0 {
+  min-width: 0;
+}
+
+.text-truncate {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
 </style>
