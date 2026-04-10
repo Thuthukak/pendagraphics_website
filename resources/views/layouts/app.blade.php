@@ -19,10 +19,32 @@
         @routes
         @vite(['resources/js/app.js', "resources/js/Pages/{$page['component']}.vue"])
         
+        <!--
+            Blade fallback for meta tags. 
+            This guarantees Google always sees them even if SSR fails.
+        -->
+        <?php
+        $seo = $page['props']['seo'] ?? [];
+        ?>
+
+        @if(!empty($seo))
+            <title>{{ $seo['title'] ?? config('app.name') }}</title>
+            <meta name="description" content="{{ $seo['description'] ?? '' }}">
+            <meta name="keywords" content="{{ $seo['keywords'] ?? '' }}">
+            <link rel="canonical" href="{{ $seo['canonical_url'] ?? url()->current() }}">
+            <meta property="og:title" content="{{ $seo['og_title'] ?? '' }}">
+            <meta property="og:description" content="{{ $seo['og_description'] ?? '' }}">
+            <meta property="og:image" content="{{ $seo['og_image'] ?? '' }}">
+            <meta property="og:url" content="{{ $seo['og_url'] ?? '' }}">
+            <meta property="og:type" content="website">
+            <meta name="twitter:card" content="{{ $seo['twitter_card'] ?? 'summary_large_image' }}">
+            <meta name="twitter:title" content="{{ $seo['og_title'] ?? '' }}">
+            <meta name="twitter:description" content="{{ $seo['og_description'] ?? '' }}">
+            <meta name="twitter:image" content="{{ $seo['og_image'] ?? '' }}">
+            <meta name="robots" content="index, follow">
+        @endif
         
         @inertiaHead
-
-        <title inertia>{{ config('app.name', 'Penda Graphics') }}</title>
         
     </head>
     <body class="font-sans antialiased">

@@ -2,6 +2,7 @@
   <Head>
     <!-- Basic Meta Tags -->
     <title>{{ seo.title }}</title>
+    <component :is="'script'" type="application/ld+json">{{ structuredData }}</component>
     <meta name="description" :content="seo.description" />
     <meta name="keywords" :content="seo.keywords" />
     <meta name="author" content="Penda Graphics" />
@@ -97,21 +98,12 @@
 <script setup>
 import Layout from "@/Layouts/HomeLayout.vue";
 import FaqComponent from "@/components/Home/FaqComponent.vue";
-import { onMounted } from "vue";
 
 const props = defineProps({
   seo: Object,
   structuredData: String
 });
 
-onMounted(() => {
-  if (props.structuredData) {
-    const script = document.createElement('script');
-    script.type = 'application/ld+json';
-    script.textContent = props.structuredData;
-    document.head.appendChild(script);
-  }
-});
 </script>
 
 <style scoped>
