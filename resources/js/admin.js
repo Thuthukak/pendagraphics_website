@@ -30,7 +30,13 @@ import { faBars,
         faPaintBrush,
         faFileInvoiceDollar,
         faUserCog,
-        faPencil
+        faPencil,
+        faClone,
+        faPlus,
+        faPause,
+        faPlay,
+        faEllipsis,
+        faSearch
     } from "@fortawesome/free-solid-svg-icons";
 
 import { 
@@ -39,6 +45,7 @@ import {
     faInstagram,
     faFacebook
 } from "@fortawesome/free-brands-svg-icons";
+import { faZ } from '@fortawesome/free-solid-svg-icons/faZ';
 
 library.add(faBars,
             faFacebook,
@@ -66,6 +73,17 @@ library.add(faBars,
             faMailForward,
             faPaperPlane,
             faPaintBrush,
+            faClone,
+            faZ,
+            faPlus,
+            faPause,
+            faPlay,
+            faEllipsis,
+            faSearch,
+            faFilePdf
+            
+            
+
             
         );
 

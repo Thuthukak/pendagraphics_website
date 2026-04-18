@@ -13,6 +13,7 @@ use App\Http\Controllers\ContactController;
 use App\Http\Controllers\NewsletterController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\InvoiceController;
+use App\Http\Controllers\RecurringInvoiceController;
 use App\Http\Controllers\ClientController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\InvitationController;
@@ -61,13 +62,14 @@ Route::prefix('admin')->group(function () {
     Route::get('/about-us', [HomeController::class, 'AboutUsIndex'])->name('about-us.index');
     Route::post('/newsletter', [NewsletterController::class, 'store'])->name('newsletter.store');
     Route::get('/contact-us', [HomeController::class, 'ContactIndex'])->name('contact.index');
-   
 
 
 // API Routes (Public API)
 Route::prefix('api')->group(function () {
-     Route::get('/profile/data', [ProfileController::class, 'show'])->name('profile.data');
+    Route::get('/profile/data', [ProfileController::class, 'show'])->name('profile.data');
 
+    // clients
+    Route::Resource('clients', ClientController::class);
      //contacts
     Route::get('/contacts', [ContactController::class, 'index']);
     Route::get('/contacts/{id}', [ContactController::class, 'show']);
@@ -93,17 +95,45 @@ Route::prefix('api')->group(function () {
     Route::post('estimates/bulk-email', [EstimateController::class, 'bulkSendEmails']);
     Route::get('estimates/{id}/pdf', [EstimateController::class, 'downloadPDF']);
     Route::delete('estimates/{id}', [EstimateController::class, 'destroy']);
+
     //invoices
-    Route::get('/invoices', [InvoiceController::class, 'index'])->name('invoices.show');
-    Route::post('/invoices', [InvoiceController::class, 'store']); 
-    Route::get('/invoices/clients', [ClientController::class, 'index']);
-    Route::get('/invoices/{invoice}', [InvoiceController::class, 'show']); 
-    Route::put('/invoices/{invoice}', [InvoiceController::class, 'update']); 
-    Route::delete('/invoices/{invoice}', [InvoiceController::class, 'destroy']); 
-    // Special actions
-    Route::post('/invoices/{invoice}/send', [InvoiceController::class, 'markAsSent']); 
-    Route::post('/invoices/{invoice}/payment', [InvoiceController::class, 'recordPayment']); 
-    Route::post('/invoices/{invoice}/duplicate', [InvoiceController::class, 'duplicate']); 
+    Route::prefix('invoices')->name('invoices.')->group(function () {
+        Route::get('/',                      [InvoiceController::class, 'index'])->name('index');
+        Route::post('/',                     [InvoiceController::class, 'store'])->name('store');
+        Route::get('/statistics',            [InvoiceController::class, 'statistics'])->name('statistics');
+        Route::get('/clients',               [InvoiceController::class, 'getClients'])->name('clients');
+        Route::get('/{invoice}',             [InvoiceController::class, 'show'])->name('show');
+        Route::put('/{invoice}',             [InvoiceController::class, 'update'])->name('update');
+        Route::delete('/{invoice}',          [InvoiceController::class, 'destroy'])->name('destroy');
+        Route::post('/{invoice}/send',  [InvoiceController::class, 'send'])->name('send');
+        Route::post('/{invoice}/export',  [InvoiceController::class, 'export'])->name('export');
+        Route::post('/{invoice}/print',  [InvoiceController::class, 'print'])->name('print');
+        Route::post('/{invoice}/make-recurring',  [InvoiceController::class, 'makeRecurring'])->name('makeRecurring ');
+        Route::post('/{invoice}/mark-as-sent',  [InvoiceController::class, 'markAsSent'])->name('markAsSent');
+        Route::post('/{invoice}/record-payment',[InvoiceController::class, 'recordPayment'])->name('recordPayment');
+        Route::post('/{invoice}/duplicate',     [InvoiceController::class, 'duplicate'])->name('duplicate');
+    }); 
+
+    // Recurring invoice schedules
+    Route::prefix('recurring-invoices')->name('recurring-invoices.')->group(function () {
+        Route::get('/',                                    [RecurringInvoiceController::class, 'index'])->name('index');
+        Route::post('/',                                   [RecurringInvoiceController::class, 'store'])->name('store');
+        Route::get('/{recurringInvoice}',                  [RecurringInvoiceController::class, 'show'])->name('show');
+        Route::put('/{recurringInvoice}',                  [RecurringInvoiceController::class, 'update'])->name('update');
+        Route::delete('/{recurringInvoice}',               [RecurringInvoiceController::class, 'destroy'])->name('destroy');
+        Route::patch('/{recurringInvoice}/toggle-active',  [RecurringInvoiceController::class, 'toggleActive'])->name('toggleActive');
+        Route::get('/{recurringInvoice}/logs',             [RecurringInvoiceController::class, 'logs'])->name('logs');
+        Route::get('/{recurringInvoice}/preview-dates',    [RecurringInvoiceController::class, 'previewDates'])->name('previewDates');
+    });
+
+    // Config/static data endpoint (used by frontend dropdowns)
+    Route::get('/invoice-configs/{group}', function (string $group) {
+        return \Illuminate\Support\Facades\DB::table('invoice_configs')
+            ->where('group', $group)
+            ->where('is_active', true)
+            ->orderBy('sort_order')
+            ->get(['key', 'label']);
+    })->name('invoice-configs');
     
     // Statistics and reporting
     Route::get('/invoices/statistics', [InvoiceController::class, 'statistics']); 
@@ -126,8 +156,12 @@ Route::prefix('api')->group(function () {
     // Users
     Route::get('/users', [UserController::class, 'index']);
     Route::delete('/users/{user}', [UserController::class, 'destroy']);
-
     
+    //testing schedule - crontab -e  * * * * * php /path/to/artisan schedule:run >> /dev/null 2>&1
+    // Schedule::call(function () {
+    //     \Illuminate\Support\Facades\Log::info('Cron heartbeat: ' . now());
+    // })->everyMinute();
+
 });
 
 require __DIR__.'/auth.php';

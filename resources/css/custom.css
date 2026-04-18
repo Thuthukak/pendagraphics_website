@@ -79,3 +79,17 @@ brand primary variable and brand secondary variable */
   background-color: #fabf3d;
   color: white;
 }
+
+.penda-btn-danger {
+  background-color: #af2c2c;
+  color: white;
+}
+
+.penda-btn-danger:hover {
+  background-color: #f33e3e;
+  color: white;
+}
+
+.bg-danger-500 {
+  background-color: #af2c2c;
+}
