@@ -21,6 +21,7 @@ class RecurringInvoice extends Model
         'action_on_create', 'notify_admin', 'is_active',
     ];
 
+    
     protected $casts = [
         'start_date'     => 'date',
         'end_date'       => 'date',
@@ -30,6 +31,10 @@ class RecurringInvoice extends Model
         'discount_rate'  => 'decimal:2',
         'notify_admin'   => 'boolean',
         'is_active'      => 'boolean',
+        'interval'       => 'integer',
+        'days_until_due'    => 'integer', 
+        'occurrences_limit' => 'integer', 
+        'occurrences_count' => 'integer',
     ];
 
     // ─── Relationships ──────────────────────────────────────────────────────────
