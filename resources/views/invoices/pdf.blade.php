@@ -179,10 +179,20 @@
   <table class="header-table">
     <tr>
       <td style="width: 45%;">
-        @if(file_exists(public_path('assets/images/penda_logo2.png')))
-          <img src="{{ public_path('assets/images/penda_logo2.png') }}" class="logo-img" alt="Logo">
+        @php
+            $logoFile = public_path('assets/images/penda_logo2.png');
+            $logoSrc  = null;
+            if (file_exists($logoFile)) {
+                $type    = pathinfo($logoFile, PATHINFO_EXTENSION);
+                $data    = base64_encode(file_get_contents($logoFile));
+                $logoSrc = 'data:image/' . $type . ';base64,' . $data;
+            }
+        @endphp
+
+        @if($logoSrc)
+            <img src="{{ $logoSrc }}" class="logo-img" alt="Logo">
         @else
-          <div class="logo-placeholder">{{ config('invoice.company_name', config('app.name')) }}</div>
+            <div class="logo-placeholder">{{ config('invoice.company_name', config('app.name')) }}</div>
         @endif
       </td>
       <td style="text-align: right;">
