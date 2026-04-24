@@ -63,6 +63,12 @@ Route::prefix('admin')->group(function () {
     Route::post('/newsletter', [NewsletterController::class, 'store'])->name('newsletter.store');
     Route::get('/contact-us', [HomeController::class, 'ContactIndex'])->name('contact.index');
 
+    Route::get('/accept-invitation/{token}', [InvitationController::class, 'show'])
+    ->name('invitation.show');
+
+    Route::post('/accept-invitation/{token}', [InvitationController::class, 'accept'])
+    ->name('invitation.accept');
+
 
 // API Routes (Public API)
 Route::prefix('api')->group(function () {

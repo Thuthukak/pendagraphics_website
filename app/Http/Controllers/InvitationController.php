@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Mail\UserInvitationMail;
 use App\Models\User;
 use App\Models\UserInvitation;
+use App\Jobs\SendUserInvitationJob;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Mail;
@@ -12,7 +13,7 @@ use Illuminate\Validation\Rules\Password;
 use Inertia\Inertia;
 use Illuminate\Support\Facades\Log;
 
-class InvitationController extends Controller
+class InvitationController extends BaseController
 {
     public function index()
     {
@@ -28,20 +29,18 @@ class InvitationController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'email' => 'required|email|unique:users,email|unique:user_invitations,email',
+            'email' => 'required|email|unique:users,email',
         ]);
 
-        // Delete any expired invitations for this email
-        UserInvitation::where('email', $request->email)
-            ->where('expires_at', '<', now())
-            ->delete();
+        // Delete any existing invitation for this email (expired or not)
+        UserInvitation::where('email', $request->email)->delete();
 
         $invitation = UserInvitation::createInvitation(
             $request->email,
             auth()->id()
         );
 
-        Mail::to($request->email)->send(new UserInvitationMail($invitation));
+        SendUserInvitationJob::dispatch($invitation);
 
         return response()->json([
             'message' => 'Invitation sent successfully',
@@ -51,26 +50,25 @@ class InvitationController extends Controller
 
     public function show(string $token)
     {
-        Log::info('invitation show called');
-        Log::info('Showing invitation for token', ['token' => $token]);
         $invitation = UserInvitation::where('token', $token)->firstOrFail();
-        
-        Log::info('Invitation found', ['invitation' => $invitation]);
 
         if (!$invitation->isValid()) {
             return Inertia::render('InvitationExpired');
         }
 
+        $seoData = $this->mergeSeoData([
+            'hero_image' => asset('assets/images/3436542.png'),
+        ]);
+
         return Inertia::render('AcceptInvitation', [
             'token' => $token,
             'email' => $invitation->email,
+            'seo' => $seoData,
         ]);
     }
 
     public function accept(Request $request, string $token)
     {
-        Log::info('invitation accept called');
-        Log::info('Accepting invitation for token', ['token' => $token]);
         $invitation = UserInvitation::where('token', $token)->firstOrFail();
 
         if (!$invitation->isValid()) {
@@ -89,8 +87,6 @@ class InvitationController extends Controller
             'email' => $invitation->email,
             'password' => Hash::make($validated['password']),
         ]);
-
-        Log::info('User created successfully', ['user' => $user]);
 
         $invitation->markAsAccepted();
 

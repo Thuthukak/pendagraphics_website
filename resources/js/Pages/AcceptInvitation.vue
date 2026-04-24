@@ -4,13 +4,13 @@
       <!-- Hero Image (8 columns) -->
           <div class="col-md-8 d-none d-md-block p-0">
             <img 
-            src="/assets/images/auth_bannner.png" 
+            :src="seo.hero_image" 
             alt="Hero Image" 
             class="w-100 min-vh-100 object-fit-cover">
           </div>
 
           <!-- Auth Form (4 columns) -->
-          <div class="col-md-4 d-flex bg-neema-primary align-items-center justify-content-center p-0">
+          <div class="col-md-4 d-flex bg-penda-primary align-items-center justify-content-center p-0">
             <div class="w-100  p-4">
               <h2 class="text-center text-white fw-bold mb-3">
                 Complete Your Registration
@@ -75,7 +75,7 @@
                   <button
                     type="submit"
                     :disabled="form.processing"
-                    class="neema-btn neema-btn-secondary border w-100"
+                    class="penda-btn penda-btn-secondary border w-100"
                   >
                     {{ form.processing ? 'Creating Account...' : 'Create Account' }}
                   </button>
@@ -96,10 +96,15 @@ export default {
     token: {
       type: String,
       required: true,
+
     },
     email: {
       type: String,
       required: true,
+    },
+    seo: {
+      type: Object,
+      default: () => ({}),
     },
   },
   data() {

@@ -286,12 +286,16 @@ export default {
           email: formData.email,
         });
         
+        // Remove any existing invitation for this email (in case of resend)
+        this.invitations = this.invitations.filter(i => i.email !== formData.email);
+        
+        // Add the new invitation to the top
         this.invitations.unshift(response.data.invitation);
+        
         this.closeInviteModal();
-        alert('Invitation sent successfully!');
+        alert(response.data.message); // Shows 'Previous invitation cancelled and a new one sent successfully' or 'Invitation sent successfully'
       } catch (error) {
         if (error.response?.status === 422) {
-          // Pass server validation errors to the modal
           this.$refs.inviteModal.setErrors(error.response.data.errors);
         } else {
           alert('Failed to send invitation. Please try again.');
