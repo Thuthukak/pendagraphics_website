@@ -201,6 +201,33 @@ class InvoiceController extends Controller
         }
     }
 
+    public function reminder(Invoice $invoice): JsonResponse
+    {
+        if (!in_array($invoice->status, ['sent', 'overdue'])) {
+            return response()->json([
+                'message' => 'Reminders can only be sent for invoices that have been sent but not yet paid.',
+            ], 422);
+        }
+
+        try {
+            SendInvoiceJob::dispatch($invoice, 'reminder');
+
+            // update column last_reminder_sent_at
+            $invoice->last_reminder_sent_at = now();
+            $invoice->save();
+
+            return response()->json([
+                'message' => 'Reminder is being sent. The client will receive it shortly.',
+            ]);
+
+        } catch (\Exception $e) {
+            return response()->json([
+                'message' => 'Failed to queue reminder.',
+                'error'   => $e->getMessage(),
+            ], 500);
+        }
+    }
+
     /**
      * Send invoice to client via email
      */

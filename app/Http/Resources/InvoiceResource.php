@@ -45,6 +45,7 @@ class InvoiceResource extends JsonResource
             // Status info
             'is_overdue' => $this->is_overdue,
             'sent_at' => $this->sent_at?->format('Y-m-d H:i:s'),
+            'last_reminder_sent_at' => $this->last_reminder_sent_at?->format('Y-m-d H:i:s'),
             
             // Relationships
             'client' => $this->whenLoaded('client', function () {

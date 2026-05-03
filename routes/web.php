@@ -113,6 +113,7 @@ Route::prefix('api')->group(function () {
         Route::delete('/{invoice}',          [InvoiceController::class, 'destroy'])->name('destroy');
         Route::post('/{invoice}/send',  [InvoiceController::class, 'send'])->name('send');
         Route::post('/{invoice}/export',  [InvoiceController::class, 'export'])->name('export');
+        Route::post('/{invoice}/send-reminder',  [InvoiceController::class, 'reminder'])->name('reminder');
         Route::post('/{invoice}/print',  [InvoiceController::class, 'print'])->name('print');
         Route::post('/{invoice}/make-recurring',  [InvoiceController::class, 'makeRecurring'])->name('makeRecurring ');
         Route::post('/{invoice}/mark-as-sent',  [InvoiceController::class, 'markAsSent'])->name('markAsSent');

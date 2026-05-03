@@ -13,6 +13,7 @@ use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Queue\SerializesModels;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Mail;
+use App\Mail\InvoiceReminderMail;
 
 class SendInvoiceJob implements ShouldQueue
 {
@@ -30,27 +31,38 @@ class SendInvoiceJob implements ShouldQueue
 
     public function __construct(
         public readonly Invoice $invoice,
+        public readonly string $type = 'send', // 'send' | 'reminder'
     ) {}
 
     public function handle(): void
     {
-        // Eager-load everything the mailables and PDF view need
         $this->invoice->load(['client', 'items.service']);
 
-        // 1. Send invoice PDF to client
+        if ($this->type === 'reminder') {
+            $this->sendReminder();
+        } else {
+            $this->sendInitial();
+        }
+    }
+
+    private function sendInitial(): void
+    {
         Mail::to($this->invoice->client->email)
             ->send(new InvoiceMail($this->invoice));
 
-        // 2. Send confirmation to admin
         $adminEmail = config('mail.from.admin_address', config('mail.from.address'));
+        Mail::to($adminEmail)->send(new InvoiceSentAdminMail($this->invoice));
 
-        Mail::to($adminEmail)
-            ->send(new InvoiceSentAdminMail($this->invoice));
-
-        // 3. Mark invoice as sent (only after both mails succeed)
         $this->invoice->markAsSent();
-
         Log::info("Invoice {$this->invoice->invoice_number} sent to {$this->invoice->client->email}");
+    }
+
+    private function sendReminder(): void
+    {
+        Mail::to($this->invoice->client->email)
+            ->send(new InvoiceReminderMail($this->invoice));
+
+        Log::info("Reminder sent for invoice {$this->invoice->invoice_number} to {$this->invoice->client->email}");
     }
 
     /**
