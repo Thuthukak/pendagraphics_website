@@ -175,6 +175,8 @@
 
 <script>
 import { ref, reactive, computed, watch, onMounted } from 'vue'
+import { useNotify } from '@/composables/useToast.js'
+import axios from 'axios'
 
 export default {
   name: 'InvoiceCreateEditModal',
@@ -217,6 +219,7 @@ export default {
       ]
     })
 
+    const notify = useNotify()
     // Services state
     const services = ref([])
     const loadingServices = ref(false)
@@ -350,42 +353,34 @@ export default {
 
     const addCustomService = async () => {
       try {
-        // Save custom service to backend
         const newService = await api.post('/api/services/custom', customService)
-        
-        // Add to local services list
         services.value.push(newService)
-        
-        // Add item with custom service
-        const newItem = {
+
+        localForm.items.push({
           service_id: '',
           description: customService.name,
           quantity: 1,
           unit_price: parseFloat(customService.price),
           total: parseFloat(customService.price),
           is_custom: true
-        }
-        
-        localForm.items.push(newItem)
-        
-        // Reset and close custom service form
+        })
+
         Object.assign(customService, { name: '', description: '', price: 0, is_active: 1 })
         showCustomService.value = false
+        notify.success('Custom service added.')
       } catch (error) {
-        console.error('Error adding custom service:', error)
-        // If API fails, still add as custom item
-        const newItem = {
+        // fallback: still add as custom item even if API fails
+        localForm.items.push({
           service_id: '',
           description: customService.name,
           quantity: 1,
           unit_price: parseFloat(customService.price),
           total: parseFloat(customService.price),
           is_custom: true
-        }
-        
-        localForm.items.push(newItem)
+        })
         Object.assign(customService, { name: '', description: '', price: 0, is_active: 1 })
         showCustomService.value = false
+        notify.warning('Service saved locally — could not sync to server.')
       }
     }
 
@@ -420,14 +415,19 @@ export default {
     }
 
     const handleSave = () => {
+      // Basic guard — at least one item with a description
+      const hasValidItems = localForm.items.every(i => i.description && i.quantity > 0 && i.unit_price >= 0)
+      if (!hasValidItems) {
+        notify.error('Please fill in all item fields before saving.')
+        return
+      }
+
       const formData = { ...localForm }
-      
-      // Handle custom client
+
       if (showCustomClient.value && customClient.name) {
         formData.custom_client = { ...customClient }
       }
 
-      // Clean up items - remove service_id if it's empty or custom
       formData.items = formData.items.map(item => ({
         service_id: (item.service_id && !item.is_custom) ? item.service_id : null,
         description: item.description,
