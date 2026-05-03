@@ -209,6 +209,10 @@ import InvoiceRowMenu          from './partials/InvoiceRowMenu.vue'
 import InvoiceExportModal      from './InvoiceExportModal.vue'
 import InvoiceDeleteModal      from './InvoiceDeleteModal.vue'
 import MakeRecurringModal      from './MakeRecurringModal.vue'
+import { useNotify } from '@/composables/useToast.js'
+import axios from 'axios'
+
+const notify = useNotify()
 
 // ── Tabs ────────────────────────────────────────────────────────────────────
 const activeTab    = ref('invoices')
@@ -311,18 +315,33 @@ function exportInvoice(inv) { selectedInvoice.value = inv; showExportModal.value
 function openDelete(inv) { selectedInvoice.value = inv; showDeleteModal.value = true }
 
 async function duplicateInvoice(inv) {
-  await api('POST', `/invoices/${inv.id}/duplicate`)
-  await Promise.all([loadInvoices(), loadStatistics()])
+  try {
+    await api('POST', `/invoices/${inv.id}/duplicate`)
+    await Promise.all([loadInvoices(), loadStatistics()])
+    notify.success('Invoice duplicated.')
+  } catch (err) {
+    notify.error(err?.message ?? 'Failed to duplicate invoice.')
+  }
 }
 
 async function sendInvoice(inv) {
-  await api('POST', `/invoices/${inv.id}/send`)
-  await Promise.all([loadInvoices(), loadStatistics()])
+  try {
+    await api('POST', `/invoices/${inv.id}/send`)
+    await Promise.all([loadInvoices(), loadStatistics()])
+    notify.success('Invoice sent! The client will receive it shortly.')
+  } catch (err) {
+    notify.error(err?.message ?? 'Failed to send invoice.')
+  }
 }
 
 async function sendReminder(inv) {
-  await api('POST', `/invoices/${inv.id}/send-reminder`)
-  await Promise.all([loadInvoices(), loadStatistics()])
+  try {
+    await api('POST', `/invoices/${inv.id}/send-reminder`)
+    await Promise.all([loadInvoices(), loadStatistics()])
+    notify.success('Reminder sent successfully.')
+  } catch (err) {
+    notify.error(err?.message ?? 'Failed to send reminder.')
+  }
 }
 
 async function printInvoice(inv) {
@@ -339,48 +358,56 @@ function makeRecurring(inv) {
 async function handleMakeRecurring(payload) {
   savingRecurring.value = true
   try {
-    // POST /api/invoices/{id}/make-recurring  →  InvoiceController@makeRecurring
     await api('POST', `/invoices/${selectedInvoice.value.id}/make-recurring`, payload)
     showRecurringModal.value = false
     selectedInvoice.value    = null
-    // Optionally switch to the recurring tab so the user sees the new schedule
     activeTab.value = 'recurring'
+    notify.success('Recurring schedule created.')
   } catch (err) {
-    console.error('Failed to create recurring schedule:', err)
-    alert(err?.message ?? 'Failed to create recurring schedule.')
+    notify.error(err?.message ?? 'Failed to create recurring schedule.')
   } finally {
     savingRecurring.value = false
   }
 }
 
 async function markAsSent(inv) {
-  await api('POST', `/invoices/${inv.id}/mark-as-sent`)
-  await Promise.all([loadInvoices(), loadStatistics()])
+  try {
+    await api('POST', `/invoices/${inv.id}/mark-as-sent`)
+    await Promise.all([loadInvoices(), loadStatistics()])
+    notify.success('Invoice marked as sent.')
+  } catch (err) {
+    notify.error(err?.message ?? 'Failed to mark invoice as sent.')
+  }
 }
 
 async function deleteInvoice() {
   await Promise.all([loadInvoices(), loadStatistics()])
 }
 
+
 async function handleSave(formData) {
   saving.value = true
   try {
     if (isEditing.value) {
       await api('PUT', `/invoices/${selectedInvoice.value.id}`, formData)
+      notify.success('Invoice updated successfully.')
     } else {
       await api('POST', '/invoices', formData)
+      notify.success('Invoice created successfully.')
     }
     closeModals()
     await Promise.all([loadInvoices(), loadStatistics()])
   } catch (err) {
-    console.error('Save failed:', err)
-    alert(err?.message ?? 'Failed to save invoice. Please check your inputs.')
-  } finally { saving.value = false }
+    notify.error(err?.message ?? 'Failed to save invoice. Please check your inputs.')
+  } finally { 
+    saving.value = false 
+  }
 }
 
 async function onPaymentSaved() {
   closeModals()
   await Promise.all([loadInvoices(), loadStatistics()])
+  notify.success('Payment recorded successfully.')
 }
 
 /**

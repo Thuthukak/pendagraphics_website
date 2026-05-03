@@ -3,6 +3,8 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import '../css/app.css';
 import '../css/custom.css';
 import { createApp } from 'vue';
+import Toast from 'vue-toastification'
+import 'vue-toastification/dist/index.css'
 import Dashboard from './components/Admin/Dashboard/Dashboard.vue'; 
 import DashboardLayout from './Layouts/DashboardLayout.vue';
 import { library } from "@fortawesome/fontawesome-svg-core";
@@ -95,6 +97,13 @@ app.component('Dashboard', Dashboard);
 app.component('DashboardLayout', DashboardLayout);
 app.component("font-awesome-icon", FontAwesomeIcon);
 app.use(router);
+app.use(Toast, {
+    position: 'bottom-right',
+    timeout: 4000,
+    closeOnClick: true,
+    pauseOnHover: true,
+    draggable: true,
+});
 
 
 app.mount('#app');
