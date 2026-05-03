@@ -20,6 +20,10 @@
                   {{ formatStatus(invoice.status) }}
                 </span>
               </div>
+              <!-- reminder last sent at -->
+              <div v-if="invoice.last_reminder_sent_at" class="total-line">
+                <strong>Reminder Sent:</strong> {{ formatDate(invoice.last_reminder_sent_at) }}
+              </div>
             </div>
           </div>
 

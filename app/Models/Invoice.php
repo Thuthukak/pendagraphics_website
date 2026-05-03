@@ -32,6 +32,7 @@ class Invoice extends Model
         'payment_method',
         'payment_notes',
         'sent_at',
+        'last_reminder_sent_at',
     ];
 
     protected $casts = [
@@ -47,6 +48,7 @@ class Invoice extends Model
         'total' => 'decimal:2',
         'paid_amount' => 'decimal:2',
         'balance' => 'decimal:2',
+        'last_reminder_sent_at' => 'datetime',
     ];
 
     // Relationships

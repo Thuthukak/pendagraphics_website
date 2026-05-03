@@ -16,6 +16,9 @@
         <button class="menu-item" @click="emit('export', invoice); close()">
           Export as PDF
         </button>
+        <button class="menu-item" @click="emit('reminder', invoice); close()">
+          Send Reminder
+        </button>
         <button class="menu-item" @click="emit('recurring', invoice); close()">
           Make Recurring
         </button>
@@ -37,7 +40,7 @@
 import { ref, computed, onUnmounted } from 'vue'
 
 defineProps({ invoice: Object })
-const emit = defineEmits(['send', 'export', 'recurring', 'mark-sent', 'payment', 'delete'])
+const emit = defineEmits(['send', 'export', 'reminder', 'recurring', 'mark-sent', 'payment', 'delete'])
 
 const open       = ref(false)
 const triggerRef = ref(null)

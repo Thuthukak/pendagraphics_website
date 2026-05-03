@@ -109,6 +109,7 @@
                     :invoice="inv"
                     @send="sendInvoice"
                     @export="exportInvoice"
+                    @reminder="sendReminder"
                     @print="printInvoice"
                     @recurring="makeRecurring"
                     @mark-sent="markAsSent" 
@@ -316,6 +317,11 @@ async function duplicateInvoice(inv) {
 
 async function sendInvoice(inv) {
   await api('POST', `/invoices/${inv.id}/send`)
+  await Promise.all([loadInvoices(), loadStatistics()])
+}
+
+async function sendReminder(inv) {
+  await api('POST', `/invoices/${inv.id}/send-reminder`)
   await Promise.all([loadInvoices(), loadStatistics()])
 }
 

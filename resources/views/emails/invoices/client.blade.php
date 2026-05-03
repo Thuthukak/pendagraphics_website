@@ -1,4 +1,3 @@
-{{-- resources/views/emails/invoices/client.blade.php --}}
 <x-mail::message>
 # Invoice {{ $invoice->invoice_number }}
 
