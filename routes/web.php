@@ -16,7 +16,9 @@ use App\Http\Controllers\InvoiceController;
 use App\Http\Controllers\RecurringInvoiceController;
 use App\Http\Controllers\ClientController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\DeliveryNoteController;
 use App\Http\Controllers\InvitationController;
+use App\Http\Controllers\SettingsController;
 use Inertia\Inertia;
 
 
@@ -63,6 +65,9 @@ Route::prefix('admin')->group(function () {
     Route::post('/newsletter', [NewsletterController::class, 'store'])->name('newsletter.store');
     Route::get('/contact-us', [HomeController::class, 'ContactIndex'])->name('contact.index');
 
+    //Route::get('/Refund-&-Cancellation', [HomeController::class, 'TermsAndConditionsIndex'])->name('terms-and-conditions.index');
+    Route::get('/Refunds-&-Cancellation', [HomeController::class, 'PrivacyPolicyIndex'])->name('privacy-policy.index');
+
     Route::get('/accept-invitation/{token}', [InvitationController::class, 'show'])
     ->name('invitation.show');
 
@@ -101,6 +106,45 @@ Route::prefix('api')->group(function () {
     Route::post('estimates/bulk-email', [EstimateController::class, 'bulkSendEmails']);
     Route::get('estimates/{id}/pdf', [EstimateController::class, 'downloadPDF']);
     Route::delete('estimates/{id}', [EstimateController::class, 'destroy']);
+
+    //estimates
+    Route::prefix('estimates')->group(function () {
+        Route::get('/', [EstimateController::class, 'index']);
+        Route::post('/', [EstimateController::class, 'store']); // public quote-request form still posts here
+        Route::get('/statistics', [EstimateController::class, 'statistics']);
+        Route::get('/{estimate}', [EstimateController::class, 'show']);
+        Route::put('/{estimate}', [EstimateController::class, 'update']);
+        Route::delete('/{estimate}', [EstimateController::class, 'destroy']);
+    
+        Route::put('/{id}/status', [EstimateController::class, 'updateStatus']);
+        Route::put('/bulk-status', [EstimateController::class, 'bulkUpdateStatus']);
+    
+        Route::post('/{id}/resend-email', [EstimateController::class, 'resendEmail']);
+        Route::post('/bulk-email', [EstimateController::class, 'bulkSendEmails']);
+    
+        Route::get('/{id}/pdf', [EstimateController::class, 'downloadPDF']);
+        Route::post('/{estimate}/duplicate', [EstimateController::class, 'duplicate']);
+    
+        Route::post('/{estimate}/convert-to-invoice', [EstimateController::class, 'convertToInvoice']);
+    });
+
+    Route::prefix('delivery-notes')->group(function () {
+        Route::get('/',                      [DeliveryNoteController::class, 'index']);
+        Route::post('/',                     [DeliveryNoteController::class, 'store']);
+        Route::get('/statistics',            [DeliveryNoteController::class, 'statistics']);
+        Route::get('/from-invoice/{invoice}',       [DeliveryNoteController::class, 'fromInvoice']);
+        Route::get('/from-estimate/{estimate}',   [DeliveryNoteController::class, 'fromEstimate']);
+    
+        Route::get('/{deliveryNote}',        [DeliveryNoteController::class, 'show']);
+        Route::put('/{deliveryNote}',        [DeliveryNoteController::class, 'update']);
+        Route::delete('/{deliveryNote}',     [DeliveryNoteController::class, 'destroy']);
+    
+        Route::post('/{deliveryNote}/dispatch',  [DeliveryNoteController::class, 'markAsDispatched']);
+        Route::post('/{deliveryNote}/deliver',   [DeliveryNoteController::class, 'markAsDelivered']);
+        Route::post('/{deliveryNote}/cancel',    [DeliveryNoteController::class, 'cancel']);
+        Route::get('/{deliveryNote}/export',     [DeliveryNoteController::class, 'export']);
+    });
+
 
     //invoices
     Route::prefix('invoices')->name('invoices.')->group(function () {
@@ -163,6 +207,11 @@ Route::prefix('api')->group(function () {
     // Users
     Route::get('/users', [UserController::class, 'index']);
     Route::delete('/users/{user}', [UserController::class, 'destroy']);
+
+    //settings
+    Route::get('settings', [SettingsController::class, 'index']);
+    Route::post('settings', [SettingsController::class, 'update']);
+    Route::get('settings/bank-accounts', [SettingsController::class, 'bankAccounts']);
     
     //testing schedule - crontab -e  * * * * * php /path/to/artisan schedule:run >> /dev/null 2>&1
     // Schedule::call(function () {

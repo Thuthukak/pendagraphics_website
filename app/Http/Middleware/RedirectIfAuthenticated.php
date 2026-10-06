@@ -19,6 +19,9 @@ class RedirectIfAuthenticated
         if (Auth::guard($guards)->check()) {
             return redirect('/admin/dashboard');  // Redirect authenticated users to the dashboard
         }
+        else {
+            return redirect('/admin/auth');  // Redirect unauthenticated users to the login page
+        }
 
         return $next($request);
     }

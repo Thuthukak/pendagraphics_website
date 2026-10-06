@@ -3,8 +3,6 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import '../css/app.css';
 import '../css/custom.css';
 import { createApp } from 'vue';
-import Toast from 'vue-toastification'
-import 'vue-toastification/dist/index.css'
 import Dashboard from './components/Admin/Dashboard/Dashboard.vue'; 
 import DashboardLayout from './Layouts/DashboardLayout.vue';
 import { library } from "@fortawesome/fontawesome-svg-core";
@@ -31,40 +29,57 @@ import { faBars,
         faEnvelope,
         faPaintBrush,
         faFileInvoiceDollar,
-        faUserCog,
         faPencil,
-        faClone,
+        faTrashAlt,
+        faUserCog,
+        faEllipsisH,
+        faUserCheck,
+        faLeaf,
+        faHeart,
+        faScaleBalanced,
+        faSeedling,
+        faLock,
+        faHandHolding,
+        faTruck,
+        faUsers,
         faPlus,
+        faSearch,
+        faXmark,
+        faEllipsisVertical,
+        faClone,
         faPause,
         faPlay,
-        faEllipsis,
-        faSearch
+        faCircleCheck,
+        faCheck,
+        faBan,
+        faCopy
+
     } from "@fortawesome/free-solid-svg-icons";
 
 import { 
     faTiktok,
     faYoutube,
     faInstagram,
-    faFacebook
+    faFacebook,
+    faWhatsapp,
 } from "@fortawesome/free-brands-svg-icons";
-import { faZ } from '@fortawesome/free-solid-svg-icons/faZ';
 
 library.add(faBars,
             faFacebook,
             faInstagram,
             faYoutube,
             faTiktok, 
+            faWhatsapp,
             faMoon,
             faFileInvoiceDollar, 
             faSun, 
             faGlobe, 
-            faUser, 
-            faBell,
-            faUserCog,
+            faUser,
+            faUserCog, 
+            faBell, 
             faCog, 
             faTrash,
             faEye,
-            faPencil,
             faFilePdf,
             faHome, 
             faSignOutAlt,
@@ -75,17 +90,29 @@ library.add(faBars,
             faMailForward,
             faPaperPlane,
             faPaintBrush,
-            faClone,
-            faZ,
+            faPencil,
+            faTrashAlt,
+            faEllipsisH,
+            faUserCheck,
+            faLeaf,
+            faHeart,
+            faScaleBalanced,
+            faSeedling,
+            faLock,
+            faHandHolding,
+            faTruck,
+            faUsers,
             faPlus,
+            faSearch,
+            faXmark,
+            faEllipsisVertical,
+            faClone,
             faPause,
             faPlay,
-            faEllipsis,
-            faSearch,
-            faFilePdf
-            
-            
-
+            faCircleCheck,
+            faCheck,
+            faBan,
+            faCopy
             
         );
 
@@ -97,13 +124,6 @@ app.component('Dashboard', Dashboard);
 app.component('DashboardLayout', DashboardLayout);
 app.component("font-awesome-icon", FontAwesomeIcon);
 app.use(router);
-app.use(Toast, {
-    position: 'bottom-right',
-    timeout: 4000,
-    closeOnClick: true,
-    pauseOnHover: true,
-    draggable: true,
-});
 
 
 app.mount('#app');

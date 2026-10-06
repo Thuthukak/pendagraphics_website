@@ -1,94 +1,86 @@
 <?php
+
 namespace App\Http\Controllers;
 
-use App\Mail\EstimateRequest;
+use App\Http\Requests\StoreEstimateRequest;
+use App\Http\Requests\UpdateEstimateRequest;
+use App\Http\Resources\EstimateResource;
+use App\Jobs\SendInvoiceJob;
+use App\Mail\EstimateRequest as EstimateRequestMail;
+use App\Models\Client;
 use App\Models\Estimate;
 use App\Models\EstimateService;
-use App\Models\Service;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Mail;
-use Illuminate\Support\Facades\Log;
-use Illuminate\Support\Facades\DB;
+use App\Models\Invoice;
 use Barryvdh\DomPDF\Facade\Pdf;
-// validator
-use Validator;
+use Illuminate\Http\JsonResponse;
+use Illuminate\Http\Request;
+use Illuminate\Http\Resources\Json\AnonymousResourceCollection;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Mail;
 use Exception;
 
 class EstimateController extends Controller
 {
-
     /**
-     * Get all estimates with their services for admin dashboard
+     * List quotations with filtering, sorting and pagination (mirrors InvoiceController::index).
      */
-    public function index(Request $request)
+    public function index(Request $request): AnonymousResourceCollection
     {
-        try {
-            $estimates = Estimate::with(['services.service'])
-                ->orderBy('created_at', 'desc')
-                ->get()
-                ->map(function ($estimate) {
-                    return [
-                        'id' => $estimate->id,
-                        'name' => $estimate->name,
-                        'email' => $estimate->email,
-                        'total_amount' => $estimate->total_amount,
-                        'status' => $estimate->status,
-                        'notes' => $estimate->notes,
-                        'created_at' => $estimate->created_at->toISOString(),
-                        'updated_at' => $estimate->updated_at->toISOString(),
-                        'services' => $estimate->services->map(function ($estimateService) {
-                            return [
-                                'id' => $estimateService->service_id,
-                                'name' => $estimateService->service->name ?? 'Unknown Service',
-                                'price' => $estimateService->price,
-                            ];
-                        })
-                    ];
-                });
+        $query = Estimate::with(['services.service', 'invoice']);
 
-            return response()->json($estimates);
-        } catch (Exception $e) {
-            Log::error('Failed to fetch estimates', [
-                'error' => $e->getMessage()
-            ]);
-
-            return response()->json([
-                'message' => 'Failed to fetch estimates',
-                'error' => config('app.debug') ? $e->getMessage() : 'Internal server error'
-            ], 500);
+        if ($request->filled('status')) {
+            $query->byStatus($request->status);
         }
+
+        if ($request->filled('search')) {
+            $query->search($request->search);
+        }
+
+        if ($request->filled('date_from') || $request->filled('date_to')) {
+            $query->byDateRange($request->date_from, $request->date_to);
+        }
+
+        if ($request->boolean('expired_only')) {
+            $query->expired();
+        }
+
+        $sortBy = $request->get('sort_by', 'created_at');
+        $sortOrder = $request->get('sort_order', 'desc');
+
+        $allowedSorts = ['quote_number', 'name', 'email', 'total_amount', 'status', 'created_at'];
+        if (in_array($sortBy, $allowedSorts)) {
+            $query->orderBy($sortBy, $sortOrder);
+        }
+
+        $perPage = $request->get('per_page', 15);
+        $estimates = $query->paginate($perPage);
+
+        return EstimateResource::collection($estimates);
     }
 
-    public function store(Request $request)
+    public function show(Estimate $estimate): JsonResponse
     {
-        // Validate request data
-        $validator = Validator::make($request->all(), [
-            'name' => 'required|string|max:255',
-            'email' => 'required|email|max:255',
-            'selectedServices' => 'required|array|min:1',
-            'selectedServices.*.id' => 'required|integer|exists:services,id',
-            'totalEstimate' => 'required|numeric|min:0',
-            'additionalDetails' => 'nullable|string',
+        $estimate->load(['services.service', 'invoice']);
+
+        return response()->json([
+            'estimate' => new EstimateResource($estimate),
         ]);
+    }
 
-        if ($validator->fails()) {
-            return response()->json([
-                'message' => 'Validation failed',
-                'errors' => $validator->errors()
-            ], 422);
-        }
-
+    public function store(StoreEstimateRequest $request): JsonResponse
+    {
         try {
-            // Create estimate record
             $estimate = Estimate::create([
                 'name' => $request->name,
                 'email' => $request->email,
                 'total_amount' => $request->totalEstimate,
-                'notes' => $request->additionalDetails,
-                'status' => 'pending', // Default status
+                'expiry_date' => $request->expiry_date,
+                'notes' => $request->notes ?? $request->additionalDetails,
+                'terms' => $request->terms,
+                'status' => Estimate::STATUS_PENDING,
             ]);
 
-            // Store selected services
             foreach ($request->selectedServices as $service) {
                 EstimateService::create([
                     'estimate_id' => $estimate->id,
@@ -97,59 +89,86 @@ class EstimateController extends Controller
                 ]);
             }
 
-            // Try to send email notification
             $emailSent = false;
-            $emailError = null;
-            
+
             try {
                 Mail::to($request->email)
                     ->cc(config('mail.admin_address'))
                     ->bcc(config('mail.from.address'))
-                    ->send(new EstimateRequest($estimate));
-                    
+                    ->send(new EstimateRequestMail($estimate));
+
                 $emailSent = true;
-                
-                // Update estimate status to indicate email was sent
-                $estimate->update(['status' => 'emailed']);
-                
+                $estimate->update(['status' => Estimate::STATUS_EMAILED]);
             } catch (Exception $mailException) {
-                // Log the email error but don't fail the entire request
                 Log::error('Failed to send estimate email', [
                     'estimate_id' => $estimate->id,
                     'email' => $request->email,
-                    'error' => $mailException->getMessage()
+                    'error' => $mailException->getMessage(),
                 ]);
-                
-                $emailError = $mailException->getMessage();
-                
-                // Update estimate status to indicate email failed
-                $estimate->update(['status' => 'email_failed']);
+                $estimate->update(['status' => Estimate::STATUS_EMAIL_FAILED]);
             }
 
-            // Return success response with email status
             $response = [
                 'message' => 'Estimate request received successfully',
-                'estimate_id' => $estimate->id,
-                'email_sent' => $emailSent
+                'estimate' => new EstimateResource($estimate->load(['services.service'])),
+                'email_sent' => $emailSent,
             ];
 
-            // If email failed, inform the user
             if (!$emailSent) {
                 $response['email_warning'] = 'Your request was saved, but we encountered an issue sending the confirmation email. We will contact you directly within 24 hours.';
             }
 
             return response()->json($response, 201);
-
         } catch (Exception $e) {
-            // Log the general error
             Log::error('Failed to create estimate', [
                 'error' => $e->getMessage(),
-                'request_data' => $request->all()
+                'request_data' => $request->all(),
             ]);
 
             return response()->json([
                 'message' => 'An error occurred while processing your request. Please try again or contact us directly.',
-                'error' => config('app.debug') ? $e->getMessage() : 'Internal server error'
+                'error' => config('app.debug') ? $e->getMessage() : 'Internal server error',
+            ], 500);
+        }
+    }
+
+    public function update(UpdateEstimateRequest $request, Estimate $estimate): JsonResponse
+    {
+        if (!$estimate->is_editable) {
+            return response()->json([
+                'message' => 'This quotation can no longer be edited (' . $estimate->status . ').',
+            ], 422);
+        }
+
+        try {
+            $estimate->update($request->only(['name', 'email', 'expiry_date', 'notes', 'terms']));
+
+            if ($request->has('selectedServices')) {
+                $estimate->services()->delete();
+
+                foreach ($request->selectedServices as $service) {
+                    EstimateService::create([
+                        'estimate_id' => $estimate->id,
+                        'service_id' => $service['id'],
+                        'price' => $service['price'],
+                    ]);
+                }
+            }
+
+            if ($request->filled('totalEstimate')) {
+                $estimate->update(['total_amount' => $request->totalEstimate]);
+            }
+
+            return response()->json([
+                'message' => 'Quotation updated successfully',
+                'estimate' => new EstimateResource($estimate->load(['services.service'])),
+            ]);
+        } catch (Exception $e) {
+            Log::error('Failed to update estimate', ['estimate_id' => $estimate->id, 'error' => $e->getMessage()]);
+
+            return response()->json([
+                'message' => 'Failed to update quotation',
+                'error' => config('app.debug') ? $e->getMessage() : 'Internal server error',
             ], 500);
         }
     }
@@ -160,30 +179,37 @@ class EstimateController extends Controller
     public function updateStatus(Request $request, $id)
     {
         $request->validate([
-            'status' => 'required|in:pending,emailed,email_failed,completed,cancelled'
+            'status' => 'required|in:pending,emailed,email_failed,completed,cancelled',
         ]);
 
         try {
             $estimate = Estimate::findOrFail($id);
+
+            if ($estimate->status === Estimate::STATUS_CONVERTED) {
+                return response()->json([
+                    'message' => 'This quotation has already been converted to an invoice and cannot change status.',
+                ], 422);
+            }
+
             $estimate->update([
                 'status' => $request->status,
-                'updated_at' => now()
+                'updated_at' => now(),
             ]);
 
             return response()->json([
                 'message' => 'Status updated successfully',
-                'estimate' => $estimate
+                'estimate' => new EstimateResource($estimate),
             ]);
         } catch (Exception $e) {
             Log::error('Failed to update estimate status', [
                 'estimate_id' => $id,
                 'status' => $request->status,
-                'error' => $e->getMessage()
+                'error' => $e->getMessage(),
             ]);
 
             return response()->json([
                 'message' => 'Failed to update status',
-                'error' => config('app.debug') ? $e->getMessage() : 'Internal server error'
+                'error' => config('app.debug') ? $e->getMessage() : 'Internal server error',
             ], 500);
         }
     }
@@ -196,30 +222,31 @@ class EstimateController extends Controller
         $request->validate([
             'ids' => 'required|array|min:1',
             'ids.*' => 'integer|exists:estimates,id',
-            'status' => 'required|in:pending,emailed,email_failed,completed,cancelled'
+            'status' => 'required|in:pending,emailed,email_failed,completed,cancelled',
         ]);
 
         try {
             $updated = Estimate::whereIn('id', $request->ids)
+                ->where('status', '!=', Estimate::STATUS_CONVERTED)
                 ->update([
                     'status' => $request->status,
-                    'updated_at' => now()
+                    'updated_at' => now(),
                 ]);
 
             return response()->json([
                 'message' => "{$updated} estimates updated successfully",
-                'updated_count' => $updated
+                'updated_count' => $updated,
             ]);
         } catch (Exception $e) {
             Log::error('Failed to bulk update estimate statuses', [
                 'ids' => $request->ids,
                 'status' => $request->status,
-                'error' => $e->getMessage()
+                'error' => $e->getMessage(),
             ]);
 
             return response()->json([
                 'message' => 'Failed to bulk update statuses',
-                'error' => config('app.debug') ? $e->getMessage() : 'Internal server error'
+                'error' => config('app.debug') ? $e->getMessage() : 'Internal server error',
             ], 500);
         }
     }
@@ -232,41 +259,31 @@ class EstimateController extends Controller
         try {
             $estimate = Estimate::with(['services.service'])->findOrFail($id);
 
-            // Try to send email
             Mail::to($estimate->email)
                 ->cc(config('mail.admin_address'))
                 ->bcc(config('mail.from.address'))
-                ->send(new EstimateRequest($estimate));
+                ->send(new EstimateRequestMail($estimate));
 
-            // Update status to emailed 
-                $estimate->update([
-                    'status' => 'emailed',
-                    'updated_at' => now()
-                
+            $estimate->update([
+                'status' => Estimate::STATUS_EMAILED,
+                'updated_at' => now(),
             ]);
 
             return response()->json([
                 'message' => 'Email sent successfully',
-                'estimate' => $estimate
+                'estimate' => new EstimateResource($estimate),
             ]);
         } catch (Exception $e) {
-            Log::error('Failed to resend estimate email', [
-                'estimate_id' => $id,
-                'error' => $e->getMessage()
-            ]);
+            Log::error('Failed to resend estimate email', ['estimate_id' => $id, 'error' => $e->getMessage()]);
 
-            // Update status to email_failed
             $estimate = Estimate::find($id);
             if ($estimate) {
-                $estimate->update([
-                    'status' => 'email_failed',
-                    'updated_at' => now()
-                ]);
+                $estimate->update(['status' => Estimate::STATUS_EMAIL_FAILED, 'updated_at' => now()]);
             }
 
             return response()->json([
                 'message' => 'Failed to send email',
-                'error' => config('app.debug') ? $e->getMessage() : 'Email delivery failed'
+                'error' => config('app.debug') ? $e->getMessage() : 'Email delivery failed',
             ], 500);
         }
     }
@@ -278,13 +295,11 @@ class EstimateController extends Controller
     {
         $request->validate([
             'ids' => 'required|array|min:1',
-            'ids.*' => 'integer|exists:estimates,id'
+            'ids.*' => 'integer|exists:estimates,id',
         ]);
 
         try {
-            $estimates = Estimate::with(['services.service'])
-                ->whereIn('id', $request->ids)
-                ->get();
+            $estimates = Estimate::with(['services.service'])->whereIn('id', $request->ids)->get();
 
             $sent = 0;
             $failed = 0;
@@ -295,76 +310,220 @@ class EstimateController extends Controller
                     Mail::to($estimate->email)
                         ->cc(config('mail.admin_address'))
                         ->bcc(config('mail.from.address'))
-                        ->send(new EstimateRequest($estimate));
+                        ->send(new EstimateRequestMail($estimate));
 
-                    // Update status to emailed
-                    $estimate->update([
-                        'status' => 'emailed',
-                        'updated_at' => now()
-                    ]);
-
+                    $estimate->update(['status' => Estimate::STATUS_EMAILED, 'updated_at' => now()]);
                     $sent++;
                 } catch (Exception $e) {
                     Log::error('Failed to send bulk email', [
                         'estimate_id' => $estimate->id,
                         'email' => $estimate->email,
-                        'error' => $e->getMessage()
+                        'error' => $e->getMessage(),
                     ]);
 
-                    // Update status to email_failed
-                    $estimate->update([
-                        'status' => 'email_failed',
-                        'updated_at' => now()
-                    ]);
-
+                    $estimate->update(['status' => Estimate::STATUS_EMAIL_FAILED, 'updated_at' => now()]);
                     $failed++;
                     $failedIds[] = $estimate->id;
                 }
             }
 
             return response()->json([
-                'message' => "Bulk email operation completed",
+                'message' => 'Bulk email operation completed',
                 'sent' => $sent,
                 'failed' => $failed,
-                'failed_ids' => $failedIds
+                'failed_ids' => $failedIds,
             ]);
         } catch (Exception $e) {
-            Log::error('Failed to process bulk emails', [
-                'ids' => $request->ids,
-                'error' => $e->getMessage()
-            ]);
+            Log::error('Failed to process bulk emails', ['ids' => $request->ids, 'error' => $e->getMessage()]);
 
             return response()->json([
                 'message' => 'Failed to process bulk emails',
-                'error' => config('app.debug') ? $e->getMessage() : 'Internal server error'
+                'error' => config('app.debug') ? $e->getMessage() : 'Internal server error',
             ], 500);
         }
     }
 
-     /**
-     * Download PDF for estimate
-     */
     public function downloadPDF(Request $request, $id)
     {
         try {
             $estimate = Estimate::with(['services.service'])->findOrFail($id);
-
-            // Generate PDF using DomPDF
             $pdf = Pdf::loadView('estimates.pdf', compact('estimate'));
 
-            // Return PDF as download
-            return $pdf->download("estimate-{$id}.pdf");
+            return $pdf->download("{$estimate->quote_number}.pdf");
         } catch (Exception $e) {
-            Log::error('Failed to generate PDF', [
-                'estimate_id' => $id,
-                'error' => $e->getMessage()
-            ]);
+            Log::error('Failed to generate PDF', ['estimate_id' => $id, 'error' => $e->getMessage()]);
 
             return response()->json([
                 'message' => 'Failed to generate PDF',
-                'error' => config('app.debug') ? $e->getMessage() : 'PDF generation failed'
+                'error' => config('app.debug') ? $e->getMessage() : 'PDF generation failed',
             ], 500);
         }
+    }
+
+    /**
+     * Duplicate an existing quotation (new draft-style pending quote, own number).
+     */
+    public function duplicate(Estimate $estimate): JsonResponse
+    {
+        try {
+            $new = $estimate->replicate(['quote_number', 'status', 'invoice_id', 'converted_at']);
+            $new->status = Estimate::STATUS_PENDING;
+            $new->invoice_id = null;
+            $new->converted_at = null;
+            $new->quote_number = null; // regenerated on create via model boot
+            $new->save();
+
+            foreach ($estimate->services as $service) {
+                EstimateService::create([
+                    'estimate_id' => $new->id,
+                    'service_id' => $service->service_id,
+                    'price' => $service->price,
+                ]);
+            }
+
+            return response()->json([
+                'message' => 'Quotation duplicated successfully',
+                'estimate' => new EstimateResource($new->load(['services.service'])),
+            ], 201);
+        } catch (Exception $e) {
+            Log::error('Failed to duplicate estimate', ['estimate_id' => $estimate->id, 'error' => $e->getMessage()]);
+
+            return response()->json([
+                'message' => 'Error duplicating quotation',
+                'error' => config('app.debug') ? $e->getMessage() : 'Internal server error',
+            ], 500);
+        }
+    }
+
+    /**
+     * Convert a quotation into a real Invoice.
+     *
+     * - Finds or creates a Client from the quote's name/email.
+     * - Copies each selected service into an InvoiceItem.
+     * - Locks the quotation with status "converted" and links invoice_id.
+     */
+    public function convertToInvoice(Request $request, Estimate $estimate): JsonResponse
+    {
+        if ($estimate->status === Estimate::STATUS_CONVERTED) {
+            return response()->json([
+                'message' => 'This quotation has already been converted to invoice ' .
+                    ($estimate->invoice->invoice_number ?? '#' . $estimate->invoice_id) . '.',
+            ], 422);
+        }
+
+        if ($estimate->status === Estimate::STATUS_CANCELLED) {
+            return response()->json([
+                'message' => 'Cancelled quotations cannot be converted to an invoice.',
+            ], 422);
+        }
+
+        $request->validate([
+            'invoice_date' => 'nullable|date',
+            'due_date' => 'nullable|date|after_or_equal:invoice_date',
+            'tax_rate' => 'nullable|numeric|min:0|max:100',
+            'discount_rate' => 'nullable|numeric|min:0|max:100',
+            'notes' => 'nullable|string|max:1000',
+            'action' => 'required|in:draft,send',
+        ]);
+
+        $estimate->load('services.service');
+
+        if ($estimate->services->isEmpty()) {
+            return response()->json([
+                'message' => 'This quotation has no services to convert.',
+            ], 422);
+        }
+
+        try {
+            $invoice = DB::transaction(function () use ($request, $estimate) {
+                $client = Client::firstOrCreate(
+                    ['email' => $estimate->email],
+                    ['name' => $estimate->name]
+                );
+
+                $invoiceDate = $request->input('invoice_date', now()->toDateString());
+                $dueDate = $request->input('due_date', now()->addDays(30)->toDateString());
+
+                $invoice = Invoice::create([
+                    'client_id' => $client->id,
+                    'invoice_date' => $invoiceDate,
+                    'due_date' => $dueDate,
+                    'status' => 'draft',
+                    'notes' => $request->input('notes', $estimate->notes),
+                    'terms' => $estimate->terms,
+                    'tax_rate' => $request->input('tax_rate', 0),
+                    'discount_rate' => $request->input('discount_rate', 0),
+                ]);
+
+                foreach ($estimate->services as $index => $estimateService) {
+                    $invoice->items()->create([
+                        'service_id' => $estimateService->service_id,
+                        'description' => $estimateService->service->name ?? 'Service',
+                        'quantity' => 1,
+                        'unit_price' => $estimateService->price,
+                        'sort_order' => $index,
+                    ]);
+                }
+
+                $invoice->load('items');
+                $invoice->calculateTotals();
+                $invoice->save();
+
+                if ($request->action === 'send') {
+                    SendInvoiceJob::dispatch($invoice);
+                }
+
+                $estimate->markAsConverted($invoice);
+
+                return $invoice;
+            });
+
+            return response()->json([
+                'message' => $request->action === 'send'
+                    ? 'Quotation converted — the invoice is being sent to the client.'
+                    : 'Quotation converted to a draft invoice.',
+                'invoice' => new \App\Http\Resources\InvoiceResource($invoice->load(['client', 'items.service'])),
+                'estimate' => new EstimateResource($estimate->fresh()->load(['services.service', 'invoice'])),
+            ], 201);
+        } catch (Exception $e) {
+            Log::error('Failed to convert estimate to invoice', [
+                'estimate_id' => $estimate->id,
+                'error' => $e->getMessage(),
+            ]);
+
+            return response()->json([
+                'message' => 'Failed to convert quotation to invoice',
+                'error' => config('app.debug') ? $e->getMessage() : 'Internal server error',
+            ], 500);
+        }
+    }
+
+    /**
+     * Quotation statistics for the dashboard stat cards.
+     */
+    public function statistics(Request $request): JsonResponse
+    {
+        $query = Estimate::query();
+
+        if ($request->filled('date_from')) {
+            $query->where('created_at', '>=', $request->date_from);
+        }
+        if ($request->filled('date_to')) {
+            $query->where('created_at', '<=', $request->date_to);
+        }
+
+        $stats = [
+            'total_estimates' => (clone $query)->count(),
+            'pending' => (clone $query)->where('status', Estimate::STATUS_PENDING)->count(),
+            'email_failed' => (clone $query)->where('status', Estimate::STATUS_EMAIL_FAILED)->count(),
+            'completed' => (clone $query)->where('status', Estimate::STATUS_COMPLETED)->count(),
+            'converted' => (clone $query)->where('status', Estimate::STATUS_CONVERTED)->count(),
+            'cancelled' => (clone $query)->where('status', Estimate::STATUS_CANCELLED)->count(),
+            'total_value' => (clone $query)->sum('total_amount'),
+            'converted_value' => (clone $query)->where('status', Estimate::STATUS_CONVERTED)->sum('total_amount'),
+        ];
+
+        return response()->json(['statistics' => $stats]);
     }
 
     /**
@@ -373,36 +532,31 @@ class EstimateController extends Controller
     public function destroy($id)
     {
         try {
-            DB::beginTransaction();
-
             $estimate = Estimate::findOrFail($id);
 
-            // Delete related estimate services first
-            EstimateService::where('estimate_id', $id)->delete();
+            if ($estimate->status === Estimate::STATUS_CONVERTED) {
+                return response()->json([
+                    'message' => 'This quotation has been converted to an invoice and cannot be deleted.',
+                ], 422);
+            }
 
-            // Delete the estimate
+            DB::beginTransaction();
+
+            EstimateService::where('estimate_id', $id)->delete();
             $estimate->delete();
 
             DB::commit();
 
-            return response()->json([
-                'message' => 'Estimate deleted successfully'
-            ]);
+            return response()->json(['message' => 'Estimate deleted successfully']);
         } catch (Exception $e) {
             DB::rollBack();
 
-            Log::error('Failed to delete estimate', [
-                'estimate_id' => $id,
-                'error' => $e->getMessage()
-            ]);
+            Log::error('Failed to delete estimate', ['estimate_id' => $id, 'error' => $e->getMessage()]);
 
             return response()->json([
                 'message' => 'Failed to delete estimate',
-                'error' => config('app.debug') ? $e->getMessage() : 'Internal server error'
+                'error' => config('app.debug') ? $e->getMessage() : 'Internal server error',
             ], 500);
         }
     }
-
-    
-
 }

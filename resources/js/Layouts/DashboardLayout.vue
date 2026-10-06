@@ -4,13 +4,13 @@
     <div 
       v-if="!isMobile"
       :class="[
-        'transition-all duration-300 ease-in-out bg-dark text-white h-full flex flex-col',
+        'transition-all duration-300 ease-in-out h-full flex flex-col',
         sidebarCollapsed ? 'w-16' : 'w-64'
       ]"
     >
       <Sidebar :collapsed="sidebarCollapsed" @toggle="toggleSidebar" />
     </div>
-
+    
     <!-- Main Content Area -->
     <div class="flex-1 flex flex-col min-h-0">
       <!-- Navbar -->
@@ -20,16 +20,23 @@
         @toggle-sidebar="toggleSidebar" 
       />
       
-      <!-- Main content area -->
-      <main class="flex-1 p-4 md:p-6 overflow-y-auto pb-20 md:pb-4">
-        <router-view></router-view>
+      <!-- Main content area with safe area support -->
+      <main 
+        class="bg-white flex-1 overflow-y-auto"
+        :style="mainContentStyle"
+      >
+        <div class="p-4 md:p-6">
+          <router-view></router-view>
+        </div>
       </main>
     </div>
-
-    <!-- Mobile Bottom Navigation -->
+    
+    <!-- Mobile Bottom Navigation with safe area support -->
     <div 
       v-if="isMobile"
-      class="fixed bottom-0 left-0 right-0 bg-dark text-white border-t border-gray-600 z-50"
+      class="fixed bottom-0 left-0 right-0  border-t border-gray-600 z-50"
+      :style="mobileNavStyle"
+      ref="mobileNav"
     >
       <MobileBottomNav />
     </div>
@@ -52,11 +59,35 @@ export default {
     return {
       sidebarCollapsed: false,
       isMobile: false,
+      mobileNavHeight: 64, // Default height in pixels
     };
+  },
+  computed: {
+    mainContentStyle() {
+      if (this.isMobile) {
+        return {
+          paddingBottom: `${this.mobileNavHeight + 16}px`, // Nav height + extra spacing
+          paddingBottom: `calc(${this.mobileNavHeight}px + env(safe-area-inset-bottom) + 16px)` // Support for devices with notches
+        };
+      }
+      return {
+        paddingBottom: '24px'
+      };
+    },
+    mobileNavStyle() {
+      return {
+        paddingBottom: 'env(safe-area-inset-bottom)' // Support for devices with home indicators
+      };
+    }
   },
   mounted() {
     this.checkMobile();
     window.addEventListener('resize', this.checkMobile);
+    
+    // Measure actual mobile nav height after render
+    this.$nextTick(() => {
+      this.measureMobileNavHeight();
+    });
   },
   beforeUnmount() {
     window.removeEventListener('resize', this.checkMobile);
@@ -68,10 +99,22 @@ export default {
       if (window.innerWidth < 1024 && window.innerWidth >= 768) {
         this.sidebarCollapsed = true;
       }
+      
+      // Re-measure nav height when switching between mobile/desktop
+      this.$nextTick(() => {
+        this.measureMobileNavHeight();
+      });
     },
     toggleSidebar() {
       this.sidebarCollapsed = !this.sidebarCollapsed;
     },
+    measureMobileNavHeight() {
+      if (this.isMobile && this.$refs.mobileNav) {
+        // Get the actual rendered height of the mobile navigation
+        const rect = this.$refs.mobileNav.getBoundingClientRect();
+        this.mobileNavHeight = rect.height || 64; // Fallback to 64px
+      }
+    }
   },
 };
 </script>
@@ -93,5 +136,12 @@ main::-webkit-scrollbar-thumb {
 
 main::-webkit-scrollbar-thumb:hover {
   background: #a8a8a8;
+}
+
+/* Ensure proper viewport handling on iOS */
+@supports (padding: max(0px)) {
+  main {
+    padding-bottom: max(16px, env(safe-area-inset-bottom));
+  }
 }
 </style>

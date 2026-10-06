@@ -1,4 +1,5 @@
 <template>
+    <Teleport to="body">
     <div v-if="show" class="modal-overlay" @click.self="$emit('close')">
         <div class="modal modal-medium" @click.stop>
         <div class="modal-header bg-danger-500">
@@ -10,16 +11,17 @@
             <p>Are you sure you want to delete this invoice?</p>
         </div>
         <div class="modal-footer">
-            <button class="btn-secondary" :disabled="deleting" @click="$emit('close')">
+            <button class="penda-btn penda-btn-gray" :disabled="deleting" @click="$emit('close')">
             Cancel
             </button>
-            <button class="btn penda-btn-danger" :disabled="deleting" @click="handleDelete">
+            <button class="penda-btn penda-btn-danger" :disabled="deleting" @click="handleDelete">
             <span v-if="deleting">⏳ Deleting…</span>
             <span v-else>Delete</span>
             </button>
         </div>
         </div>
     </div>
+    </Teleport>
 </template>
 
 <script setup>
@@ -52,5 +54,57 @@ async function handleDelete() {
 }
 </script>
 <style scoped>
-.modal { max-height: 45vh !important; }
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  z-index: 50;
+  padding: 20px;
+  overflow-y: auto;
+}
+
+.modal {
+  position: relative;
+  top: auto;
+  left: auto;
+  height: auto;
+  background: #fff;
+  border-radius: 16px;
+  width: 100%; max-width: 820px;
+  display: flex; flex-direction: column;
+  box-shadow: 0 24px 64px rgba(0,0,0,0.18);
+  margin-bottom: 32px;
+}
+
+.modal-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 24px;
+  border-bottom: 1px solid #ebe6e5;
+  position: sticky;
+  top: 0;
+  background: rgb(145, 1, 1);
+  z-index: 10;
+  border-radius: 12px 12px 0 0;
+}
+
+.modal-header h3 {
+  margin: 0;
+  font-size: 20px;
+  font-weight: 600;
+  color: #1f2937;
+}
+
+.modal-body {
+  padding: 24px;
+  flex: 1;
+  overflow-y: visible;
+}
 </style>

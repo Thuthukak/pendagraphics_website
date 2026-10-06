@@ -329,4 +329,16 @@ export default {
 .modal-header-color {
   background: linear-gradient(135deg, #005e91 0%, #004469 100%);
 }
+.modal {
+  position: relative;
+  top: auto;
+  left: auto;
+  height: auto;
+  background: #fff;
+  border-radius: 16px;
+  width: 100%; max-width: 820px;
+  display: flex; flex-direction: column;
+  box-shadow: 0 24px 64px rgba(0,0,0,0.18);
+  margin-bottom: 32px;
+}
 </style>

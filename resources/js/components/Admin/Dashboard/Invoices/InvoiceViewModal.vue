@@ -1,4 +1,5 @@
 <template>
+  <Teleport to="body">
   <div v-if="show" class="modal-overlay" @click="$emit('close')">
     <div class="modal modal-large" @click.stop>
       <div class="modal-header">
@@ -70,6 +71,7 @@
       </div>
     </div>
   </div>
+  </Teleport>
 </template>
 
 <script>
@@ -115,14 +117,16 @@ export default {
 }
 
 .modal {
-  background: white;
-  border-radius: 12px;
-  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
-  max-height: 90vh;
-  overflow-y: auto;
-  width: 100%;
-  max-width: 600px;
-  margin: 20px;
+  position: relative;
+  top: auto;
+  left: auto;
+  height: auto;
+  background: #fff;
+  border-radius: 16px;
+  width: 100%; max-width: 820px;
+  display: flex; flex-direction: column;
+  box-shadow: 0 24px 64px rgba(0,0,0,0.18);
+  margin-bottom: 32px;
 }
 
 .modal-large {

@@ -187,17 +187,40 @@
 
             <!-- Notes & Terms -->
             <div class="section">
-                <div class="form-row">
+              <div class="row">
+                <div class="col-md-6">
                 <div class="form-group">
+                  <div class="notes-label-row">
                     <label>Notes <span class="opt">(visible on invoice)</span></label>
-                    <textarea v-model="form.notes" class="form-input" rows="3" placeholder="Payment instructions, bank details…" />
+                      <div class="bank-insert" v-if="bankAccounts.length">
+                        <button type="button" class="btn-text" @click="showBankPicker = !showBankPicker">
+                          + Insert bank details
+                        </button>
+                          <div v-if="showBankPicker" class="bank-picker" v-click-outside="() => showBankPicker = false">
+                          <button
+                              v-for="acc in bankAccounts"
+                              :key="acc.id ?? acc.account_number"
+                              type="button"
+                              class="bank-chip"
+                              @click="insertBankDetails(acc)"
+                          >
+                              <span class="svc-name">{{ acc.name }}</span>
+                              <span class="svc-price">{{ acc.bank }} · {{ acc.account_number }}</span>
+                          </button>
+                          </div>
+                        </div>
+                        </div>
+                        <textarea v-model="form.notes" class="form-input" rows="3" placeholder="Payment instructions, bank details…" />
+                    </div>
+                  </div>
+                  <div class="col-md-6">
+                    <div class="form-group">
+                        <label>Terms <span class="opt">(optional)</span></label>
+                        <textarea v-model="form.terms" class="form-input" rows="3" placeholder="Late payment penalties, warranty terms…" />
+                  </div>
                 </div>
-                <div class="form-group">
-                    <label>Terms <span class="opt">(optional)</span></label>
-                    <textarea v-model="form.terms" class="form-input" rows="3" placeholder="Late payment penalties, warranty terms…" />
                 </div>
-                </div>
-            </div>
+              </div>
             </div>
 
             <!-- Footer -->
@@ -251,6 +274,10 @@ const showServicePicker = ref(false)
 const savingClient      = ref(false)
 const clientError       = ref('')
 const netTerms          = ref([])
+
+// ── Bank details (from Settings) ──────────────────────────────────────────────
+const bankAccounts   = ref([])
+const showBankPicker = ref(false)
 
 const newClient = reactive({
   name: '', email: '', phone: '', address: '',
@@ -342,6 +369,34 @@ async function loadMethods() {
   } catch {}
 }
 
+/**
+ * Load saved bank accounts (Settings → Bank Accounts) so they can be
+ * inserted into the Notes field with one click.
+ */
+async function loadBankAccounts() {
+  try {
+    const res = await fetch('/api/settings/bank-accounts')
+    bankAccounts.value = await res.json()
+  } catch {}
+}
+
+/**
+ * Appends the chosen account's details to the Notes textarea,
+ * keeping whatever the user already typed.
+ */
+function insertBankDetails(acc) {
+  const lines = [
+    `Account Name: ${acc.name}`,
+    `Bank: ${acc.bank}`,
+    `Account Number: ${acc.account_number}`,
+    acc.branch ? `Branch: ${acc.branch}` : null,
+    acc.phone  ? `Phone: ${acc.phone}`   : null,
+  ].filter(Boolean).join('\n')
+
+  form.notes = form.notes ? `${form.notes.trim()}\n\n${lines}` : lines
+  showBankPicker.value = false
+}
+
 function applyNetTerms(e) {
   const days = parseInt(e.target.value)
   if (isNaN(days)) return
@@ -400,6 +455,7 @@ function reset() {
   })
   showNewClient.value     = false
   showServicePicker.value = false
+  showBankPicker.value    = false
   clientError.value       = ''
   cancelNewClient()
 }
@@ -436,7 +492,21 @@ function today()        { return new Date().toISOString().split('T')[0] }
 function daysFromNow(n) { const d = new Date(); d.setDate(d.getDate() + n); return d.toISOString().split('T')[0] }
 function fmtAmt(v)      { return (parseFloat(v) || 0).toLocaleString('en-ZA', { minimumFractionDigits: 2, maximumFractionDigits: 2 }) }
 
-onMounted(loadMethods)
+// ── Minimal click-outside directive (no extra dependency) ────────────────────
+const vClickOutside = {
+  mounted(el, binding) {
+    el.__clickOutsideHandler = (e) => { if (!el.contains(e.target)) binding.value(e) }
+    document.addEventListener('click', el.__clickOutsideHandler, true)
+  },
+  unmounted(el) {
+    document.removeEventListener('click', el.__clickOutsideHandler, true)
+  },
+}
+
+onMounted(() => {
+  loadMethods()
+  loadBankAccounts()
+})
 </script>
 
 <style scoped>
@@ -449,6 +519,10 @@ onMounted(loadMethods)
 }
 
 .modal {
+  position: relative;
+  top: auto;
+  left: auto;
+  height: auto;
   background: #fff;
   border-radius: 16px;
   width: 100%; max-width: 820px;
@@ -511,6 +585,28 @@ onMounted(loadMethods)
 }
 .form-input:focus { border-color: #d4a853; box-shadow: 0 0 0 3px rgba(212,168,83,0.1); }
 textarea.form-input { resize: vertical; }
+
+/* ── Notes label row + bank details picker ──────────────────────────────── */
+.notes-label-row {
+  display: flex; justify-content: space-between; align-items: center;
+  margin-bottom: 5px;
+}
+.notes-label-row label { margin-bottom: 0; }
+.bank-insert { position: relative; }
+.bank-picker {
+  position: absolute; top: calc(100% + 6px); right: 0; z-index: 20;
+  background: white; border: 1px solid #e8e8e0; border-radius: 10px;
+  box-shadow: 0 8px 24px rgba(0,0,0,0.12);
+  padding: 8px; min-width: 220px;
+  display: flex; flex-direction: column; gap: 4px;
+}
+.bank-chip {
+  display: flex; flex-direction: column; gap: 2px;
+  padding: 8px 10px; background: white;
+  border: 1px solid transparent; border-radius: 7px;
+  cursor: pointer; transition: all 0.15s; text-align: left;
+}
+.bank-chip:hover { border-color: #d4a853; background: #fdf9f0; }
 
 /* ── New client panel ────────────────────────────────────────────────────── */
 .new-client-panel {

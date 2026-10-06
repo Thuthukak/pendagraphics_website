@@ -1,4 +1,5 @@
 <template>
+  <Teleport to="body">
   <!-- Create/Edit Invoice Modal -->
   <div v-if="show" class="modal-overlay" @click="handleOverlayClick">
     <div class="modal" @click.stop>
@@ -171,6 +172,7 @@
       </div>
     </div>
   </div>
+  </Teleport>
 </template>
 
 <script>

@@ -5,29 +5,10 @@
 <meta charset="UTF-8">
 <style>
 
-  @font-face {
-    font-family: 'Roboto';
-    font-style: normal;
-    font-weight: 400;
-    src: url("{{ storage_path('fonts/Roboto-Regular.ttf') }}") format('truetype');
-  }
-  @font-face {
-    font-family: 'Roboto';
-    font-style: normal;
-    font-weight: 500;
-    src: url("{{ storage_path('fonts/Roboto-Medium.ttf') }}") format('truetype');
-  }
-  @font-face {
-    font-family: 'Roboto';
-    font-style: normal;
-    font-weight: 700;
-    src: url("{{ storage_path('fonts/Roboto-Bold.ttf') }}") format('truetype');
-  }
-
   * { margin: 0; padding: 0; box-sizing: border-box; }
 
   body {
-    font-family: 'Roboto', sans-serif;
+    font-family: 'Helvetica', 'DejaVu Sans', Arial, sans-serif;
     font-weight: 400;
     font-size: 12px;
     color: #1a1a1a;

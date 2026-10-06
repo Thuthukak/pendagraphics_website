@@ -5,7 +5,7 @@
 <script setup>
 import { computed } from 'vue'
 const props = defineProps({ status: String })
-const label = computed(() => ({ draft: 'Draft', sent: 'Sent', paid: 'Paid', overdue: 'Overdue', cancelled: 'Cancelled' }[props.status] ?? props.status))
+const label = computed(() => ({ draft: 'Draft', sent: 'Sent', paid: 'Paid', overdue: 'Overdue', cancelled: 'Cancelled', pending: 'Pending', delivered: 'Delivered'}[props.status] ?? props.status))
 </script>
 
 <style scoped>
@@ -15,4 +15,6 @@ const label = computed(() => ({ draft: 'Draft', sent: 'Sent', paid: 'Paid', over
 .badge.paid      { background: #e8f7ee; color: #166534; }
 .badge.overdue   { background: #fee8e8; color: #991b1b; }
 .badge.cancelled { background: #f5f5f5; color: #888; }
+
+
 </style>

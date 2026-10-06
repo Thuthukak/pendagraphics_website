@@ -119,7 +119,7 @@ class HomeController extends BaseController
             'description' => 'Admin Authentication page for Penda Graphics',
             'keywords' => 'Penda Graphics, Web Design, Graphic Design, Branding, E-commerce, Digital Marketing',
             'og_title' => 'Admin Authentication | Penda Graphics',
-            'hero_image' => asset('assets/images/3436542.png'),
+            'hero_image' => asset('assets/images/background.jpg'),
             'logo' => asset('assets/images/penda_logo2.png'),
         ]);
 
@@ -484,4 +484,38 @@ class HomeController extends BaseController
         'contactInfo' => $contactInfo,
     ]);
 }
+
+    public function TermsAndConditionsIndex() {
+        $seoData = $this->mergeSeoData([
+            'title' => 'Terms and Conditions | Penda Graphics',
+            'description' => 'Read the terms and conditions for using Penda Graphics services, including web design, branding, and digital marketing.',
+            'keywords' => 'terms and conditions, Penda Graphics, web design terms, branding terms, digital marketing terms',
+            'og_title' => 'Terms and Conditions | Penda Graphics',
+            'og_description' => 'Understand the terms and conditions for using Penda Graphics services.',
+            'og_type' => 'website',
+            'og_url' => url('/terms-and-conditions'),
+            'canonical_url' => url('/terms-and-conditions'),
+        ]);
+
+        return Inertia::render('RefundCancellationPolicy', [
+            'seo' => $seoData,
+        ]);
+    }
+
+    public function PrivacyPolicyIndex() {
+        $seoData = $this->mergeSeoData([
+            'title' => 'Privacy Policy | Penda Graphics',
+            'description' => 'Learn about how Penda Graphics collects, uses, and protects your personal information in our privacy policy.',
+            'keywords' => 'privacy policy, Penda Graphics, data protection, personal information',
+            'og_title' => 'Privacy Policy | Penda Graphics',
+            'og_description' => 'Read our privacy policy to understand how we handle your personal information.',
+            'og_type' => 'website',
+            'og_url' => url('/privacy-policy'),
+            'canonical_url' => url('/privacy-policy'),
+        ]);
+
+        return Inertia::render('LegalPolicies', [
+            'seo' => $seoData,
+        ]);
+    }
 }

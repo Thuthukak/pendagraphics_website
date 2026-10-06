@@ -46,7 +46,7 @@
                   <button
                     type="button"
                     @click="$emit('close')"
-                    class="penda-btn penda-btn-secondary"
+                    class="penda-btn penda-btn-gray"
                   >
                     Cancel
                   </button>

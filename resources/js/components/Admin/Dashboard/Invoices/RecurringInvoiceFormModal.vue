@@ -233,7 +233,7 @@ function blankForm() {
         terms:             '',
         tax_rate:          0,
         discount_rate:     0,
-        action_on_create:  'draft',
+        action_on_create:  'send',
         notify_admin:      true,
         items: [{ service_id: '', description: '', quantity: 1, unit_price: 0 }],
     }
@@ -432,7 +432,18 @@ function fmtAmt(v) {
 
 <style scoped>
 .modal-backdrop { position: fixed; inset: 0; background: rgba(0,0,0,0.45); display: flex; align-items: center; justify-content: center; z-index: 9000; padding: 20px; }
-.modal { background: #fff; border-radius: 16px; width: 100%; max-width: 680px; max-height: 90vh; display: flex; flex-direction: column; overflow: hidden; box-shadow: 0 20px 60px rgba(0,0,0,0.15); }
+.modal {
+  position: relative;
+  top: auto;
+  left: auto;
+  height: auto;
+  background: #fff;
+  border-radius: 16px;
+  width: 100%; max-width: 820px;
+  display: flex; flex-direction: column;
+  box-shadow: 0 24px 64px rgba(0,0,0,0.18);
+  margin-bottom: 32px;
+}
 
 .modal-hd { display: flex; justify-content: space-between; align-items: center; padding: 24px 28px; border-bottom: 1px solid #f0f0e8; }
 .modal-hd h2 { font-size: 20px; font-weight: 700; color: #1a1a1a; margin: 0; font-family: 'Playfair Display', Georgia, serif; }

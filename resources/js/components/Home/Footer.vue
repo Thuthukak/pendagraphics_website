@@ -40,6 +40,14 @@
                 <a class="text-white" href="mailto:info@pendagraphics.co.za">info@pendagraphics.co.za</a>
               </span>
             </li>
+            <li class="d-flex align-items-center">
+              <div class="text-white p-2 d-flex align-items-center justify-content-center me-2" style="width: 40px; height: 40px;">
+                <i class="fas fa-exclamation-triangle"></i>
+              </div>
+              <span>
+                <a class="text-white" href="/Refunds-&-Cancellation">Refunds & Cancellation Policy</a>
+              </span>
+            </li>
           </ul>
         </div>
 

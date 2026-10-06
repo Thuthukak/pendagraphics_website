@@ -18,7 +18,7 @@
       <div class="mt-6">
         <a
           href="/"
-          class="neema-btn neema-btn-primary"
+          class="penda-btn penda-btn-primary"
         >
           Go to Home
         </a>

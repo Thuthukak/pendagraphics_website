@@ -92,7 +92,19 @@ onMounted(loadMethods)
 
 <style scoped>
 .modal-backdrop { position: fixed; inset: 0; background: rgba(0,0,0,0.45); display: flex; align-items: center; justify-content: center; z-index: 9100; padding: 20px; }
-.modal { background: white; border-radius: 16px; width: 100%; max-width: 440px; max-height: 100vh; box-shadow: 0 20px 60px rgba(0,0,0,0.15); }
+.modal {
+  position: relative;
+  top: auto;
+  left: auto;
+  height: auto;
+  background: #fff;
+  border-radius: 16px;
+  width: 100%; max-width: 820px;
+  max-height: calc(100vh - 64px); 
+  display: flex; flex-direction: column;
+  box-shadow: 0 24px 64px rgba(0,0,0,0.18);
+  margin-bottom: 32px;
+}
 .modal-hd { display: flex; justify-content: space-between; align-items: center; padding: 20px 24px; border-bottom: 1px solid #f0f0e8; }
 .modal-hd h2 { font-size: 18px; font-weight: 700; color: #1a1a1a; margin: 0; font-family: 'Playfair Display', Georgia, serif; }
 .modal-close { background: none; border: none; font-size: 22px; color: #aaa; cursor: pointer; }

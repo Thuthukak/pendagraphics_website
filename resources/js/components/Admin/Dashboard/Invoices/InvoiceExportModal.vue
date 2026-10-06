@@ -1,5 +1,6 @@
 <template>
-  <div v-if="show" class="modal-overlay" @click.self="$emit('close')">
+  <Teleport to="body">
+  <div v-if="show" class="modal-backdrop" @click.self="$emit('close')">
     <div class="modal modal-medium" @click.stop>
       <div class="modal-header">
         <h2>Export to PDF</h2>
@@ -19,20 +20,21 @@
       </div>
 
       <div class="modal-footer">
-        <button class="btn-secondary" :disabled="exporting" @click="$emit('close')">
+        <button class="penda-btn penda-btn-gray" :disabled="exporting" @click="$emit('close')">
           Cancel
         </button>
-        <button class="btn-primary" :disabled="exporting" @click="exportOnly">
+        <button class="penda-btn penda-btn-primary" :disabled="exporting" @click="exportOnly">
           <span v-if="exporting">⏳ Generating…</span>
           <span v-else>Download Only</span>
         </button>
-        <button class="btn-primary" :disabled="exporting" @click="exportAndMark">
+        <button class="penda-btn penda-btn-primary" :disabled="exporting" @click="exportAndMark">
           <span v-if="exporting">⏳ Generating…</span>
           <span v-else>Download &amp; Mark as Sent</span>
         </button>
       </div>
     </div>
   </div>
+  </Teleport>
 </template>
 
 <script>
@@ -94,6 +96,19 @@ export default {
 </script>
 
 <style scoped>
-.modal { max-height: 56vh !important; }
+.modal-backdrop { position: fixed; inset: 0; background: rgba(0,0,0,0.45); display: flex; align-items: center; justify-content: center; z-index: 9000; padding: 20px; }
+.modal {
+  position: relative;
+  top: auto;
+  left: auto;
+  height: auto;
+  background: #fff;
+  border-radius: 16px;
+  width: 100%; max-width: 820px;
+  max-height: calc(100vh - 64px); 
+  display: flex; flex-direction: column;
+  box-shadow: 0 24px 64px rgba(0,0,0,0.18);
+  margin-bottom: 32px;
+}
 .text-muted { color: #888; font-style: italic; }
 </style>

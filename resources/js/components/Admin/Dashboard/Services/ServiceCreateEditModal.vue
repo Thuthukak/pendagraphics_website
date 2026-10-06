@@ -5,7 +5,7 @@
         <div class="modal-dialog modal-dialog-centered modal-lg">
           <div class="modal-content">
             <div class="modal-header">
-              <h5 class="modal-title">{{ isEditing ? 'Edit Service' : 'Add New Service' }}</h5>
+              <h5 class="modal-title fw-bold p-1">{{ isEditing ? 'Edit Service' : 'Add New Service' }}</h5>
               <button type="button" class="btn-close" @click="$emit('close')"></button>
             </div>
             <div class="modal-body">
@@ -65,9 +65,9 @@
                   </div>
                 </div>
                 
-                <div class="d-flex flex-column flex-sm-row justify-content-end gap-2">
-                  <button type="button" class="btn btn-secondary" @click="$emit('close')">Cancel</button>
-                  <button type="submit" class="btn btn-primary" :disabled="isSubmitting">
+                <div class="modal-footer d-flex flex-column flex-sm-row justify-content-end gap-2">
+                  <button type="button" class="penda-btn penda-btn-gray" @click="$emit('close')">Cancel</button>
+                  <button type="submit" class="penda-btn penda-btn-primary" :disabled="isSubmitting">
                     <span v-if="isSubmitting" class="spinner-border spinner-border-sm me-1"></span>
                     {{ isEditing ? 'Update' : 'Add' }} Service
                   </button>

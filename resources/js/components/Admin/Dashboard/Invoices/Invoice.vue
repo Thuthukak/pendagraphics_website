@@ -12,7 +12,7 @@
         {{ tab.label }}
         <span v-if="tab.badge" class="tab-badge">{{ tab.badge }}</span>
       </button>
-    </nav>
+    </nav> 
 
     <!-- Main content -->
     <main class="inv-main">
@@ -24,7 +24,7 @@
             <h1 class="inv-title">Invoices</h1>
             <p class="inv-subtitle">{{ pagination.total }} invoices total</p>
           </div>
-          <button class="btn-create" @click="openCreate">
+          <button class="penda-btn penda-btn-primary" @click="openCreate">
             <font-awesome-icon :icon="['fas', 'plus']" /> New Invoice
           </button>
         </div>
@@ -105,16 +105,16 @@
                 <td class="row-actions" @click.stop>
                   <button class="icon-btn" title="Edit" @click="editInvoice(inv)"><font-awesome-icon :icon="['fas', 'pencil']" /></button>
                   <button class="icon-btn" title="Duplicate" @click="duplicateInvoice(inv)"><font-awesome-icon :icon="['fas', 'clone']" /></button>
-                  <InvoiceRowMenu 
+                  <InvoiceRowMenu
                     :invoice="inv"
                     @send="sendInvoice"
                     @export="exportInvoice"
                     @reminder="sendReminder"
                     @print="printInvoice"
                     @recurring="makeRecurring"
-                    @mark-sent="markAsSent" 
-                    @payment="openPayment" 
-                    @delete="openDelete" 
+                    @mark-sent="markAsSent"
+                    @payment="openPayment"
+                    @delete="openDelete"
                   />
                 </td>
               </tr>
@@ -304,9 +304,13 @@ async function loadServices() {
 function openCreate() { isEditing.value = false; selectedInvoice.value = null; showFormModal.value = true }
 
 async function viewInvoice(inv) {
-  const res = await api('GET', `/invoices/${inv.id}`)
-  selectedInvoice.value = res.invoice
-  showViewModal.value = true
+  try {
+    const res = await api('GET', `/invoices/${inv.id}`)
+    selectedInvoice.value = res.invoice
+    showViewModal.value = true
+  } catch (err) {
+    notify.error(err?.message ?? 'Failed to load invoice.')
+  }
 }
 
 function editInvoice(inv)  { selectedInvoice.value = inv; isEditing.value = true; showFormModal.value = true }
@@ -458,7 +462,6 @@ onMounted(async () => {
   display: block;
   min-height: 100vh;
   background: #f8f7f4;
-  font-family: 'DM Sans', 'Söhne', system-ui, sans-serif;
 }
 
 /* ── Sidebar tabs ────────────────────────────────────────────────────────── */
@@ -517,7 +520,6 @@ onMounted(async () => {
   color: #1a1a1a;
   letter-spacing: -0.5px;
   margin: 0 0 4px;
-  font-family: 'Playfair Display', Georgia, serif;
 }
 .inv-subtitle { font-size: 13px; color: #888; margin: 0; }
 

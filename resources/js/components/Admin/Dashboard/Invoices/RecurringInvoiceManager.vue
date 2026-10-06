@@ -6,7 +6,7 @@
             <h1 class="inv-title">Recurring Invoices</h1>
             <p class="inv-subtitle">Automated invoice schedules</p>
         </div>
-        <button class="btn-create" @click="openCreate">
+        <button class="penda-btn penda-btn-primary" @click="openCreate">
             <font-awesome-icon icon="plus" /> New Schedule
         </button>
         </div>
